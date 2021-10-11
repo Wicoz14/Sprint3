@@ -1,0 +1,121 @@
+.textprincipal{
+    color:#ffc107
+}
+.navbar-collapse{
+    flex-grow: 0;
+}
+.container{
+    max-width:none !important;
+}
+.navbar-brand{
+    padding-right: 25rem;
+}
+.bt1{
+    margin-right:3rem;
+}
+.bt2{
+    margin-right:7rem;
+}
+.btn{
+    height: 1.5rem;
+    padding-top:0rem;
+    padding-bottom:0rem;
+    border-radius: 20px;
+}
+.barrabusqueda{
+    border-radius: 20px;
+    border-color: #ffc107;
+}
+.me-2{
+    height:1.5rem;
+}
+.iconos{
+    font-size: 1.5rem;
+    text-align:center;
+    color:white;
+}
+.fa-contao{
+    text-align: left;
+    font-size:3rem;
+    color:#ffc107;
+}
+.logo{
+    margin-top: 0;
+    position: relative;
+    font-size:4rem;
+    color: #ffc107;
+    padding-bottom: 0rem;
+}
+.fixed-top{
+    height: 5rem;
+}
+.container{
+    max-width: 1365px;
+}
+.textfoot{
+    font-size: .8rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 26rem;
+    margin-bottom: 0;
+    color: white;
+    display: block;
+}
+.textfoot2{
+    padding-right: 0rem;
+    justify-content: right;
+    display: flex;
+}
+.footer{
+    height: 4rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+.col{
+      align-self: center;
+  }
+.cuerpopagina{
+    padding-top: 6.5rem;
+    padding-bottom:5rem;
+}
+.img-move{
+    scroll-padding-left: 0.5rem;
+}
+.modal-footer, .modal-header{
+    background-color: black;
+    color:#ffc107;
+    justify-content:center;
+}
+.btn-close{
+    background-color:#ffc107;
+    color: black;
+}
+.modal-content{
+    border:4px solid;
+    border-color: black;
+    border-radius: 40px;
+    overflow:auto;
+    width: max-content;
+}
+.modal-dialog{
+    float: right;
+    padding-right: 3rem;
+    padding-top: 3rem;
+}
+.btlogin{
+    background-color: black;
+    height: 2rem;
+    border-radius: 20px;
+    align-self: center;
+    color: white;
+    border-color:#ffc107;
+}
+.cuerporegistro{
+    width: 50%;
+    margin-right: auto;
+    margin-left:auto;
+}
+.barralogin{
+    background-color:lightgoldenrodyellow;
+    border: none;
+}
