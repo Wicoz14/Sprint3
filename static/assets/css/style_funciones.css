@@ -1,0 +1,29 @@
+.card-img-top{
+    max-width: 300px;
+    border-radius: 5px;
+}
+
+.movie_sec{
+    margin-bottom: 10rem;
+    text-align: center;
+}
+
+.movie_title{
+    margin-bottom: 0rem;
+}
+
+.btn{
+    border-radius: 57px;
+    border-width: 2px;
+    border-color: rgb(245,196,20);
+    background: rgb(0,0,0);
+    color: rgb(245,196,20);
+    display: inline-block;
+    border: 1px solid;
+}
+
+.desc{
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}
+  

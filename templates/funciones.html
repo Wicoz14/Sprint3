@@ -1,6 +1,56 @@
 {% extends "layout.html" %}
 
 {% block contenido %}
-<h1>Funciones</h1>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/assets/css/style_funciones.css">
+    
+</head>
+<body>
+    <main>     
+        <h1>Funciones</h1>
+        <section>
+            <div class="container">
+                <div class="row">
+                        <div class="movie_sec"><img class="card-img-top" src="/static/assets/images/p1.jpg" />
+                            <div class="movie_body">
+                                <h5 class="movie_title">Shang-Chi</h5>
+                                <p class="desc">Genero: Accion/Fantasia</p>
+                                <p class="desc">Duracion: 132m</p>
+                                <p><a class="btn" role="button" href="/detallefunciones">Ver...</a></p>
+                            </div>
+                        </div>
+                        <div class="movie_sec"><img class="card-img-top" src="/static/assets/images/p2.jpg" />
+                            <div class="movie_body">
+                                <h5 class="movie_title">Sin tiempo para morir</h5>
+                                <p class="desc">Genero: Accion</p>
+                                <p class="desc">Duracion: 140m</p>
+                                <p><a class="btn" role="button" href="/detallefunciones">Ver...</a></p>
+                            </div>
+                        </div>
+                        <div class="movie_sec"><img class="card-img-top" src="/static/assets/images/p3.jpg" />
+                            <div class="movie_body">
+                                <h5 class="movie_title">Venom</h5>
+                                <p class="desc">Genero: Accion/Ciencia Ficcion</p>
+                                <p class="desc">Duracion: 138m</p>
+                                <p><a class="btn" role="button" href="/detallefunciones">Ver...</a></p>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </section>
+    </main> 
+</body>
+</html>
+
+
+
+
+
 
 {% endblock %}

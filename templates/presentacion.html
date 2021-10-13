@@ -1,11 +1,59 @@
 {% extends "layout.html" %}
 
 {% block contenido %}
-<h1>PRÓXIMOS ESTRENOS</h1>
-<div class="img-move-wrapper">
-    <img class="img-move img-move-1 img-fluid" src="../static/assets/images/p1.jpg" alt="foto 1">
-    <img class="img-move img-move-2 img-fluid" src="../static/assets/images/p2.jpg" alt="foto 2">
-    <p class="caption-absolute">nuestro texto va aquí
-    </p>
-</div>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/assets/css/style_presentacion.css">
+</head>
+<body>
+    <main>
+        <section>
+            <div class="backg">
+                <div class="txtback">
+                    <h1 class="title">ASEGURA TU SILLA</h1>
+                    <p class="textregist">Regístrate y compra tus entradas directamente desde nuestra pagina web</p>
+                    <p><a class="botonregist" role="button" href="/registro">REGISTRARME</a></p>
+                </div>
+            </div>
+        </section>
+
+        <h1>PRÓXIMOS ESTRENOS</h1>
+
+        <div class="container-fluid">
+            <div class="row justify-content-around" id="">
+                <div class="col text-center">
+                    <img id="content_div_one_photo" class="rounded " src="/static/assets/images/p1.jpg">
+                    <h4>Shang-Chi</h4>
+                    <p>Genero: Accion/Fantasia</p>
+                    <p>Duracion: 132m</p>
+                    <p>Estreno: 20 de Septiembre 2021</p>
+                </div>
+                <div class="col text-center">
+                    <img id="content_div_one_photo" class="rounded " src="/static/assets/images/p2.jpg">
+                    <h4>Sin tiempo para morir</h4>
+                    <p>Genero: Accion</p>
+                    <p>Duracion: 140m</p>
+                    <p>Estreno: 30 de Septiembre</p>
+                </div>
+                <div class="col text-center">
+                    <img id="content_div_one_photo" class="rounded " src="/static/assets/images/p3.jpg">
+                    <h4>Venom</h4>
+                    <p>Genero: Accion/Ciencia Ficcion</p>
+                    <p>Duracion: 138m</p>
+                    <p>Estreno: Diciembre 2021</p>
+                </div>
+            </div>
+        </div>
+
+        
+
+    </main>   
+</body>
+</html>
+
 {% endblock %}

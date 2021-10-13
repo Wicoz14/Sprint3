@@ -1,0 +1,77 @@
+.backg{
+    background-image: url(../images/back_main.jpeg);
+    background-size: cover;  
+    background-position: center;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    border-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+}
+
+.txtback{
+    text-align: center;
+    color: white;
+}
+
+.title{
+    margin-top: 0;
+    margin-bottom: .5rem;
+    text-shadow: 0 2px 2px rgb(0 0 0 / 30%);
+    color: #fff;
+    font-weight: 500;
+    font-size: calc(1.375rem + 1.5vw);
+    background: rgba(0,0,0,0.58);
+}
+
+.textregist{
+    max-width: 600px;
+    margin: 25px auto;
+    padding: 10px 15px;
+    background-color: rgba(0,0,0,0.1);
+    color: #fff;
+    text-shadow: 0 1px 1px rgb(0 0 0 / 70%);
+    font-weight: 500;
+    border-radius: 73px;
+    border-color: rgba(0,0,0,0.85);
+    background: rgba(0,0,0,0.58);
+}
+
+.botonregist{
+    border-radius: 57px;
+    border-width: 2px;
+    border-color: rgb(245,196,20);
+    background: rgb(0,0,0);
+    color: rgb(245,196,20);
+    padding: .3rem .8rem;
+    display: inline-block;
+    text-decoration: none;
+    border: 1px solid;    
+}
+
+img{
+    min-width: 100px;
+    max-width: 300px;
+}
+
+h1{ 
+    padding-top: 1rem;
+}
+
+.container-fluid p{
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem ;
+}
+
+.container-fluid h4{
+    margin-top: -0.3rem;
+    margin-bottom: -0.5rem ;   
+}
+
+.img1, .img2, .img3{
+    padding: 0.5rem;
+}
+
+.container-fluid div{
+    margin-top: 1rem;
+}
+
