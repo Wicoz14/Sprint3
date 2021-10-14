@@ -27,6 +27,7 @@ def detallefunciones():
 
 @app.route('/informacion', methods=['GET'])
 def informacion():
+<<<<<<< HEAD
     return render_template('informacion.html')
 
 @app.route('/busqueda')
@@ -46,3 +47,8 @@ def perfilusuario():
     else:
         user ="este usuario no existe"
     return render_template('perfilusuario.html', user=user)
+=======
+    return render_template('informacion.html') 
+    
+    #yera
+>>>>>>> cf8770166ca403af74e433032c26e7350ade65c1

@@ -1,0 +1,33 @@
+.card-img-top{
+    max-width: 300px;
+    border-radius: 5px;
+}
+
+.col-sm{
+    margin-bottom: 3rem;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.movie_title{
+    margin-bottom: 0rem;
+}
+
+.btn{
+    border-radius: 57px;
+    border-width: 2px;
+    border-color: rgb(245,196,20);
+    background: rgb(0,0,0);
+    color: rgb(245,196,20);
+    display: inline-block;
+    border: 1px solid;
+}
+
+.desc{
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}
+  
