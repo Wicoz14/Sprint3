@@ -28,4 +28,6 @@ def busqueda():
 
 @app.route('/informacion', methods=['GET'])
 def informacion():
-    return render_template('informacion.html')
+    return render_template('informacion.html') 
+    
+    #yera
