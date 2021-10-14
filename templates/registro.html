@@ -1,48 +1,76 @@
 {% extends "layout.html" %}
 
 {% block contenido %}
-<form class="row g-3 cuerporegistro">
-    <div class="col-md-6">
-      <label for="inputEmail4" class="form-label">Email</label>
-      <input type="email" class="form-control" id="inputEmail4">
+<form class="row g-3 cuerporegistro" onsubmit="return validar_formulario()">
+  <h1>Registro</h1>
+  <div class="col-md-6">
+    <label class="form-label">Nombres*</label>
+    <input type="name" class="form-control inputregistro" placeholder="Nombre" id="nombres">
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Apellidos*</label>
+    <input type="name" class="form-control inputregistro" placeholder="Apellidos" id="apellidos">
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Documento de identidad*</label>
+    <select class="form-select inputregistro" id="selector">
+      <option selected>Choose...</option>
+      <option>Cédula de ciudadanía</option>
+      <option>Tarjeta de identidiad</option>
+      <option>Pasaporte de extrangería</option>
+    </select>
+    <input type="text" class="form-control inputregistro" placeholder="Número de documento">
+  </div>
+  <div class="col-md-6">
+    <label class="form-label" id="fecha">Fecha de nacimiento*</label>
+    <input class="inputregistro fecha" type="date" name="fecha" min="1921-03-25" max="2020-05-25" step="1" />
+  </div>
+  <div class="col-md-6">
+    <label class="form-label" id="celular">Celular*</label>
+    <input type="name" class="form-control inputregistro" placeholder="Número de celular">
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Departamento*</label>
+    <input type="name" class="form-control inputregistro" placeholder="Departamento">
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Ciudad de residencia*</label>
+    <input type="name" class="form-control inputregistro" placeholder="Ciudad de residencia">
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Correo*</label>
+    <input type="name" class="form-control inputregistro" placeholder="Correo electrónico" id="email">
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Confirmar correo*</label>
+    <input type="name" class="form-control inputregistro" placeholder="Confirmar correo" id="confirmaremail">
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Contraseña*</label>
+    <input type="name" class="form-control inputregistro" placeholder="Contraseña" id="contraseña">
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">confirmar contraseña*</label>
+    <input type="name" class="form-control inputregistro" placeholder="Confirmar contraseña" id="confirmar contraseña">
+  </div>
+  <div class="col-12">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="datos">
+      <label class="form-check-label" for="gridCheck">
+        Acepto los términos y condiciones del uso del portal, para mayor información haga click aquí*
+      </label>
     </div>
-    <div class="col-md-6">
-      <label for="inputPassword4" class="form-label">Password</label>
-      <input type="password" class="form-control" id="inputPassword4">
+  </div>
+  </div>
+  <div class="col-12">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="gridCheck">
+      <label class="form-check-label" for="gridCheck">
+        En cumplimiento del Régimen de Protección Datos Personales, autorizo expresamente a Cine Colombia S.A.S, de manera directa, o a través de terceros designados, para almacenar, consultar, procesar y en general, para dar tratamiento a la información personal que suministre, y para ser incluido en sus bases de datos, recibir información de la Compañía, de conformidad con las políticas de privacidad y manejo de información. Para más información, Haga Clic Aquí *
+      </label>
     </div>
-    <div class="col-12">
-      <label for="inputAddress" class="form-label">Address</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-    </div>
-    <div class="col-12">
-      <label for="inputAddress2" class="form-label">Address 2</label>
-      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-    </div>
-    <div class="col-md-6">
-      <label for="inputCity" class="form-label">City</label>
-      <input type="text" class="form-control" id="inputCity">
-    </div>
-    <div class="col-md-4">
-      <label for="inputState" class="form-label">State</label>
-      <select id="inputState" class="form-select">
-        <option selected>Choose...</option>
-        <option>...</option>
-      </select>
-    </div>
-    <div class="col-md-2">
-      <label for="inputZip" class="form-label">Zip</label>
-      <input type="text" class="form-control" id="inputZip">
-    </div>
-    <div class="col-12">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck">
-        <label class="form-check-label" for="gridCheck">
-          Check me out
-        </label>
-      </div>
-    </div>
-    <div class="col-12">
-      <button type="submit" class="btn btn-primary">Sign in</button>
-    </div>
-  </form>
+  </div>
+  </div>
+  <button type="submit" class="btn  btlogin" style="text-decoration:none; color:#ffc107">Registrarme</button>
+</form>
 {% endblock %}
