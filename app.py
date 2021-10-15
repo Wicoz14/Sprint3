@@ -3,7 +3,7 @@ from flask import Flask, render_template, request,redirect
 app = Flask(__name__)
 
 peliculas=["shang-chi", "sin tiempo para morir"]
-usuarios={"usuario1":12345, "usuario2":67890}
+usuarios={"usuario1":'12345', "usuario2":'67890',"admi1":'admi12345'}
 
 @app.route('/', methods=['GET','POST'])
 def presentacion():
@@ -27,10 +27,9 @@ def detallefunciones():
 
 @app.route('/informacion', methods=['GET'])
 def informacion():
-<<<<<<< HEAD
     return render_template('informacion.html')
 
-@app.route('/busqueda')
+@app.route('/busqueda', methods=['GET'])
 def busqueda():
     buscado = request.args.get('busqueda')
     if buscado in peliculas:
@@ -42,13 +41,8 @@ def busqueda():
 @app.route('/perfilusuario', methods=['POST'])
 def perfilusuario():
     usuario= request.form['usuario']
-    if usuario in usuarios:
-        user ="Usuario Válido"
+    if usuario=="admi1":
+        return render_template('dashboard.html')
     else:
-        user ="este usuario no existe"
-    return render_template('perfilusuario.html', user=user)
-=======
-    return render_template('informacion.html') 
+        return render_template('perfilusuario.html', user=usuario)
     
-    #yera
->>>>>>> cf8770166ca403af74e433032c26e7350ade65c1

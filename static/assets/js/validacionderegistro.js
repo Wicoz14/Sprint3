@@ -85,3 +85,26 @@ function validar_formulario() {
     
     return sw
 }
+
+function validarusuario() {
+    let usuarios={"usuario1":'12345', "usuario2":'67890',"admi1":'admi12345'}
+    let usuario = document.getElementById("usuario").value
+    let contraseña = document.getElementById("password").value
+
+    let sw = true
+
+    if (usuario in usuarios) {
+        if(contraseña == usuarios[usuario]){
+            let link=""
+        }
+        else{
+            alert("contraseña inválida")
+            sw = false  
+        }    
+    }
+    else{
+        alert("usuario no existente")
+        sw = false
+    }
+    return sw
+}
