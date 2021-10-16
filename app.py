@@ -21,8 +21,8 @@ def funciones():
 def dashboard():
     return render_template('dashboard.html')
 
-@app.route('/detallefunciones', methods=['GET'])
-def detallefunciones():
+@app.route('/detallefunciones/<idpelicula>', methods=['GET'])
+def detallefunciones(idpelicula):
     return render_template('detallefunciones.html')
 
 @app.route('/informacion', methods=['GET'])
