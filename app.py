@@ -65,7 +65,7 @@ def busqueda():
         resultado ="película no encontrada"
         return render_template('busqueda.html',buscado=buscado, resultado=resultado)
 
-@app.route('/perfilusuario', methods=['POST'])
+@app.route('/perfilusuario', methods=['GET','POST'])
 def perfilusuario():
     usuario= request.form['usuario']
     if usuario=="admi1":
