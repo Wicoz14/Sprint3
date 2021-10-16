@@ -39,7 +39,7 @@ def dashboardU():
 
 @app.route('/detallefunciones/<idpelicula>', methods=['GET'])
 def detallefunciones(idpelicula):
-    if idpelicula == "Shang-chi":
+    if idpelicula == "shang-chi":
         return render_template('detallefunciones.html')
     if idpelicula == "sintiempoparamorir":
         return render_template('detallefuncion2.html')
@@ -55,7 +55,7 @@ def informacion():
 def busqueda():
     buscado = request.args.get('busqueda')
     if buscado in peliculas:
-        if buscado=="shang-chi":
+        if buscado=="Shang-chi":
             return render_template('detallefunciones.html')
         if buscado=="Sin tiempo para morir":
             return render_template('detallefuncion2.html')
