@@ -1,12 +1,123 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="/static/assets/css/styleR.css">
+    <script src="https://kit.fontawesome.com/3f5ddcfbcc.js" crossorigin="anonymous"></script>
+
+    
+
 </head>
-<body>
-    <h1>ghsghgdhsgd</h1>
+<body id= "body">
+    <header>
+        <div class="icon__menu">
+            <span id="btn_open">&#9776</span>
+        </div>
+
+        <div class="name"> 
+        
+            <h1>Dashboard</h1>
+            <h3>Administrativo</h3>
+        </div>
+        
+        
+        <a href="#" id = "letter">
+            <i class="far fa-envelope"></i>
+        </a> 
+        
+        <a href="#" id="login">
+            <i class="far fa-user"></i>
+        </a>
+        
+    </header>
+
+    <div class="menu__side" id="menu__side">
+
+        <div class="name__page">
+
+            <a href="/templates/dashboard.html" id= "logo" > 
+                <i class="fab fa-contao logo" id="icon_logo"></i>
+            </a>
+
+            <h3 id="nombre" >cine colombia</h3>
+
+        </div>
+
+        <div class="options__menu">
+
+            <button class="selected">
+
+                <a href="/usuario">
+                    <div class="option">
+                        <div id = icon>
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <div>
+                        <h4>Usuarios</h4> 
+                       </div>
+                    </div> 
+                </a>
+            </button>
+
+            <button>
+                <a href="/agregarPelicula">
+                    <div class="option">
+                        <div id = icon>
+                            <i class="fas fa-file-video"></i>
+                        </div>
+                        <div>
+                            <h4>Agregar pelicula</h4> 
+                       </div>
+                    </div> 
+                </a>
+            </button>
+            
+            <button>            
+                <a href="/peliculas">
+                    <div class="option">
+                        <div id = icon>
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <div>
+                            <h4>Peliculas</h4> 
+                       </div>
+                    </div>     
+                </a>
+            </button>
+
+            <button>
+                <a href="/Dfunciones">
+                    <div class="option">
+                        <div id = icon>
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <div>
+                            <h4>Funciones</h4> 
+                       </div>
+                         
+                    </div>     
+                </a>
+            </button>
+
+        </div>
+
+        <div class="foot__page" id="logo">
+            <i class="fab fa-contao logo" id="icon_logo"></i>
+        </div>
+    </div>
+
+    <section>
+        {% block contenido %} 
+
+        {% endblock %} 
+        
+        
+    </section>
+
+    <script src="/static/assets/js/scriptR.js"></script>   
 </body>
 </html>
