@@ -55,7 +55,7 @@ def informacion():
 def busqueda():
     buscado = request.args.get('busqueda')
     if buscado in peliculas:
-        if buscado=="Shang-chi":
+        if buscado=="shang-chi":
             return render_template('detallefunciones.html')
         if buscado=="Sin tiempo para morir":
             return render_template('detallefuncion2.html')
