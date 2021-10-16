@@ -5,7 +5,7 @@ app = Flask(__name__)
 peliculas=["Shang-chi", "Sin tiempo para morir","Venom","Spidey","Jhon Wick 4","Liga de la Justicia","Space Jam","Escape Room 2","Jack en la caja maldita","Cruella"]
 usuarios={"usuario1":'12345', "usuario2":'67890',"admi1":'admi12345'}
 
-@app.route('/', methods=['GET','POST'])
+@app.route('/', methods=['GET'])
 def presentacion():
     return render_template('presentacion.html')
 
