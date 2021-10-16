@@ -1,6 +1,78 @@
 {% extends "layout.html" %}
 
 {% block contenido %}
-<h1> Usuario</h1>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/assets/css/style_perfiluser.css">
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+</head>
+
+<body>
+    
+</body>
+</html>
+
+<body>
+    <div class="container profile profile-view" id="profile">
+        <form>
+            <div class="row profile-row">
+                <div class="col-md-4 relative">
+                    <div class="avatar">
+                        <div class="avatar-bg center"></div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group mb-3"><label class="form-label">Nombres </label><input class="form-control" type="text" name="firstname" /></div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group mb-3"><label class="form-label">Apellidos </label><input class="form-control" type="text" name="lastname" /></div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group mb-3"><label class="form-label">Documento de Identidad </label><select name="doctipe">
+                                <option>Cedula de Ciudadania</option>
+                                <option>Tarjeta de Identidad</option>
+                                <option>Cedula Extranjera</option>
+                                </select> 
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group mb-3"><label class="form-label"> <br> </label><input class="form-control" type="text" name="docnumber" /></div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group mb-3"><label class="form-label">Fecha de Nacimiento </label><input class="form-control" type="date" name="datebrn" /></div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group mb-3"><label class="form-label">Celular </label><input class="form-control" type="text" name="phone" /></div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group mb-3"><label class="form-label">Departamento </label><input class="form-control" type="text" name="depart" /></div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group mb-3"><label class="form-label">Ciudad de Residencia </label><input class="form-control" type="text" name="city" /></div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3"><label class="form-label">Email </label><input class="form-control" type="email" autocomplete="off" required name="email" /></div>
+                    <div class="row">   
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 content-right">
+                            <button class="botonopcion" type="submit">Mi Tarjeta </button>
+                            <button class="botonopcion" type="submit">Compras </button>
+                            <button class="botonopcion" type="submit">Actualizar </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
 {{user}}
 {% endblock %}
