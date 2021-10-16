@@ -21,6 +21,22 @@ def funciones():
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route('/agregarPelicula', methods=['GET','POST'])
+def dashboardA():
+    return render_template('dashboardA.html') 
+   
+@app.route('/Dfunciones', methods=['GET','POST'])
+def dashboardF():
+    return render_template('dashboardF.html') 
+
+@app.route('/peliculas', methods=['GET','POST'])
+def dashboardP():
+    return render_template('dashboardP.html') 
+
+@app.route('/usuario', methods=['GET','POST'])
+def dashboardU():
+    return render_template('dashboardU.html')     
+
 @app.route('/detallefunciones/<idpelicula>', methods=['GET'])
 def detallefunciones(idpelicula):
     if idpelicula == "Shang-chi":

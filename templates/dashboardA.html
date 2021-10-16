@@ -1,0 +1,62 @@
+{% extends "dashboard.html" %}
+
+{% block contenido %}
+<div class="add_movie">
+    <h1>AGREGAR PELICULA</h1>
+</div>
+
+
+<form action="#"  method="post" id="form_Add">
+
+    <div class="left">
+
+    <div class="name">
+        <label for="name">Nombre: </label>
+        <input type="text" id="name" name="name" >
+    </div>
+
+     <div class="duration"> 
+        <label for="duration">Duración:</label>
+        <input type="text" id="duration" name="duration">
+    </div> 
+    
+    <div class="director">
+        <label for="director">Director:</label>
+        <input type="text" id="director" name="director">
+    </div> 
+
+    <div class="genre">
+        <label for="genre">Género: </label>
+        <input type="text" id="genre">
+    </div> 
+    
+    <div class="synopsis">
+        <label for="synopsis">Sinopsis</label>
+        <textarea name="" id="textSynopsis"></textarea>
+    </div>
+
+</div>
+
+<div class="right">
+    <div class="cover" >
+        
+        <label for="">Caratula</label>
+
+        <div  id=coverBox onclick = "searchImage()">
+            <input type="file" id="file" name = "files[]" hidden >
+            
+            <div id= "image">
+            
+            </div>
+
+        </div>
+
+    </div>   
+
+    <div class="add">
+        <input type="submit" id="submitAdd" value="Agregar">
+    </div>
+</div>    
+</form> 
+
+{% endblock %}
