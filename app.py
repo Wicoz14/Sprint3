@@ -2,7 +2,7 @@ from flask import Flask, render_template, request,redirect
 
 app = Flask(__name__)
 
-peliculas=["shang-chi", "sin tiempo para morir"]
+peliculas=["Shang-chi", "Sin tiempo para morir","Venom","Spidey","Jhon Wick 4","Liga de la Justicia","Space Jam","Escape Room 2","Jack en la caja maldita","Cruella"]
 usuarios={"usuario1":'12345', "usuario2":'67890',"admi1":'admi12345'}
 
 @app.route('/', methods=['GET','POST'])
@@ -23,7 +23,13 @@ def dashboard():
 
 @app.route('/detallefunciones/<idpelicula>', methods=['GET'])
 def detallefunciones(idpelicula):
-    return render_template('detallefunciones.html')
+    if idpelicula == "shang-chi":
+        return render_template('detallefunciones.html')
+    if idpelicula == "sintiempoparamorir":
+        return render_template('detallefuncion2.html')
+    else:
+        return render_template('detallefuncion3.html')
+    
 
 @app.route('/informacion', methods=['GET'])
 def informacion():
