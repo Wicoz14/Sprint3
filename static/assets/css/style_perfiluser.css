@@ -1,0 +1,102 @@
+div.avatar > img {
+    border-radius: auto;
+  }
+  
+.center {
+    text-align: center;
+  }
+  
+div.alert {
+    width: 40%;
+  }
+  
+.alert-col > .alert {
+    padding: 10px;
+    border-radius: 0;
+    transition: all 0.5s ease;
+    opacity: 0;
+  }
+  
+.alert-col > .alert.display {
+    opacity: 1;
+  }
+  
+hr {
+    height: 2px;
+  }
+  
+.content-right > * {
+    float: right;
+  }
+  
+img.avart-img {
+    max-width: 200px;
+  }
+  
+div.avatar-bg {
+    background: url(https://www.gravatar.com/avatar/1234566?size=200&d=mm);
+    background-position: 50% 50%;
+    height: 200px;
+    width: 200px;
+    background-size: cover;
+    border-radius: 50%;
+    margin-left: calc(50% - 100px);
+  }
+    
+div.container.profile {
+  padding: 10px 20px;
+}
+
+div.profile-row {
+  margin-top: 55px;
+}
+
+.absolue.center {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 0%);
+}
+
+div.alert {
+  width: 40%;
+}
+
+.alert-col > .alert {
+  padding: 10px;
+  border-radius: 0;
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+hr {
+  height: 2px;
+}
+
+.content-right > * {
+  float: center;
+}
+
+div.avatar-bg {
+  background: url(https://www.gravatar.com/avatar/1234566?size=200&d=mm);
+  background-position: 50% 50%;
+  height: 200px;
+  width: 200px;
+  background-size: cover;
+  border-radius: 50%;
+  margin-left: calc(50% - 100px);
+}
+
+.botonopcion{
+    border-radius: 57px;
+    border-width: 2px;
+    border-color: rgb(245,196,20);
+    background: rgb(0,0,0);
+    color: rgb(245,196,20);
+    padding: .3rem .8rem;
+    display: inline-block;
+    text-decoration: none;
+    border: 1px solid;
+    margin-left: 2rem;
+    margin-left: 2rem;
+}
+
