@@ -37,16 +37,16 @@
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">Ingresar Sesión</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+                </div>  
                 <div class="modal-body">
-                  <form action="/perfilusuario" onsubmit="return validarusuario()" method="post">
+                  <form action="/perfilusuario"  method="post">
                     <div class="mb-3">
                       <label for="usuario" class="col-form-label">Usuario:</label>
-                      <input type="text" name="usuario" class="form-control barralogin" id="usuario" placeholder="Usuario">
+                      <input type="text" name="usuario" class="form-control barralogin" id="usuario" placeholder="Usuario" required>
                     </div>
                     <div class="mb-3">
                       <label for="message-text" class="col-form-label">Contraseña:</label>
-                      <input type="password" name="password" class="form-control barralogin" id="password" placeholder="Contraseña">
+                      <input type="password" name="password" class="form-control barralogin" id="password" placeholder="Contraseña" required>
                     </div>
                     <button type="submit" class="btn  btlogin" style="text-decoration:none; color:#ffc107">Ingresar</button>
                     <div>
@@ -108,7 +108,6 @@
     </footer>
     <script type=text/javascript src="{{ url_for('static', filename='assets/js/popper.min.js') }}"></script>
     <script type=text/javascript src="{{ url_for('static', filename='assets/js/bootstrap.min.js') }}"></script>
-    <script type=text/javascript src="{{ url_for('static', filename='assets/js/script.js')}}"></script>
     <script type=text/javascript src="{{ url_for('static', filename='assets/js/validacionderegistro.js') }}"></script>
 </body>
 </html>

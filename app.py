@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request,redirect
+import db
 
 app = Flask(__name__)
 
@@ -68,8 +69,42 @@ def busqueda():
 @app.route('/perfilusuario', methods=['GET','POST'])
 def perfilusuario():
     usuario= request.form['usuario']
-    if usuario=="admi1":
-        return render_template('dashboard.html')
+    contraseña= request.form['password']
+    if validarUserPass(usuario,contraseña):
+        if usuario=="admi1":
+            return render_template('dashboard.html')
+        else:
+            return render_template('perfilusuario.html', user=usuario)
     else:
-        return render_template('perfilusuario.html', user=usuario)
-    
+        denegado= True
+        return redirect('/')
+
+def validarUserPass(usuario,contraseña):
+    conexion=db.get_db()
+    strsql="SELECT * FROM usuario WHERE usuario = '{}' and contraseña = '{}'".format(usuario, contraseña)
+    cursor=conexion.cursor()
+    cursor.execute(strsql)
+    datos=cursor.fetchall()
+    if datos:
+        return True
+    else:
+        return False
+
+def registrar(nombre,tipodedocumento,id,fecha,celular,departamento,ciudad,usuario,correo,contraseña):
+    conexion=db.get_db()
+    strsql="INSERT INTO usuario (id,nombre,usuario,correo,contraseña,fecha,TipoDeDocumento,celular,departamento,ciudad)" + " VALUES ("+"{}"+"'{}'"+"'{}'"+"'{}'"+"'{}'"+"'{}'"+"'{}'"+"{}"+"'{}'"+"'{}'".format(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular,departamento,ciudad)
+
+@app.route('/validacion-registro')
+def validacion_registro():
+    id = request.form['id']
+    nombre = request.form['nombres'] + ' ' + request.form['apellidos']
+    usuario = request.form['usuario']
+    correo = request.form['email']
+    contraseña = request.form['contrasena']
+    fecha = request.form['fecha']
+    tipodedocumento = request.form['selector']
+    celular= request.form['celular']
+    departamento = request.form['departamento']
+    ciudad= request.form['ciudad']
+    registrar(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular,departamento,ciudad)
+    return "registro realizado"
