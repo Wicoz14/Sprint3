@@ -71,13 +71,13 @@ def perfilusuario():
     usuario= request.form['usuario']
     contraseña= request.form['password']
     if validarUserPass(usuario,contraseña):
-        if usuario=="admi1":
+        if usuario=="administrador1":
             return render_template('dashboard.html')
         else:
             return render_template('perfilusuario.html', user=usuario)
     else:
         denegado= True
-        return redirect('/')
+        return render_template('presentacion.html', denegado=denegado)
 
 def validarUserPass(usuario,contraseña):
     conexion=db.get_db()
@@ -90,21 +90,27 @@ def validarUserPass(usuario,contraseña):
     else:
         return False
 
-def registrar(nombre,tipodedocumento,id,fecha,celular,departamento,ciudad,usuario,correo,contraseña):
+def registrar(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular,departamento,ciudad):
     conexion=db.get_db()
-    strsql="INSERT INTO usuario (id,nombre,usuario,correo,contraseña,fecha,TipoDeDocumento,celular,departamento,ciudad)" + " VALUES ("+"{}"+"'{}'"+"'{}'"+"'{}'"+"'{}'"+"'{}'"+"'{}'"+"{}"+"'{}'"+"'{}'".format(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular,departamento,ciudad)
+    cursor=conexion.cursor()
+    strsql=("INSERT INTO usuario (id,nombre,usuario,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad)" + " VALUES ("+"{},"+"'{}',"+"'{}',"+"'{}',"+"'{}',"+"'{}',"+"'{}',"+"{},"+"'{}',"+"'{}'"+");").format(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular,departamento,ciudad)
+    cursor.execute(strsql)
+    conexion.commit()
 
-@app.route('/validacion-registro')
+@app.route('/validacion-registro',methods=['GET','POST'])
 def validacion_registro():
-    id = request.form['id']
-    nombre = request.form['nombres'] + ' ' + request.form['apellidos']
+    id = request.form['doc']
+    nom = request.form['nombres']
+    apellidos = request.form['apellidos']
+    nombre=nom+" "+apellidos
     usuario = request.form['usuario']
     correo = request.form['email']
-    contraseña = request.form['contrasena']
+    contraseña = request.form['contraseña']
     fecha = request.form['fecha']
     tipodedocumento = request.form['selector']
     celular= request.form['celular']
     departamento = request.form['departamento']
     ciudad= request.form['ciudad']
     registrar(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular,departamento,ciudad)
-    return "registro realizado"
+    registrado= "Usuario registrado con éxito"
+    return render_template('presentacion.html', registrado=registrado)
