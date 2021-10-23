@@ -73,8 +73,10 @@ def perfilusuario():
     if validarUserPass(usuario,contraseña):
         if usuario=="admi1":
             return render_template('dashboard.html')
+            
         else:
             return render_template('perfilusuario.html', user=usuario)
+            
     else:
         denegado= True
         return redirect('/')
@@ -108,3 +110,27 @@ def validacion_registro():
     ciudad= request.form['ciudad']
     registrar(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular,departamento,ciudad)
     return "registro realizado"
+
+@app.route("/mostrarperfil")
+def mostrarp():
+    datos=db.consultardatos("hypnos")
+    print(datos)
+
+@app.route('/updatedatos', methods=['GET','POST'])
+def actualizardatos():
+
+    id = request.form['documento']
+    nombre = request.form['nombre']
+    usuario = request.form['usuario']
+    correo = request.form['correo']
+    contraseña = request.form['contraseña']
+    fecha = request.form['fnacimiento']
+    tipoDeDocumento = request.form['tcedula']
+    celular= request.form['celular']
+    departamento = request.form['departamento']
+    ciudad= request.form['ciudad']
+
+    db.actualizarusuario(id,nombre,usuario,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad)
+    return render_template('perfilusuario.html', user=usuario)
+
+
