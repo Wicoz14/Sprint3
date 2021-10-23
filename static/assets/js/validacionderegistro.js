@@ -1,4 +1,4 @@
-function validar_formulario() {
+function validarformulario() {
     let nombres = document.getElementById("nombres").value
     let apellidos = document.getElementById("apellidos").value
     let selector = document.getElementById("selector").value
@@ -11,57 +11,52 @@ function validar_formulario() {
 
     let sw = true
 
+    if (nombres.length < 4) {
+        alert("Escriba su nombre completo")
+        sw = false
+    }
+        
+    if (apellidos.length < 7) {
+        alert("Escriba sus apellidos correctamente")
+        sw = false
+    }
+
     if (selector=="Choose...") {
         alert("Debe escoger un tipo de documento")
         sw = false
     }
 
-
-    if (correo.length < 1) {
-        alert("el correo esta vacío")
+    if (cedula.length < 6) {
+        alert("Escriba su documento completo")
         sw = false
-    } else {
-        if (correo.includes("@")) {
-            let separador = correo.split("@")
-            let usuario = separador[0]
-            if (usuario.length < 1) {
-                alert("el correo no tiene el usuario")
-                sw = false
-            } else {
-                let nombreDominio = separador[1]
-                if (nombreDominio.includes(".")) {
-                    separador = nombreDominio.split(".")
-                    let dominio = separador[0]
-                    let extension = separador[1]
-                    if (dominio.length < 1) {
-                        alert("el correo no tiene dominio")
-                        sw = false
-                    }
-
-                    if (extension.length < 1) {
-                        alert("el correo no tiene extension")
-                        sw = false
-                    }
-                } else {
-                    alert("el correo no tiene el .")
-                    sw = false
-                }
-            }
-        } else {
-            alert("el correo no tiene el @")
-            sw = false
-        }
     }
 
-    if (correo =! confirmarcorreo){
+    // if (celular.length < 10) {
+    //     alert("el número de celular es incorrecto")
+    //     sw = false
+    // }
+
+    if (contraseña.length < 6) {
+        alert("la contraseña debe tener al menos 6 caracteres")
+        sw = false
+    }
+
+    if (correo!=confirmarcorreo){
+        sw= false
         alert("los correos inscritos son distintos en ambos campos")
-        sw = false
     }
 
-    if (contraseña =! confirmarcontraseña){
+    console.log(contraseña)
+    console.log(confirmarcontraseña)
+    if (contraseña!=confirmarcontraseña){
         alert("los contraseñas inscritas son distintas en ambos campos")
-        sw = false
+        sw= false
     }
 
-    return sw
+    if (sw){
+        return true;
+    }else{
+        return false;
+    }
+   
 }

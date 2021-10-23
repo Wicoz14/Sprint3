@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request,redirect
 import db
+from sqlite3 import Error
 
 app = Flask(__name__)
 
@@ -77,7 +78,7 @@ def perfilusuario():
             return render_template('perfilusuario.html', user=usuario)
     else:
         denegado= True
-        return render_template('presentacion.html', denegado=denegado)
+        return render_template('presentacion.html', denegado=denegado   )
 
 def validarUserPass(usuario,contraseña):
     conexion=db.get_db()
@@ -85,17 +86,23 @@ def validarUserPass(usuario,contraseña):
     cursor=conexion.cursor()
     cursor.execute(strsql)
     datos=cursor.fetchall()
+    cursor.close()
     if datos:
         return True
     else:
         return False
 
 def registrar(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular,departamento,ciudad):
-    conexion=db.get_db()
-    cursor=conexion.cursor()
-    strsql=("INSERT INTO usuario (id,nombre,usuario,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad)" + " VALUES ("+"{},"+"'{}',"+"'{}',"+"'{}',"+"'{}',"+"'{}',"+"'{}',"+"{},"+"'{}',"+"'{}'"+");").format(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular,departamento,ciudad)
-    cursor.execute(strsql)
-    conexion.commit()
+    try:
+        conexion=db.get_db()
+        strsql=("INSERT INTO usuario (id,nombre,usuario,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad)" + " VALUES ("+"{},"+"'{}',"+"'{}',"+"'{}',"+"'{}',"+"'{}',"+"'{}',"+"{},"+"'{}',"+"'{}'"+");").format(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular,departamento,ciudad)
+        cursor=conexion.cursor()
+        cursor.execute(strsql)
+        conexion.commit()
+        conexion.close()
+        cursor.close
+    except Error:
+        return False
 
 @app.route('/validacion-registro',methods=['GET','POST'])
 def validacion_registro():
@@ -111,6 +118,8 @@ def validacion_registro():
     celular= request.form['celular']
     departamento = request.form['departamento']
     ciudad= request.form['ciudad']
-    registrar(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular,departamento,ciudad)
-    registrado= "Usuario registrado con éxito"
+    if(registrar(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular,departamento,ciudad)):
+        registrado= "Usuario registrado con éxito"
+    else:
+        registrado= "No se ha registrado el usuario, el usuario o sus credenciales ya existen"
     return render_template('presentacion.html', registrado=registrado)
