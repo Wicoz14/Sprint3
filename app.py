@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request,redirect
 import db
+from sqlite3 import Error
+import werkzeug.security as sec
 
 app = Flask(__name__)
 
@@ -71,7 +73,7 @@ def perfilusuario():
     usuario= request.form['usuario']
     contraseña= request.form['password']
     if validarUserPass(usuario,contraseña):
-        if usuario=="admi1":
+        if usuario=="administrador1":
             return render_template('dashboard.html')
             
         else:
@@ -79,30 +81,44 @@ def perfilusuario():
             
     else:
         denegado= True
-        return redirect('/')
+        return render_template('presentacion.html', denegado=denegado   )
 
 def validarUserPass(usuario,contraseña):
     conexion=db.get_db()
-    strsql="SELECT * FROM usuario WHERE usuario = '{}' and contraseña = '{}'".format(usuario, contraseña)
+    strsql="SELECT * FROM usuario WHERE usuario = '{}'".format(usuario)
     cursor=conexion.cursor()
     cursor.execute(strsql)
     datos=cursor.fetchall()
+    cursor.close()
     if datos:
-        return True
+        if sec.check_password_hash(datos[0][4],contraseña):
+            return True
+        else: return False
     else:
         return False
 
-def registrar(nombre,tipodedocumento,id,fecha,celular,departamento,ciudad,usuario,correo,contraseña):
-    conexion=db.get_db()
-    strsql="INSERT INTO usuario (id,nombre,usuario,correo,contraseña,fecha,TipoDeDocumento,celular,departamento,ciudad)" + " VALUES ("+"{}"+"'{}'"+"'{}'"+"'{}'"+"'{}'"+"'{}'"+"'{}'"+"{}"+"'{}'"+"'{}'".format(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular,departamento,ciudad)
+def registrar(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular,departamento,ciudad):
+    try:
+        conexion=db.get_db()
+        strsql=("INSERT INTO usuario (id,nombre,usuario,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad)" + " VALUES ("+"{},"+"'{}',"+"'{}',"+"'{}',"+"'{}',"+"'{}',"+"'{}',"+"{},"+"'{}',"+"'{}'"+");").format(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular,departamento,ciudad)
+        cursor=conexion.cursor()
+        cursor.execute(strsql)
+        conexion.commit()
+        conexion.close()
+        cursor.close
+        return True
+    except Error:
+        return False
 
-@app.route('/validacion-registro')
+@app.route('/validacion-registro',methods=['GET','POST'])
 def validacion_registro():
-    id = request.form['id']
-    nombre = request.form['nombres'] + ' ' + request.form['apellidos']
+    id = request.form['doc']
+    nom = request.form['nombres']
+    apellidos = request.form['apellidos']
+    nombre=nom+" "+apellidos
     usuario = request.form['usuario']
     correo = request.form['email']
-    contraseña = request.form['contrasena']
+    contraseña = sec.generate_password_hash(request.form['contraseña'])
     fecha = request.form['fecha']
     tipodedocumento = request.form['selector']
     celular= request.form['celular']

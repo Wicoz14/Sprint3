@@ -1,26 +1,23 @@
-function validar_formulario() {
+function validarformulario() {
     let nombres = document.getElementById("nombres").value
     let apellidos = document.getElementById("apellidos").value
     let selector = document.getElementById("selector").value
-    let fecha = document.getElementById("fecha").value
     let celular = document.getElementById("celular").value
     let correo = document.getElementById("email").value
     let confirmarcorreo = document.getElementById("confirmaremail").value
     let contraseña = document.getElementById("contraseña").value
-    let confirmarcontraseña = document.getElementById("confirmaremail").value
-    let datos = document.getElementById("datos").checked
-    let datos1 = document.getElementById("gridCheck").checked
-
+    let confirmarcontraseña = document.getElementById("confirmarcontraseña").value
+    let cedula = document.getElementById("doc").value
 
     let sw = true
 
-    if (nombres.length < 1) {
-        alert("los nombres están vacíos")
+    if (nombres.length < 4) {
+        alert("Escriba su nombre completo")
         sw = false
     }
         
-    if (apellidos.length < 1) {
-        alert("los apellidos están vacíos")
+    if (apellidos.length < 7) {
+        alert("Escriba sus apellidos correctamente")
         sw = false
     }
 
@@ -29,82 +26,37 @@ function validar_formulario() {
         sw = false
     }
 
-    if (celular.length < 1) {
-        alert("el número de celular está vacío")
-        sw = false
-    }else if (celular.length < 10) {
-        alert("el número de celular debe tener 10 números")
-        sw = false
-    }  
-
-    if (contraseña.length < 1) {
-        alert("la contraseña está vacia")
-        sw = false
-    } else if (contraseña.length < 8) {
-        alert("la contraseña debe tener más de 7 caracteres")
+    if (cedula.length < 6) {
+        alert("Escriba su documento completo")
         sw = false
     }
 
+    // if (celular.length < 10) {
+    //     alert("el número de celular es incorrecto")
+    //     sw = false
+    // }
 
-    if (correo.length < 1) {
-        alert("el correo esta vacío")
+    if (contraseña.length < 6) {
+        alert("la contraseña debe tener al menos 6 caracteres")
         sw = false
-    } else {
-        if (correo.includes("@")) {
-            let separador = correo.split("@")
-            let usuario = separador[0]
-            if (usuario.length < 1) {
-                alert("el correo no tiene el usuario")
-                sw = false
-            } else {
-                let nombreDominio = separador[1]
-                if (nombreDominio.includes(".")) {
-                    separador = nombreDominio.split(".")
-                    let dominio = separador[0]
-                    let extension = separador[1]
-                    if (dominio.length < 1) {
-                        alert("el correo no tiene dominio")
-                        sw = false
-                    }
-
-                    if (extension.length < 1) {
-                        alert("el correo no tiene extension")
-                        sw = false
-                    }
-                } else {
-                    alert("el correo no tiene el .")
-                    sw = false
-                }
-            }
-        } else {
-            alert("el correo no tiene el @")
-            sw = false
-        }
     }
 
-    
-    return sw
+    if (correo!=confirmarcorreo){
+        sw= false
+        alert("los correos inscritos son distintos en ambos campos")
+    }
+
+    console.log(contraseña)
+    console.log(confirmarcontraseña)
+    if (contraseña!=confirmarcontraseña){
+        alert("los contraseñas inscritas son distintas en ambos campos")
+        sw= false
+    }
+
+    if (sw){
+        return true;
+    }else{
+        return false;
+    }
+   
 }
-
-// function validarusuario() {
-//     let usuarios={"usuario1":'12345', "usuario2":'67890',"admi1":'admi12345'}
-//     let usuario = document.getElementById("usuario").value
-//     let contraseña = document.getElementById("password").value
-
-//     let sw = true
-
-//     if (usuario in usuarios) {
-//         if(contraseña == usuarios[usuario]){
-//             let link=""
-//         }
-//         else{
-//             alert("contraseña inválida")
-//             sw = false  
-//         }    
-//     }
-//     else{
-//         alert("usuario no existente")
-//         sw = false
-//     }
-//     return sw
-// }

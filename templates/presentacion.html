@@ -17,7 +17,15 @@
                 <div class="txtback">
                     <h1 class="title">ASEGURA TU SILLA</h1>
                     <p class="textregist">Regístrate y compra tus entradas directamente desde nuestra pagina web</p>
-                    <p><a class="botonregist" role="button" href="/registro">REGISTRARME</a></p>
+                    <p><a class="botonregist" role="button" href="/registro" style="text-decoration:none; color:#ffc107">REGISTRARME</a></p>
+                    <div>
+                        {% if registrado %}
+                            <p class="textregist">{{registrado}}</p>
+                        {% endif %}
+                        {% if denegado %}
+                            <p class="textregist">Usuario o contraseña inválida</p>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </section>
