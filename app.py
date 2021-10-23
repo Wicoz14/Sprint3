@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request,redirect
 import db
 from sqlite3 import Error
+import werkzeug.security as sec
 
 app = Flask(__name__)
 
@@ -82,13 +83,15 @@ def perfilusuario():
 
 def validarUserPass(usuario,contraseña):
     conexion=db.get_db()
-    strsql="SELECT * FROM usuario WHERE usuario = '{}' and contraseña = '{}'".format(usuario, contraseña)
+    strsql="SELECT * FROM usuario WHERE usuario = '{}'".format(usuario)
     cursor=conexion.cursor()
     cursor.execute(strsql)
     datos=cursor.fetchall()
     cursor.close()
     if datos:
-        return True
+        if sec.check_password_hash(datos[0][4],contraseña):
+            return True
+        else: return False
     else:
         return False
 
@@ -101,6 +104,7 @@ def registrar(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular
         conexion.commit()
         conexion.close()
         cursor.close
+        return True
     except Error:
         return False
 
@@ -112,7 +116,7 @@ def validacion_registro():
     nombre=nom+" "+apellidos
     usuario = request.form['usuario']
     correo = request.form['email']
-    contraseña = request.form['contraseña']
+    contraseña = sec.generate_password_hash(request.form['contraseña'])
     fecha = request.form['fecha']
     tipodedocumento = request.form['selector']
     celular= request.form['celular']
