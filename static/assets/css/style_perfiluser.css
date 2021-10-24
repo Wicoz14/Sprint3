@@ -7,7 +7,7 @@ form{
     width: 900px 1200px;
 }
 
-input, select{
+form .lblfor, select{
     background: none;
     padding: 10px 10px 1px 10px;
     display: flex;
@@ -16,6 +16,8 @@ input, select{
     min-width: 25%;
     border: 1px solid;
     margin: 5px;
+    border-radius: 5px;
+    box-shadow: 10px 5px rgb(245,196,20);
 }
 
 .opcion {

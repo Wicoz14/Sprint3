@@ -142,3 +142,20 @@ def cerrar_sesion():
     if 'user' in session:
         session.pop('user')
         return redirect('/')
+
+@app.route('/updatedatos', methods=['GET','POST'])
+def actualizardatos():
+
+    id = request.form['documento']
+    nombre = request.form['nombre']
+    usuario = session['user']
+    correo = request.form['correo']
+    contraseña = sec.generate_password_hash(request.form['contraseña'])
+    fecha = request.form['fnacimiento']
+    tipoDeDocumento = request.form['tcedula']
+    celular= request.form['celular']
+    departamento = request.form['departamento']
+    ciudad= request.form['ciudad']
+
+    db.actualizarusuario(id,nombre,usuario,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad)
+    return render_template('perfilusuario.html', user=usuario)
