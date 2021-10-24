@@ -1,19 +1,25 @@
-.container .profile{
-   align-items: center;
+.contenedor{
+    display: flex;
+    justify-content: center;
 }
 
-div.avatar-bg {
-    background: url(https://www.gravatar.com/avatar/1234566?size=200&d=mm);
-    background-position: 50% 50%;
-    height: 200px;
-    width: 200px;
-    background-size: cover;
-    border-radius: 50%;
-    margin-left: calc(50% - 5px);
-  }
+form{
+    width: 900px 1200px;
+}
 
-.botonopcion{
-    border-radius: 57px;
+input, select{
+    background: none;
+    padding: 10px 10px 1px 10px;
+    display: flex;
+    width: 500px;
+    max-width: 100%;
+    min-width: 25%;
+    border: 1px solid;
+    margin: 5px;
+}
+
+.opcion {
+    border-radius: 70px;
     border-width: 2px;
     border-color: rgb(245,196,20);
     background: rgb(0,0,0);
@@ -22,16 +28,7 @@ div.avatar-bg {
     display: inline-block;
     text-decoration: none;
     border: 1px solid;
+    margin-top: 10px;
     margin-left: 2rem;
     margin-left: 2rem;
-}
-
-.col-md-8 {
-    flex: inherit;
-    width: 60%;
-}
-
-div .row{
-    align-items: center;
-    margin-right: 10px;
 }

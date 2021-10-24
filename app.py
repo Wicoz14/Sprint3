@@ -80,8 +80,10 @@ def validarusuario():
     if validarUserPass(usuario,contraseña):
         if usuario=="administrador1":
             return render_template('dashboard.html')
+            
         else:
             return render_template('perfilusuario.html', user=usuario)
+            
     else:
         denegado= True
         return render_template('presentacion.html', denegado=denegado   )
