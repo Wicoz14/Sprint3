@@ -11,37 +11,33 @@
     </label>
     <input type="text" id="searchBox">
     <input type="submit" id="searchButton" value="Buscar">
-
 </div>
 
-<table id="tableOfContentsU"> 
+<table id="tableOfContentsP"> 
     <tr>
-        <th> Nombre</th>
-        <th> Duracion</th>
-        <th> Director </th>
-        <th> Genero</th>
-        <th> Sinopsis</th>
-        <th> caratula</th>
-        
+        <th>Nombre </th>
+        <th>Duración</th>
+        <th>Director</th>
+        <th>Genero</th>
+        <th>Sinopsis</th>
+        <th>Caratula</th>
     </tr>
 
-     <tr>
-        <td>texto1</td>
-        <td>texto1</td>
-        <td>texto1</td>
-        <td>texto1</td>
-        <td>texto1</td>
-        <td>texto1</td>
-        <td>
-            <button>
-                Editar
-            </button>
+    {% for peli in tablapeli %}
+    <tr>
+        <td>{{peli[0]}}</td>
+        <td>{{peli[1]}}</td>
+        <td>{{peli[2]}}</td>
+        <td>{{peli[3]}}</td>
+        <td><a href="">ver</a></td>
+        <td><a href="">ver</a></td>
+        <td><button>Editar</button></td>
+        <td><button>Eliminar</button></td>
 
-            <button id="eliminar">
-                Eliminar
-            </button>
-        </td>
-    </tr>  
+    </tr>
+    {%endfor%}
+
     
+
 </table>
 {% endblock %}

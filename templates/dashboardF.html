@@ -5,31 +5,35 @@
     <h1> FUNCIONES </h1>
 </div>
 
+
+
+
+
 <div class="subtitulo">
     <h3>Agregar Función</h3>
 
 </div>
 
 
-<form id="add_funcion">
+<form action = "/Dfunciones" method = "post" id= "add_funcion">
     <div class="sala">
         <label for=""> Sala: </label>
-        <input type="text" id="sala">
+        <input type="text" id="sala" name="sala" value="{{datosEdit[0][1]}}">
     </div>
 
     <div class="hora">
         <label for=""> Hora: </label>
-        <input type="text" id="hora">
+        <input type="text" id="hora" name="hora" value="{{datosEdit[0][2]}}">
     </div>
 
     <div class="capacidad">
         <label for=""> Capacidad: </label>
-        <input type="text" id="capacidad">
+        <input type="text" id="capacidad" name="capacidad" value="{{datosEdit[0][3]}}">
     </div>
 
     <div class="pelicula">
         <label for=""> película: </label>
-        <input type="text" id="pelicula">
+        <input type="text" id="pelicula" name="pelicula" value="{{datosEdit[0][4]}}">
     </div>
 
     <input type="submit" id="Agregar" value="Agregar">
@@ -42,10 +46,21 @@
         <th> Hora</th>
         <th> Capacidad </th>
         <th> Pelicula</th>
-        <th></th>
-        <th></th>
+        
         
     </tr>
+
+    {% for fun in tablafunc %}
+    <tr>
+        <td >{{fun[1]}}</td>
+        <td>{{fun[2]}}</td>
+        <td>{{fun[3]}}</td>
+        <td id="nom">{{fun[4]}}</td>
+        <td><button ><a href="/Dfunciones/{{fun[4]}}/U/{{fun[0]}}" style="color: black;">editar</a></button></td>
+        <td><button><a href="/Dfunciones/{{fun[4]}}/D/{{fun[0]}}" style="color: black;">eliminar</a></button></td>
+
+    </tr>
+    {%endfor%}
 
     <!-- <tr>
         <td>texto1</td>
