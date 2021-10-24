@@ -1,12 +1,13 @@
-from flask import Flask, render_template, request,redirect
+from flask import Flask, render_template, request,redirect,session
 import db
 from sqlite3 import Error
 import werkzeug.security as sec
 
 app = Flask(__name__)
+app.secret_key = "Secret Key"
 
 peliculas=["Shang-chi", "Sin tiempo para morir","Venom","Spidey","Jhon Wick 4","Liga de la Justicia","Space Jam","Escape Room 2","Jack en la caja maldita","Cruella"]
-usuarios={"usuario1":'12345', "usuario2":'67890',"admi1":'admi12345'}
+
 
 @app.route('/', methods=['GET'])
 def presentacion():
@@ -68,8 +69,12 @@ def busqueda():
         resultado ="película no encontrada"
         return render_template('busqueda.html',buscado=buscado, resultado=resultado)
 
-@app.route('/perfilusuario', methods=['GET','POST'])
-def perfilusuario():
+@app.route('/perfilusuario/<user>')
+def perfilusuario(user):
+    return render_template('perfilusuario.html')
+
+@app.route('/validar-usuario', methods=['GET','POST'])
+def validarusuario():
     usuario= request.form['usuario']
     contraseña= request.form['password']
     if validarUserPass(usuario,contraseña):
@@ -90,6 +95,8 @@ def validarUserPass(usuario,contraseña):
     cursor.close()
     if datos:
         if sec.check_password_hash(datos[0][4],contraseña):
+            session.clear()
+            session['user']=usuario
             return True
         else: return False
     else:
@@ -127,3 +134,9 @@ def validacion_registro():
     else:
         registrado= "No se ha registrado el usuario, el usuario o sus credenciales ya existen"
     return render_template('presentacion.html', registrado=registrado)
+
+@app.route('/cerrarsesion')
+def cerrar_sesion():
+    if 'user' in session:
+        session.pop('user')
+        return redirect('/')
