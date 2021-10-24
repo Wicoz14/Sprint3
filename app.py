@@ -78,7 +78,7 @@ def validarusuario():
     usuario= request.form['usuario']
     contraseña= request.form['password']
     if validarUserPass(usuario,contraseña):
-        if usuario=="administrador1":
+        if usuario=="admi1":
             return render_template('dashboard.html')
             
         else:
