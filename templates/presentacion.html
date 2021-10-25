@@ -17,7 +17,15 @@
                 <div class="txtback">
                     <h1 class="title">ASEGURA TU SILLA</h1>
                     <p class="textregist">Regístrate y compra tus entradas directamente desde nuestra pagina web</p>
-                    <p><a class="botonregist" role="button" href="/registro">REGISTRARME</a></p>
+                    <p><a class="botonregist" role="button" href="/registro" style="text-decoration:none; color:#ffc107">REGISTRARME</a></p>
+                    <div>
+                        {% if registrado %}
+                            <p class="textregist">{{registrado}}</p>
+                        {% endif %}
+                        {% if denegado %}
+                            <p class="textregist">Usuario o contraseña inválida</p>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </section>
@@ -31,7 +39,7 @@
                     <h4>Shang-Chi</h4>
                     <p>Genero: Accion/Fantasia</p>
                     <p>Duracion: 132m</p>
-                    <p>Estreno: 20 de Septiembre 2021</p>
+                    <p>Estreno: 02 de Septiembre 2021</p>
                 </div>
                 <div class="col text-center">
                     <img id="content_div_one_photo" class="rounded " src="/static/assets/images/p2.jpg">
@@ -45,7 +53,7 @@
                     <h4>Venom</h4>
                     <p>Genero: Accion/Ciencia Ficcion</p>
                     <p>Duracion: 138m</p>
-                    <p>Estreno: Diciembre 2021</p>
+                    <p>Estreno: 07 de octubre 2021</p>
                 </div>
             </div>
         </div>

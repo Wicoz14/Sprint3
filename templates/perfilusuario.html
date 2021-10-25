@@ -1,6 +1,134 @@
 {% extends "layout.html" %}
 
 {% block contenido %}
-<h1> Usuario</h1>
-{{user}}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/assets/css/style_perfiluser.css">
+  </head>
+
+<body>
+    
+</body>
+</html>
+
+<body>
+  <h1>Perfil</h1>
+    <section class ="contenedor">
+        <form action="/updatedatos" method="post" onload="mostrarperfil()">
+          <div class="form">
+            <div class="grupo">
+              <label for="nombre">Nombre: </label>
+              <input type="text" name="nombre" id="nombre" required placeholder="Nombres">
+              <label for="usuario">Usuario: </label>
+              <input type="text" name="usuario" id="usuario" required placeholder="Usuario">
+              <label for="correo">Correo: </label>
+              <input type="email" name="correo" id="correo" required>
+              <label for="celular">Celular: </label>
+              <input type="text" name="celular" id="celular" required>
+              <label for="tipodocumento">Tipo de Documento: </label>
+              <select name="tcedula" id="tcedula" required>
+                <option value="Cedula de ciudadania">Cédula de ciudadanía</option>
+                <option value="Tarjeta de identidiad">Tarjeta de identidiad</option>
+                <option value="Pasaporte de extrangería">Pasaporte de extrangería</option>
+              </select>
+              <label for="documento">N° Documento: </label>
+              <input type="text" name="documento" id="documento" required>
+              <label for="fnacimiento">Fecha de Nacimiento: </label>
+              <input type="date" name="fnacimiento" id="fnacimiento" required>
+              <label for="departamento">Departamento Residencia: </label>
+              <input type="text" name="departamento" id="departamento" required>
+              <label for="ciudad">Ciudad: </label>
+              <input type="text" name="ciudad" id="ciudad" required>
+              <label for="contraseña">Confirmar contraseña: </label>
+              <input type="password" name="contraseña" id="contraseña" required>
+            </div>
+          </div>
+          <button class="opcion" type="submit" value="actualizar">Actualizar</button>
+        </form>
+        <a class="btn btn-outline-warning bt2" href="/cerrarsesion" role="button">SALIR</a>
+    </section>
+  
+
+
+
+   <!-- <div class="container profile profile-view" id="profile">
+        <form>
+            <div class="row profile-row">
+                <div class="col-md-4 relative">
+                    <div class="avatar">
+                        <div class="avatar-bg center"></div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <form class="row g-3 cuerporegistro" action="/validacion-registro" onsubmit="return validar_formulario()">
+                        <div class="col-md-6">
+                          <label class="form-label">Nombres*</label>
+                          <input type="name" class="form-control inputregistro" placeholder="Nombre" id="nombres" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Documento de identidad*</label>
+                          <select class="form-select inputregistro" id="selector">
+                            <option selected>Choose...</option>
+                            <option>Cédula de ciudadanía</option>
+                            <option>Tarjeta de identidiad</option>
+                            <option>Pasaporte de extrangería</option>
+                          </select>
+                          <input type="text" class="form-control inputregistro" placeholder="Número de documento" id="id" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label" id="fecha">Fecha de nacimiento*</label>
+                          <input class="inputregistro fecha" type="date" name="fecha" min="1921-03-25" max="2020-05-25" step="1" id="fecha" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label" id="celular">Celular*</label>
+                          <input type="name" class="form-control inputregistro" placeholder="Número de celular" id="celular" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Departamento*</label>
+                          <input type="name" class="form-control inputregistro" placeholder="Departamento" id="departamento"required>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Ciudad de residencia*</label>
+                          <input type="name" class="form-control inputregistro" placeholder="Ciudad de residencia" id="ciudad" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Nombre de Usuario*</label>
+                          <input type="name" class="form-control inputregistro" placeholder="Usuario" id="usuario" equired>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Correo*</label>
+                          <input type="name" class="form-control inputregistro" placeholder="Correo electrónico" id="email" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Confirmar correo*</label>
+                          <input type="name" class="form-control inputregistro" placeholder="Confirmar correo" id="confirmaremail" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Contraseña*</label>
+                          <input type="password" class="form-control inputregistro" placeholder="contraseña" id="contraseña"required>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">confirmar contraseña*</label>
+                          <input type="password" class="form-control inputregistro" placeholder="Confirmar contraseña" id="confirmar contraseña" required>
+                        </div>
+                    <div class="row">   
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 content-right">
+                            <button class="botonopcion" type="submit">Mi Tarjeta </button>
+                            <button class="botonopcion" type="submit">Compras </button>
+                            <button class="botonopcion" href="/datos" type="submit">Actualizar </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <a class="btn btn-outline-warning bt2" href="/cerrarsesion" role="button">SALIR</a>
+    </div>
+</body>
 {% endblock %}

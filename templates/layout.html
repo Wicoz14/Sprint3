@@ -2,113 +2,126 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineColombia</title>
-    <link rel="shortcut icon" href="../static/assets/images/favicon/favicon-256x256.png">
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.min.css' ) }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/Style.css' ) }}">
-    <script src="https://kit.fontawesome.com/456cf9686f.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineColombia</title>
+  <link rel="shortcut icon" href="../static/assets/images/favicon/favicon-256x256.png">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.min.css' ) }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/Style.css' ) }}">
+  <script src="https://kit.fontawesome.com/456cf9686f.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <head>
-        <nav class="navbar navbar-expand-lg navbar-black bg-black fixed-top">
-            <div class="container-fluid">
-                <a class="navbar-brand textprincipal" href="/" style="text-decoration:none; color:#ffc107">
-                    <i class="fab fa-contao logo"></i>
-                    Cine Colombia
-                </a>
-                <div class="collapse navbar-collapse textprincipal" id="navbarScroll">
-                    <form class="d-flex" method="get" action="/busqueda">
-                        <input name="busqueda" class="form-control me-2 barrabusqueda" type="search" aria-label="Search">
-                        <button class="btn btn-outline-warning bt1" type="submit">BUSCAR</button>
-                        <a class="btn btn-outline-warning bt2" href="/funciones" role="button">FUNCIONES</a>
-                        <button type="button" class="btn btn-outline-warning bt1" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">INGRESO</button>
-                    </form>
-            </div>
-        </nav>
-    </head>
-    <body class="cuerpopagina">
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Ingresar Sesión</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form action="/perfilusuario" onsubmit="return validarusuario()" method="post">
-                    <div class="mb-3">
-                      <label for="usuario" class="col-form-label">Usuario:</label>
-                      <input type="text" name="usuario" class="form-control barralogin" id="usuario" placeholder="Usuario">
-                    </div>
-                    <div class="mb-3">
-                      <label for="message-text" class="col-form-label">Contraseña:</label>
-                      <input type="password" name="password" class="form-control barralogin" id="password" placeholder="Contraseña">
-                    </div>
-                    <button type="submit" class="btn  btlogin" style="text-decoration:none; color:#ffc107">Ingresar</button>
-                    <div>
-                      <a href="/registro" style="text-decoration:none; color:#ffc107" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="@mdo">¿Olvidaste tu contraseña? Recuperála aquí</a>
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <a href="/registro" style="text-decoration:none; color:#ffc107">¿No estás registrado? Regístrate aquí</a>
-                </div>
-              </div>
-            </div>
+
+  <head>
+    <nav class="navbar navbar-expand-lg navbar-black bg-black fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand textprincipal" href="/" style="text-decoration:none; color:#ffc107">
+          <i class="fab fa-contao logo"></i>
+          Cine Colombia
+        </a>
+        <div class="collapse navbar-collapse textprincipal" id="navbarScroll">
+          <form class="d-flex" method="get" action="/busqueda">
+            <input name="busqueda" class="form-control me-2 barrabusqueda" type="search" aria-label="Search">
+            <button class="btn btn-outline-warning bt1" type="submit">BUSCAR</button>
+            <a class="btn btn-outline-warning bt2" href="/funciones" role="button">FUNCIONES</a>
+            {% if 'user' in session%}
+            <i class="far fa-user icon-user"></i>
+            <a class="btn btn-outline-warning bt2" href="/perfilusuario/{{session['user']}}"
+              role="button">{{session['user']}}</a>
+            {%else%}
+            <button type="button" class="btn btn-outline-warning bt1" data-bs-toggle="modal"
+              data-bs-target="#exampleModal" data-bs-whatever="@mdo">INGRESO</button>
+            {% endif %}
+          </form>
+        </div>
+    </nav>
+  </head>
+
+  <body class="cuerpopagina">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ingresar Sesión</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Recuperar contraseña</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="mb-3">
-                      <label for="recipient-name" class="col-form-label">Correo electrónico:</label>
-                      <input type="text" class="form-control barralogin" id="recipient-name" placeholder="Correo electrónico">
-                    </div>
-                    <button type="button" class="btn  btlogin" style="text-decoration:none; color:#ffc107">Recuperar</button>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <a href="/registro" style="text-decoration:none; color:#ffc107">¿No estás registrado? Regístrate aquí</a>
-                </div>
+          <div class="modal-body">
+            <form action="/validar-usuario" method="post">
+              <div class="mb-3">
+                <label for="usuario" class="col-form-label">Usuario:</label>
+                <input type="text" name="usuario" class="form-control barralogin" id="usuario" placeholder="Usuario"
+                  required>
               </div>
-            </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Contraseña:</label>
+                <input type="password" name="password" class="form-control barralogin" id="password"
+                  placeholder="Contraseña" required>
+              </div>
+              <button type="submit" class="btn  btlogin" style="text-decoration:none; color:#ffc107">Ingresar</button>
+              <div>
+                <a href="/registro" style="text-decoration:none; color:#ffc107" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal2" data-bs-whatever="@mdo">¿Olvidaste tu contraseña? Recuperála aquí</a>
+              </div>
+            </form>
           </div>
-       {% block contenido %} 
-       {% endblock %}
-    </body>
-    <footer>
-        <nav class="navbar navbar-black bg-black fixed-bottom">
-            <div class="container">
-                <div class="row footer">
-                    <div class="col">
-                        <i class="fab fa-contao"></i>
-                    </div>
-                    <div class="col iconos">
-                        <a class="fab fa-facebook link-light" href="https://www.facebook.com"></a>
-                        <a class="fab fa-instagram link-light" href="https://www.instagram.com"></a>
-                        <a class="fab fa-twitter link-light" href="https://www.twitter.com"></a>
-                        <a class="navbar-brand textprincipal textfoot link-light" href="/informacion">Información|Contáctanos</a>
-                        <p class="navbar-brand textprincipal textfoot">(c)2021 Grupo 6</p>
-                    </div>
-                    <div class="col">
-                        <a class="navbar-brand textprincipal textfoot2" href="/" style="text-decoration:none; color:#ffc107">Cine Colombia</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </footer>
-    <script type=text/javascript src="{{ url_for('static', filename='assets/js/popper.min.js') }}"></script>
-    <script type=text/javascript src="{{ url_for('static', filename='assets/js/bootstrap.min.js') }}"></script>
-    <script type=text/javascript src="{{ url_for('static', filename='assets/js/script.js')}}"></script>
-    <script type=text/javascript src="{{ url_for('static', filename='assets/js/validacionderegistro.js') }}"></script>
+          <div class="modal-footer">
+            <a href="/registro" style="text-decoration:none; color:#ffc107">¿No estás registrado? Regístrate aquí</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Recuperar contraseña</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Correo electrónico:</label>
+                <input type="text" class="form-control barralogin" id="recipient-name" placeholder="Correo electrónico">
+              </div>
+              <button type="button" class="btn  btlogin" style="text-decoration:none; color:#ffc107">Recuperar</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <a href="/registro" style="text-decoration:none; color:#ffc107">¿No estás registrado? Regístrate aquí</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% block contenido %}
+    {% endblock %}
+  </body>
+  <footer>
+    <nav class="navbar navbar-black bg-black fixed-bottom">
+      <div class="container">
+        <div class="row footer">
+          <div class="col">
+            <i class="fab fa-contao"></i>
+          </div>
+          <div class="col iconos">
+            <a class="fab fa-facebook link-light" href="https://www.facebook.com"></a>
+            <a class="fab fa-instagram link-light" href="https://www.instagram.com"></a>
+            <a class="fab fa-twitter link-light" href="https://www.twitter.com"></a>
+            <a class="navbar-brand textprincipal textfoot link-light" href="/informacion">Información|Contáctanos</a>
+            <p class="navbar-brand textprincipal textfoot">(c)2021 Grupo 6</p>
+          </div>
+          <div class="col">
+            <a class="navbar-brand textprincipal textfoot2" href="/" style="text-decoration:none; color:#ffc107">Cine
+              Colombia</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </footer>
+  <script type=text/javascript src="{{ url_for('static', filename='assets/js/popper.min.js') }}"></script>
+  <script type=text/javascript src="{{ url_for('static', filename='assets/js/bootstrap.min.js') }}"></script>
+  <script type=text/javascript src="{{ url_for('static', filename='assets/js/validacionderegistro.js') }}"></script>
 </body>
+
 </html>

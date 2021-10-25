@@ -129,3 +129,8 @@
     padding-top: 5rem;
     padding-left: 5rem;
 }
+.icon-user{
+    position: relative;
+    font-size:2rem;
+    color: #ffc107;
+}

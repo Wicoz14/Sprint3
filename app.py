@@ -1,11 +1,15 @@
-from flask import Flask, render_template, request,redirect
+from flask import Flask, render_template, request,redirect,session
+import db
+from sqlite3 import Error
+import werkzeug.security as sec
 
 app = Flask(__name__)
+app.secret_key = "Secret Key"
 
 peliculas=["Shang-chi", "Sin tiempo para morir","Venom","Spidey","Jhon Wick 4","Liga de la Justicia","Space Jam","Escape Room 2","Jack en la caja maldita","Cruella"]
-usuarios={"usuario1":'12345', "usuario2":'67890',"admi1":'admi12345'}
 
-@app.route('/', methods=['GET','POST'])
+
+@app.route('/', methods=['GET'])
 def presentacion():
     return render_template('presentacion.html')
 
@@ -20,6 +24,124 @@ def funciones():
 @app.route('/dashboard', methods=['GET','POST'])
 def dashboard():
     return render_template('dashboard.html')
+
+@app.route('/agregarPelicula', methods=['GET','POST'])
+def presentacionA(): 
+    if(request.method == 'GET'): 
+        action="/agregarPelicula"
+        datosEdit=[(" "," "," "," "," "," ")]
+        return render_template("dashboardA.html", action=action, datosEdit=datosEdit)
+    else:
+        nombre = request.form['nombre'] 
+        duracion=request.form['duracion'] 
+        director=request.form['director'] 
+        genero=request.form['genero'] 
+        sinopsis=request.form['sinopsis'] 
+        caratula= "null"
+        ''' caratula=request.form['']  '''
+        db.agregar_pelicula(nombre,duracion,director,genero,sinopsis,caratula)
+
+        consulta = db.consultar_dato("peliculas","nombre='{}'".format(nombre),"ultimo")
+        id = consulta[0][0]
+        
+        db.agregar_funcion(id,0," ",0,nombre)
+
+        return redirect('/agregarPelicula')
+
+@app.route('/peliculas', methods=['GET','POST'])
+def presentacionP():
+    mostrar = db.mostrar_tabla("peliculas")
+    return  render_template("dashboardP.html", tablapeli = mostrar)
+
+@app.route('/peliculas/<id>/<condicion>', methods=['GET','POST'])
+def peliculasEE(id, condicion):
+    if condicion == "Delete":  
+        db.elminar_dato("funciones","peli_id={}".format(id)) 
+        db.elminar_dato("peliculas","peli_id={}".format(id))
+        return redirect('/peliculas')  
+
+    if condicion == "Update":
+        if(request.method == 'GET'):    
+            datosEdit = db.consultar_dato("peliculas", "peli_id='{}'".format(id), " ") 
+            action="/peliculas/{}/{}".format(id,condicion)
+            
+            return render_template("dashboardA.html",  datosEdit = datosEdit, action=action )
+        else:
+            nombre = request.form['nombre'] 
+            duracion=request.form['duracion'] 
+            director=request.form['director'] 
+            genero=request.form['genero'] 
+            sinopsis=request.form['sinopsis'] 
+            caratula= "null"
+            
+            db.editar_pelicula("nombre='{}'".format(nombre),"duracion='{}'".format(duracion),"director='{}'".format(director),"genero='{}'".format(genero),"sinopsis='{}'".format(sinopsis),"caratula='{}'".format(caratula),"peli_id={}".format(id))
+
+            return redirect("/peliculas")
+
+@app.route('/Dfuncion', methods=['GET','POST'])
+def presentacionF():     
+    if(request.method == 'GET'): 
+        mostrar = db.mostrar_tabla("funciones")
+        datosEdit=[(" "," "," "," "," ")]
+        action = "/Dfuncion"
+        return render_template("dashboardF.html", tablafunc = mostrar, datosEdit = datosEdit, action=action)       
+    else:
+        sala = request.form['sala']
+        hora = request.form['hora']
+        capacidad = request.form['capacidad']
+        pelicula = request.form['pelicula']
+
+        cantidad = db.contar_dato("peliculas","nombre='{}'".format(pelicula))
+
+        if cantidad[0][0] >= 1:
+            consulta = db.consultar_dato("peliculas","nombre='{}'".format(pelicula))
+            id=consulta[0][0]
+            db.agregar_funcion(id,sala, hora, capacidad, pelicula)
+            return redirect('/Dfuncion')
+        else:
+            mostrar = db.mostrar_tabla("funciones")
+            msj="La pelicula no existe"
+            datosEdit=[(" "," "," "," "," ")]
+            action = "/Dfuncion"
+            return render_template("dashboardF.html", tablafunc = mostrar, msj=msj,datosEdit = datosEdit, action=action)
+
+
+@app.route('/Dfunciones/<id>', methods=['GET','POST']) 
+def función_editar(id):
+    if(request.method == 'GET'): 
+        mostrar = db.mostrar_tabla("funciones")    
+        datosEdit = db.consultar_dato("funciones", "id='{}'".format(id)) 
+        action="/Dfunciones/'{}'".format(id)
+        
+        return render_template("dashboardF.html", tablafunc = mostrar, datosEdit = datosEdit, action=action )
+    else:    
+        sala = request.form['sala']
+        hora = request.form['hora']
+        capacidad = request.form['capacidad']
+        pelicula = request.form['pelicula']
+        
+        db.editar_dato("funciones","sala={}".format(sala), "hora='{}'".format(hora), "capacidad={}".format(capacidad), "pelicula='{}'".format(pelicula), "id={}".format(id))   
+       
+        return redirect('/Dfuncion')
+    
+
+@app.route('/Dfunciones/<funcion>/<condicion>/<id>')
+def funcionesEE(funcion, condicion, id):
+    if condicion == "D":
+        db.elminar_dato("funciones","id='{}'".format(id))
+        return redirect('/Dfuncion')
+    elif condicion == "U":
+        ''' db.consultar_dato("funciones", "id='{}'".format(id)) '''
+        return redirect('/Dfunciones/{}'.format(id))
+
+
+@app.route('/usuario', methods=['GET','POST'])
+def dashboardU():
+    if(request.method == 'GET'): 
+        mostrar = db.mostrar_tabla("usuario")
+        return render_template("dashboardU.html", tablaUsuario = mostrar )       
+    else:
+        return render_template('dashboardU.html')     
 
 @app.route('/detallefunciones/<idpelicula>', methods=['GET'])
 def detallefunciones(idpelicula):
@@ -39,16 +161,86 @@ def informacion():
 def busqueda():
     buscado = request.args.get('busqueda')
     if buscado in peliculas:
-        resultado ="encontrada"
+        if buscado=="Shang-chi":
+            return render_template('detallefunciones.html')
+        if buscado=="Sin tiempo para morir":
+            return render_template('detallefuncion2.html')
+        else:
+            return render_template('detallefuncion3.html')
     else:
         resultado ="película no encontrada"
-    return render_template('busqueda.html',buscado=buscado, resultado=resultado)
+        return render_template('busqueda.html',buscado=buscado, resultado=resultado)
 
-@app.route('/perfilusuario', methods=['POST'])
-def perfilusuario():
+@app.route('/perfilusuario/<user>')
+def perfilusuario(user):
+    return render_template('perfilusuario.html')
+
+@app.route('/validar-usuario', methods=['GET','POST'])
+def validarusuario():
     usuario= request.form['usuario']
-    if usuario=="admi1":
-        return render_template('dashboard.html')
+    contraseña= request.form['password']
+    if validarUserPass(usuario,contraseña):
+        if usuario=="admi1":
+            return render_template('dashboard.html')
+            
+        else:
+            return render_template('perfilusuario.html', user=usuario)
+            
     else:
-        return render_template('perfilusuario.html', user=usuario)
-    
+        denegado= True
+        return render_template('presentacion.html', denegado=denegado   )
+
+def validarUserPass(usuario,contraseña):
+    conexion=db.get_db()
+    strsql="SELECT * FROM usuario WHERE usuario = '{}'".format(usuario)
+    cursor=conexion.cursor()
+    cursor.execute(strsql)
+    datos=cursor.fetchall()
+    cursor.close()
+    if datos:
+        if sec.check_password_hash(datos[0][4],contraseña):
+            session.clear()
+            session['user']=usuario
+            return True
+        else: return False
+    else:
+        return False
+
+def registrar(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular,departamento,ciudad):
+    try:
+        conexion=db.get_db()
+        strsql=("INSERT INTO usuario (id,nombre,usuario,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad)" + " VALUES ("+"{},"+"'{}',"+"'{}',"+"'{}',"+"'{}',"+"'{}',"+"'{}',"+"{},"+"'{}',"+"'{}'"+");").format(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular,departamento,ciudad)
+        cursor=conexion.cursor()
+        cursor.execute(strsql)
+        conexion.commit()
+        conexion.close()
+        cursor.close
+        return True
+    except Error:
+        return False
+
+@app.route('/validacion-registro',methods=['GET','POST'])
+def validacion_registro():
+    id = request.form['doc']
+    nom = request.form['nombres']
+    apellidos = request.form['apellidos']
+    nombre=nom+" "+apellidos
+    usuario = request.form['usuario']
+    correo = request.form['email']
+    contraseña = sec.generate_password_hash(request.form['contraseña'])
+    fecha = request.form['fecha']
+    tipodedocumento = request.form['selector']
+    celular= request.form['celular']
+    departamento = request.form['departamento']
+    ciudad= request.form['ciudad']
+    if(registrar(id,nombre,usuario,correo,contraseña,fecha,tipodedocumento,celular,departamento,ciudad)):
+        registrado= "Usuario registrado con éxito"
+    else:
+        registrado= "No se ha registrado el usuario, el usuario o sus credenciales ya existen"
+    return render_template('presentacion.html', registrado=registrado)
+
+@app.route('/cerrarsesion')
+def cerrar_sesion():
+    if 'user' in session:
+        session.pop('user')
+        return redirect('/')

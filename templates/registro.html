@@ -1,62 +1,72 @@
 {% extends "layout.html" %}
 
 {% block contenido %}
-<form class="row g-3 cuerporegistro" onsubmit="return validar_formulario()">
+<form class="row g-3 cuerporegistro" action="/validacion-registro" method="post" onsubmit="return validarformulario();" id="formularioregistro">
   <h1>Registro</h1>
   <div class="col-md-6">
     <label class="form-label">Nombres*</label>
-    <input type="name" class="form-control inputregistro" placeholder="Nombre" id="nombres">
+    <input type="text" name="nombres" class="form-control inputregistro" id="nombres" placeholder="Nombre" required minlength="4">
   </div>
   <div class="col-md-6">
     <label class="form-label">Apellidos*</label>
-    <input type="name" class="form-control inputregistro" placeholder="Apellidos" id="apellidos">
+    <input type="text" name="apellidos" class="form-control inputregistro" placeholder="Apellidos" id="apellidos" required minlength="7">
   </div>
   <div class="col-md-6">
     <label class="form-label">Documento de identidad*</label>
-    <select class="form-select inputregistro" id="selector">
+    <select class="form-select inputregistro" name="selector" id="selector">
       <option selected>Choose...</option>
       <option>Cédula de ciudadanía</option>
-      <option>Tarjeta de identidiad</option>
+      <option>Tarjeta de identidad</option>
       <option>Pasaporte de extrangería</option>
     </select>
-    <input type="text" class="form-control inputregistro" placeholder="Número de documento">
+    <input type="number" name="doc" class="form-control inputregistro" placeholder="Número de documento" id="doc" required minlength="6">
   </div>
   <div class="col-md-6">
     <label class="form-label" id="fecha">Fecha de nacimiento*</label>
-    <input class="inputregistro fecha" type="date" name="fecha" min="1921-03-25" max="2020-05-25" step="1" />
+    <input class="inputregistro fecha" type="date" name="fecha" min="1921-03-25" max="2009-12-31" step="1" id="fecha"
+      required>
   </div>
   <div class="col-md-6">
     <label class="form-label" id="celular">Celular*</label>
-    <input type="name" class="form-control inputregistro" placeholder="Número de celular">
+    <input type="number" name="celular" class="form-control inputregistro" placeholder="Número de celular" id="celular" required minlength="10">
   </div>
   <div class="col-md-6">
     <label class="form-label">Departamento*</label>
-    <input type="name" class="form-control inputregistro" placeholder="Departamento">
+    <input type="text" name="departamento" class="form-control inputregistro" placeholder="Departamento"
+      id="departamento" required minlength="4">
   </div>
   <div class="col-md-6">
     <label class="form-label">Ciudad de residencia*</label>
-    <input type="name" class="form-control inputregistro" placeholder="Ciudad de residencia">
+    <input type="text" name="ciudad" class="form-control inputregistro" placeholder="Ciudad de residencia" id="ciudad"
+      required minlength="4">
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Nombre de Usuario*</label>
+    <input type="name" name="usuario" class="form-control inputregistro" placeholder="Usuario" id="usuario" required
+      minlength="4">
   </div>
   <div class="col-md-6">
     <label class="form-label">Correo*</label>
-    <input type="name" class="form-control inputregistro" placeholder="Correo electrónico" id="email">
+    <input type="email" name="email" class="form-control inputregistro" placeholder="Correo electrónico" id="email"
+      required>
   </div>
   <div class="col-md-6">
     <label class="form-label">Confirmar correo*</label>
-    <input type="name" class="form-control inputregistro" placeholder="Confirmar correo" id="confirmaremail">
+    <input type="email" class="form-control inputregistro" name="confirmaremail" placeholder="Confirmar correo" id="confirmaremail" required>
   </div>
   <div class="col-md-6">
     <label class="form-label">Contraseña*</label>
-    <input type="password" class="form-control inputregistro" placeholder="Contraseña" id="contraseña">
+    <input type="password" name="contraseña" class="form-control inputregistro" placeholder="contraseña" id="contraseña"
+      required minlength="6">
   </div>
   <div class="col-md-6">
     <label class="form-label">confirmar contraseña*</label>
-    <input type="password" class="form-control inputregistro" placeholder="Confirmar contraseña" id="confirmar contraseña">
+    <input type="password" name="confirmarcontraseña"class="form-control inputregistro" placeholder="Confirmar contraseña" id="confirmarcontraseña" required minlength="6">
   </div>
   <div class="col-12">
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="datos">
-      <label class="form-check-label" for="gridCheck">
+      <input class="form-check-input" type="checkbox" id="datos" required>
+      <label class="form-check-label" for="datos">
         Acepto los términos y condiciones del uso del portal, para mayor información haga click aquí*
       </label>
     </div>
@@ -64,13 +74,18 @@
   </div>
   <div class="col-12">
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
+      <input class="form-check-input" type="checkbox" id="gridCheck" required>
       <label class="form-check-label" for="gridCheck">
-        En cumplimiento del Régimen de Protección Datos Personales, autorizo expresamente a Cine Colombia S.A.S, de manera directa, o a través de terceros designados, para almacenar, consultar, procesar y en general, para dar tratamiento a la información personal que suministre, y para ser incluido en sus bases de datos, recibir información de la Compañía, de conformidad con las políticas de privacidad y manejo de información. Para más información, Haga Clic Aquí *
+        En cumplimiento del Régimen de Protección Datos Personales, autorizo expresamente a Cine Colombia S.A.S, de
+        manera directa, o a través de terceros designados, para almacenar, consultar, procesar y en general, para dar
+        tratamiento a la información personal que suministre, y para ser incluido en sus bases de datos, recibir
+        información de la Compañía, de conformidad con las políticas de privacidad y manejo de información. Para más
+        información, Haga Clic Aquí *
       </label>
     </div>
   </div>
   </div>
-  <button type="submit" class="btn  btlogin" style="text-decoration:none; color:#ffc107">Registrarme</button>
+  <button type="submit" class="btn  btlogin" Style="text-decoration:none; color:#ffc107">Registrarme</button>
 </form>
+
 {% endblock %}
