@@ -16,54 +16,31 @@
 
 <table id="tableOfContentsU"> 
     <tr>
-        <th> Nombre</th>
-        <th> Apellido</th>
-        <th> Correo </th>
         <th> Identificación</th>
+        <th> Nombre</th>
+        <th> Usuario</th>
+        <th> Correo </th>
+        <th> Nacimiento</th>
         <th> Celular</th>
         <th> Departamento</th>
         <th> Ciudad</th>
-
-        
     </tr>
 
-     <tr>
-        <td>texto1</td>
-        <td>texto1</td>
-        <td>texto1</td>
-        <td>123456</td>
-        <td>texto1</td>
-        <td>texto1</td>
-        <td>texto1</td>
-        <td>
-            <button>
-                Editar
-            </button>
-
-            <button id="deleteButton" onclick="delete_Row()">
-                Eliminar
-            </button>
-        </td>
-    </tr>  
-
+    {% for user in tablaUsuario %}
     <tr>
-        <td>texto2</td>
-        <td>texto2</td>
-        <td>texto2</td>
-        <td>555555</td>
-        <td>texto2</td>
-        <td>texto2</td>
-        <td>texto2</td>
-        <td>
-            <button>
-                Editar
-            </button>
+        <td >{{user[0]}}</td>
+        <td>{{user[1]}}</td>
+        <td>{{user[2]}}</td>
+        <td >{{user[3]}}</td>
+        <td >{{user[5]}}</td>
+        <td >{{user[7]}}</td>
+        <td >{{user[8]}}</td>
+        <td >{{user[9]}}</td>
+        <td><a href="/Dfunciones" style="color: blue;">editar</a></td>
+        <td><a href="/Dfunciones" style="color: blue;">eliminar</a></td>
 
-            <button id="deleteButton" id="deleteButton" onclick="delete_Row()">
-                Eliminar
-            </button>
-        </td>
-    </tr>  
+    </tr>
+    {%endfor%}
     
 </table>
 {% endblock %}

@@ -30,7 +30,7 @@ def consultardatos(usuario):
 
 def obtener_conexion():
     try:
-        conn = sqlite3.connect('database/db_peliculas.db')
+        conn = sqlite3.connect('database/database')
         return conn
     except Error:
         print(Error)
@@ -47,12 +47,12 @@ def agregar_pelicula(nombre, duracion, director, genero, sinopsis, caratula):
     conn.commit()
     conn.close()
 
-def agregar_funcion(sala, hora, capacidad, pelicula):
+def agregar_funcion(id,sala, hora, capacidad, pelicula):
     conn = obtener_conexion()
     cursor = conn.cursor()
 
-    sql=""" INSERT INTO funciones(sala, hora, capacidad, pelicula) 
-    VALUES ({}, '{}', {}, '{}')""".format(sala, hora, capacidad, pelicula)
+    sql=""" INSERT INTO funciones(peli_id, sala, hora, capacidad, pelicula) 
+    VALUES ({}, {}, '{}', {}, '{}')""".format(id,sala, hora, capacidad, pelicula)
     
     cursor.execute(sql)
     conn.commit()
@@ -75,31 +75,38 @@ def elminar_dato(tabla, n):
     conn = obtener_conexion()
     cursor = conn.cursor()
 
-    sql1 = """ PRAGMA foreign_keys = ON"""
-    sql2 = """DELETE FROM {} WHERE {}""".format(tabla, n)
-    
-    cursor.execute(sql1)
-    cursor.execute(sql2)
-    conn.commit()
-    conn.close()    
-
-def editar_dato(tabla,s,h,c,p):
-    conn = obtener_conexion()
-    cursor = conn.cursor()
-
-    sql = """ UPDATE {} SET {},{},{},{} WHERE {}""".format(tabla,s,h,c,p,p)
+    sql = """DELETE FROM {} WHERE {}""".format(tabla, n)
     
     cursor.execute(sql)
     conn.commit()
     conn.close()    
 
+def editar_dato(tabla,s,h,c,p,i):
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+
+    sql = """ UPDATE {} SET {},{},{},{} WHERE {}""".format(tabla,s,h,c,p,i)
+    
+    cursor.execute(sql)
+    conn.commit()
+    conn.close()    
+
+def editar_pelicula(nombre,duracion,director,genero,sinopsis,caratula,id):
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+
+    sql = """ UPDATE peliculas SET {},{},{},{},{},{} WHERE {}""".format(nombre,duracion,director,genero,sinopsis,caratula,id)
+    
+    cursor.execute(sql)
+    conn.commit()
+    conn.close() 
 
 
 def contar_dato(tabla,n):
     conn = obtener_conexion()
     cursor = conn.cursor()
 
-    sql = """SELECT COUNT(*) FROM {} WHERE id ={}""".format(tabla,n)
+    sql = """SELECT COUNT(*) FROM {} WHERE {}""".format(tabla,n)
 
     cursor.execute(sql)
 
@@ -108,11 +115,16 @@ def contar_dato(tabla,n):
     return contar
 
 
-def consultar_dato(tabla,n):
+def consultar_dato(tabla,n,posicion):
     conn = obtener_conexion()
     Cursor = conn.cursor()
 
-    sql=""" SELECT * FROM {} WHERE {}""".format(tabla, n)
+    if tabla == "peliculas" :
+        if posicion == "ultimo":
+            sql =""" SELECT * FROM peliculas ORDER BY peli_id DESC LIMIT 1;"""
+        else:
+            sql=""" SELECT * FROM {} WHERE {}""".format(tabla, n)
+            
 
     Cursor.execute(sql)
     valor = Cursor.fetchall()

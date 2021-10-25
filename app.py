@@ -28,7 +28,9 @@ def dashboard():
 @app.route('/agregarPelicula', methods=['GET','POST'])
 def presentacionA(): 
     if(request.method == 'GET'): 
-        return render_template("dashboardA.html")
+        action="/agregarPelicula"
+        datosEdit=[(" "," "," "," "," "," ")]
+        return render_template("dashboardA.html", action=action, datosEdit=datosEdit)
     else:
         nombre = request.form['nombre'] 
         duracion=request.form['duracion'] 
@@ -38,74 +40,108 @@ def presentacionA():
         caratula= "null"
         ''' caratula=request.form['']  '''
         db.agregar_pelicula(nombre,duracion,director,genero,sinopsis,caratula)
+
+        consulta = db.consultar_dato("peliculas","nombre='{}'".format(nombre),"ultimo")
+        id = consulta[0][0]
+        
+        db.agregar_funcion(id,0," ",0,nombre)
+
         return redirect('/agregarPelicula')
-        
-
-   
-@app.route('/Dfunciones', methods=['GET','POST'])
-@app.route('/Dfunciones/<funcion>', methods=['GET','POST'])
-def presentacionF(funcion =None):  
-    
-    if(request.method == 'GET'): 
-        mostrar = db.mostrar_tabla("funciones")
-        datosEdit=[(" "," "," "," "," ")]
-        if funcion:
-            
-            datosEdit = db.consultar_dato("funciones", "pelicula='{}'".format(funcion)) 
-            ''' Contar = db.contar_dato("funciones", "pelicula='{}'".format(datosEdit[0][0]))
-            if Contar[0][0] == 1: '''
-            
-            return render_template("dashboardF.html", tablafunc = mostrar, datosEdit = datosEdit )
-        else:
-            return render_template("dashboardF.html", tablafunc = mostrar, datosEdit = datosEdit)       
-    else:
-        sala = request.form['sala']
-        hora = request.form['hora']
-        capacidad = request.form['capacidad']
-        pelicula = request.form['pelicula']
-
-        db.agregar_funcion(sala, hora, capacidad, pelicula)
-        
-        return redirect('/Dfunciones')
-
-@app.route('/Dfunciones/Editar', methods=['POST']) 
-def función_editar():
-    sala = request.form['sala']
-    hora = request.form['hora']
-    capacidad = request.form['capacidad']
-    pelicula = request.form['pelicula']
-    
-    db.editar_dato("funciones","sala={}".format(sala), "hora='{}'".format(hora), "capacidad={}".format(capacidad), "pelicula='{}'".format(pelicula))   
-
-@app.route('/Dfunciones/<funcion>/<condicion>/<id>')
-def funcionesEE(funcion, condicion, id):
-    if condicion == "D":
-        db.elminar_dato("funciones","id='{}'".format(id))
-        return redirect('/Dfunciones')
-    elif condicion == "U":
-        db.consultar_dato("funciones", "id='{}'".format(id))
-        return redirect('/Dfunciones/{}'.format(funcion))
-
-
-
-
-
-@app.route('/peliculas/<pelicula>/<condicion>')
-def peliculasEE(pelicula, condicion):
-    if condicion == "D":
-               
-        db.elminar_dato("funciones","pelicula='{}'".format(pelicula))
-        return redirect('/Dfunciones')   
 
 @app.route('/peliculas', methods=['GET','POST'])
 def presentacionP():
     mostrar = db.mostrar_tabla("peliculas")
     return  render_template("dashboardP.html", tablapeli = mostrar)
 
+@app.route('/peliculas/<id>/<condicion>', methods=['GET','POST'])
+def peliculasEE(id, condicion):
+    if condicion == "Delete":  
+        db.elminar_dato("funciones","peli_id={}".format(id)) 
+        db.elminar_dato("peliculas","peli_id={}".format(id))
+        return redirect('/peliculas')  
+
+    if condicion == "Update":
+        if(request.method == 'GET'):    
+            datosEdit = db.consultar_dato("peliculas", "peli_id='{}'".format(id), " ") 
+            action="/peliculas/{}/{}".format(id,condicion)
+            
+            return render_template("dashboardA.html",  datosEdit = datosEdit, action=action )
+        else:
+            nombre = request.form['nombre'] 
+            duracion=request.form['duracion'] 
+            director=request.form['director'] 
+            genero=request.form['genero'] 
+            sinopsis=request.form['sinopsis'] 
+            caratula= "null"
+            
+            db.editar_pelicula("nombre='{}'".format(nombre),"duracion='{}'".format(duracion),"director='{}'".format(director),"genero='{}'".format(genero),"sinopsis='{}'".format(sinopsis),"caratula='{}'".format(caratula),"peli_id={}".format(id))
+
+            return redirect("/peliculas")
+
+@app.route('/Dfuncion', methods=['GET','POST'])
+def presentacionF():     
+    if(request.method == 'GET'): 
+        mostrar = db.mostrar_tabla("funciones")
+        datosEdit=[(" "," "," "," "," ")]
+        action = "/Dfuncion"
+        return render_template("dashboardF.html", tablafunc = mostrar, datosEdit = datosEdit, action=action)       
+    else:
+        sala = request.form['sala']
+        hora = request.form['hora']
+        capacidad = request.form['capacidad']
+        pelicula = request.form['pelicula']
+
+        cantidad = db.contar_dato("peliculas","nombre='{}'".format(pelicula))
+
+        if cantidad[0][0] >= 1:
+            consulta = db.consultar_dato("peliculas","nombre='{}'".format(pelicula))
+            id=consulta[0][0]
+            db.agregar_funcion(id,sala, hora, capacidad, pelicula)
+            return redirect('/Dfuncion')
+        else:
+            mostrar = db.mostrar_tabla("funciones")
+            msj="La pelicula no existe"
+            datosEdit=[(" "," "," "," "," ")]
+            action = "/Dfuncion"
+            return render_template("dashboardF.html", tablafunc = mostrar, msj=msj,datosEdit = datosEdit, action=action)
+
+
+@app.route('/Dfunciones/<id>', methods=['GET','POST']) 
+def función_editar(id):
+    if(request.method == 'GET'): 
+        mostrar = db.mostrar_tabla("funciones")    
+        datosEdit = db.consultar_dato("funciones", "id='{}'".format(id)) 
+        action="/Dfunciones/'{}'".format(id)
+        
+        return render_template("dashboardF.html", tablafunc = mostrar, datosEdit = datosEdit, action=action )
+    else:    
+        sala = request.form['sala']
+        hora = request.form['hora']
+        capacidad = request.form['capacidad']
+        pelicula = request.form['pelicula']
+        
+        db.editar_dato("funciones","sala={}".format(sala), "hora='{}'".format(hora), "capacidad={}".format(capacidad), "pelicula='{}'".format(pelicula), "id={}".format(id))   
+       
+        return redirect('/Dfuncion')
+    
+
+@app.route('/Dfunciones/<funcion>/<condicion>/<id>')
+def funcionesEE(funcion, condicion, id):
+    if condicion == "D":
+        db.elminar_dato("funciones","id='{}'".format(id))
+        return redirect('/Dfuncion')
+    elif condicion == "U":
+        ''' db.consultar_dato("funciones", "id='{}'".format(id)) '''
+        return redirect('/Dfunciones/{}'.format(id))
+
 
 @app.route('/usuario', methods=['GET','POST'])
 def dashboardU():
-    return render_template('dashboardU.html')     
+    if(request.method == 'GET'): 
+        mostrar = db.mostrar_tabla("usuario")
+        return render_template("dashboardU.html", tablaUsuario = mostrar )       
+    else:
+        return render_template('dashboardU.html')     
 
 @app.route('/detallefunciones/<idpelicula>', methods=['GET'])
 def detallefunciones(idpelicula):

@@ -6,33 +6,33 @@
 </div>
 
 
-<form action="/agregarPelicula"  method="post" id="form_Add">
+<form action={{action}}  method="post" id="form_Add">
 
     <div class="left">
 
     <div class="name">
         <label for="name">Nombre: </label>
-        <input type="text" id="name" name="nombre" >
+        <input type="text" id="name" name="nombre" value="{{datosEdit[0][1]}}" >
     </div>
 
      <div class="duration"> 
         <label for="duration">Duración:</label>
-        <input type="text" id="duration" name="duracion">
+        <input type="text" id="duration" name="duracion" value="{{datosEdit[0][2]}}" >
     </div> 
     
     <div class="director">
         <label for="director">Director:</label>
-        <input type="text" id="director" name="director">
+        <input type="text" id="director" name="director" value="{{datosEdit[0][3]}}" >
     </div> 
 
     <div class="genre">
         <label for="genre">Género: </label>
-        <input type="text" id="genre" name="genero">
+        <input type="text" id="genre" name="genero" value="{{datosEdit[0][4]}}" >
     </div> 
     
     <div class="synopsis">
         <label for="synopsis">Sinopsis</label>
-        <textarea name="sinopsis" id="textSynopsis"></textarea>
+        <textarea name="sinopsis" id="textSynopsis"> {{datosEdit[0][5]}} </textarea>
     </div>
 
 </div>
