@@ -135,3 +135,38 @@ def consultar_dato(tabla,n,posicion):
     
     return valor
 
+def retornar_estrenos():
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+
+    sql = "SELECT A.nombre, A.genero, A.duracion FROM peliculas A LEFT JOIN funciones B ON A.peli_id = B.peli_id WHERE B.peli_Id IS NULL"
+
+    cursor.execute(sql)
+
+    estrenos=cursor.fetchall()
+    conn.close()  
+    return estrenos
+
+def retornar_funciones():
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+
+    sql = "SELECT A.nombre, A.genero, A.duracion, A.peli_id FROM peliculas A JOIN funciones B ON A.peli_id = B.peli_id"
+
+    cursor.execute(sql)
+
+    funciones=cursor.fetchall()
+    conn.close()  
+    return funciones
+
+def retornar_detalle_funcion(id):
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+
+    sql = "SELECT* FROM peliculas WHERE peli_id={}".format(id)
+
+    cursor.execute(sql)
+
+    funcion=cursor.fetchall()
+    conn.close()  
+    return funcion
