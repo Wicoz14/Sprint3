@@ -418,12 +418,18 @@ body{
         section #add_funcion label{
             display: inline-flex;
             width: 100px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+        }
+
+        section span#msj{
+            margin-left: 105px;
+            display: flex;
+            font-size: 14px;
         }
 
         section input#Agregar{
-            margin-left: 100px;
-            margin-top: 30px;
+            margin-left: 102px;
+            margin-top: 15px;
             height: 20px;
             width: 100px;
 

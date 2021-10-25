@@ -16,29 +16,38 @@
 
 
 <form action = {{action}} method = "post" id= "add_funcion">
-    <div class="sala">
-        <label for=""> Sala: </label>
-        <input type="text" id="sala" name="sala" value="{{datosEdit[0][2]}}">
+
+    <div class="pelicula">
+        <label for=""> Película: </label>
+        <input type="text" id="pelicula" name="pelicula" value="{{datosEdit[0][2]}}">
+    </div>
+
+    <div class="id">
+        <label for=""> Id: </label>
+        <input type="text" id="id" name="id" value="{{datosEdit[0][1]}}">
+    </div>
+
+    <div class="fecha">
+        <label for=""> Fecha: </label>
+        <input type="text" id="fecha" name="fecha" value="{{datosEdit[0][3]}}">
     </div>
 
     <div class="hora">
         <label for=""> Hora: </label>
-        <input type="text" id="hora" name="hora" value="{{datosEdit[0][3]}}">
+        <input type="text" id="hora" name="hora" value="{{datosEdit[0][4]}}">
+    </div>
+
+    <div class="sala">
+        <label for=""> Sala: </label>
+        <input type="text" id="sala" name="sala" value="{{datosEdit[0][5]}}">
     </div>
 
     <div class="capacidad">
         <label for=""> Capacidad: </label>
-        <input type="text" id="capacidad" name="capacidad" value="{{datosEdit[0][4]}}">
+        <input type="text" id="capacidad" name="capacidad" value="{{datosEdit[0][6]}}">
     </div>
 
-    <div class="pelicula">
-        <label for=""> película: </label>
-        <input type="text" id="pelicula" name="pelicula" value="{{datosEdit[0][5]}}">
-        <br>
-        <span>{{msj}}</span>
-    </div>
-
-    
+    <span id="msj">{{msj}}</span>
 
     <input type="submit" id="Agregar" value="Agregar">
 
@@ -46,11 +55,11 @@
 
 <table id="tableOfContentsF"> 
     <tr>
-        <th> Sala</th>
-        <th> Hora</th>
-        <th> Capacidad </th>
         <th> Pelicula</th>
-        
+        <th> Fecha</th>
+        <th> Hora</th>
+        <th> Sala</th>
+        <th> Capacidad </th>
         
     </tr>
 
@@ -60,8 +69,9 @@
         <td>{{fun[3]}}</td>
         <td>{{fun[4]}}</td>
         <td >{{fun[5]}}</td>
-        <td><button ><a href="/Dfunciones/{{fun[4]}}/U/{{fun[0]}}" style="color: black;">editar</a></button></td>
-        <td><button><a href="/Dfunciones/{{fun[4]}}/D/{{fun[0]}}" style="color: black;">eliminar</a></button></td>
+        <td >{{fun[6]}}</td>
+        <td><a href="/Dfunciones/{{fun[4]}}/U/{{fun[0]}}" style="color: blue;">editar</a></td>
+        <td><a href="/Dfunciones/{{fun[4]}}/D/{{fun[0]}}" style="color: blue;">eliminar</a></td>
 
     </tr>
     {%endfor%}

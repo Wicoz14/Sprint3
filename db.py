@@ -47,12 +47,12 @@ def agregar_pelicula(nombre, duracion, director, genero, sinopsis, caratula):
     conn.commit()
     conn.close()
 
-def agregar_funcion(id,sala, hora, capacidad, pelicula):
+def agregar_funcion(pelicula,id,fecha,hora,sala,capacidad):
     conn = obtener_conexion()
     cursor = conn.cursor()
 
-    sql=""" INSERT INTO funciones(peli_id, sala, hora, capacidad, pelicula) 
-    VALUES ({}, {}, '{}', {}, '{}')""".format(id,sala, hora, capacidad, pelicula)
+    sql=""" INSERT INTO funciones( pelicula,peli_id,fecha, hora,sala, capacidad) 
+    VALUES ('{}', {}, '{}','{}', {}, '{}')""".format(pelicula,id,fecha,hora,sala,capacidad)
     
     cursor.execute(sql)
     conn.commit()
@@ -81,11 +81,11 @@ def elminar_dato(tabla, n):
     conn.commit()
     conn.close()    
 
-def editar_dato(tabla,s,h,c,p,i):
+def editar_dato(tabla,p,i_p,f,h,s,c,i):
     conn = obtener_conexion()
     cursor = conn.cursor()
 
-    sql = """ UPDATE {} SET {},{},{},{} WHERE {}""".format(tabla,s,h,c,p,i)
+    sql = """ UPDATE {} SET {},{},{},{},{},{} WHERE {}""".format(tabla,p,i_p,f,h,s,c,i)
     
     cursor.execute(sql)
     conn.commit()
@@ -124,7 +124,10 @@ def consultar_dato(tabla,n,posicion):
             sql =""" SELECT * FROM peliculas ORDER BY peli_id DESC LIMIT 1;"""
         else:
             sql=""" SELECT * FROM {} WHERE {}""".format(tabla, n)
-            
+    if tabla == "funciones":
+        sql=""" SELECT * FROM {} WHERE {}""".format(tabla, n)
+
+
 
     Cursor.execute(sql)
     valor = Cursor.fetchall()

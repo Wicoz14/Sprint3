@@ -41,10 +41,10 @@ def presentacionA():
         ''' caratula=request.form['']  '''
         db.agregar_pelicula(nombre,duracion,director,genero,sinopsis,caratula)
 
-        consulta = db.consultar_dato("peliculas","nombre='{}'".format(nombre),"ultimo")
+        '''   consulta = db.consultar_dato("peliculas","nombre='{}'".format(nombre),"ultimo")
         id = consulta[0][0]
         
-        db.agregar_funcion(id,0," ",0,nombre)
+        db.agregar_funcion(id,0," ",0,nombre) '''
 
         return redirect('/agregarPelicula')
 
@@ -82,45 +82,51 @@ def peliculasEE(id, condicion):
 def presentacionF():     
     if(request.method == 'GET'): 
         mostrar = db.mostrar_tabla("funciones")
-        datosEdit=[(" "," "," "," "," ")]
+        datosEdit=[(" "," "," "," "," "," ")]
         action = "/Dfuncion"
         return render_template("dashboardF.html", tablafunc = mostrar, datosEdit = datosEdit, action=action)       
     else:
-        sala = request.form['sala']
-        hora = request.form['hora']
-        capacidad = request.form['capacidad']
         pelicula = request.form['pelicula']
+        id = request.form['id']
+        fecha = request.form['fecha']
+        hora = request.form['hora']
+        sala = request.form['sala']
+        capacidad = request.form['capacidad']
+        
 
-        cantidad = db.contar_dato("peliculas","nombre='{}'".format(pelicula))
+        cantidad = db.contar_dato("peliculas","peli_id='{}'".format(id))
 
-        if cantidad[0][0] >= 1:
-            consulta = db.consultar_dato("peliculas","nombre='{}'".format(pelicula))
-            id=consulta[0][0]
-            db.agregar_funcion(id,sala, hora, capacidad, pelicula)
+        if cantidad[0][0] == 1:
+            ''' consulta = db.consultar_dato("peliculas","nombre='{}'".format(pelicula), " ")
+            print(len(consulta))
+            id=consulta[0][0] '''
+            
+            db.agregar_funcion(pelicula,id,fecha,hora,sala,capacidad)
             return redirect('/Dfuncion')
         else:
             mostrar = db.mostrar_tabla("funciones")
             msj="La pelicula no existe"
-            datosEdit=[(" "," "," "," "," ")]
+            datosEdit=[(" "," "," "," "," "," ")]
             action = "/Dfuncion"
             return render_template("dashboardF.html", tablafunc = mostrar, msj=msj,datosEdit = datosEdit, action=action)
-
 
 @app.route('/Dfunciones/<id>', methods=['GET','POST']) 
 def función_editar(id):
     if(request.method == 'GET'): 
         mostrar = db.mostrar_tabla("funciones")    
-        datosEdit = db.consultar_dato("funciones", "id='{}'".format(id)) 
+        datosEdit = db.consultar_dato("funciones", "id='{}'".format(id), " ") 
         action="/Dfunciones/'{}'".format(id)
         
         return render_template("dashboardF.html", tablafunc = mostrar, datosEdit = datosEdit, action=action )
     else:    
-        sala = request.form['sala']
-        hora = request.form['hora']
-        capacidad = request.form['capacidad']
         pelicula = request.form['pelicula']
+        id_peli = request.form['id'] 
+        fecha = request.form['fecha']
+        hora = request.form['hora']
+        sala = request.form['sala']
+        capacidad = request.form['capacidad']
         
-        db.editar_dato("funciones","sala={}".format(sala), "hora='{}'".format(hora), "capacidad={}".format(capacidad), "pelicula='{}'".format(pelicula), "id={}".format(id))   
+        db.editar_dato("funciones","pelicula='{}'".format(pelicula),"peli_id={}".format(id_peli), "fecha='{}'".format(fecha), "hora='{}'".format(hora), "sala='{}'".format(sala), "capacidad={}".format(capacidad),"id={}".format(id))   
        
         return redirect('/Dfuncion')
     
