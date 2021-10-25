@@ -6,8 +6,13 @@ import werkzeug.security as sec
 app = Flask(__name__)
 app.secret_key = "Secret Key"
 
-peliculas=["Shang-chi", "Sin tiempo para morir","Venom","Spidey","Jhon Wick 4","Liga de la Justicia","Space Jam","Escape Room 2","Jack en la caja maldita","Cruella"]
+@app.before_request
+def antes_peticion():
+    if 'user' not in session and request.endpoint in ['perfilusuario']:
+       return redirect('/')
 
+    elif 'usuario' in session and request.endpoint in ['registro']:
+        return redirect('/perfilusuario/{}'.format(session['user']))
 
 @app.route('/', methods=['GET'])
 def presentacion():
