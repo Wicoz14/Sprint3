@@ -7,12 +7,17 @@ import werkzeug.security as sec
 app = Flask(__name__)
 app.secret_key = "Secret Key"
 
-peliculas=["Shang-chi", "Sin tiempo para morir","Venom","Spidey","Jhon Wick 4","Liga de la Justicia","Space Jam","Escape Room 2","Jack en la caja maldita","Cruella"]
-
+@app.before_request
+def antes_peticion():
+    if 'user' not in session and request.endpoint in ['perfilusuario']:
+       return redirect('/')
+    elif 'usuario' in session and request.endpoint in ['registro']:
+        return redirect('/perfilusuario/{}'.format(session['user']))
 
 @app.route('/', methods=['GET'])
 def presentacion():
-    return render_template('presentacion.html')
+    estrenos= db.retornar_estrenos()
+    return render_template('presentacion.html',estrenos=estrenos)
 
 @app.route('/registro', methods=['GET','POST'])
 def registro():
@@ -20,7 +25,8 @@ def registro():
 
 @app.route('/funciones', methods=['GET'])
 def funciones():
-    return render_template('funciones.html')
+    funciones =db.retornar_funciones()
+    return render_template('funciones.html',funciones=funciones)
 
 @app.route('/dashboard', methods=['GET','POST'])
 def dashboard():
@@ -167,13 +173,8 @@ def dashboardU():
 
 @app.route('/detallefunciones/<idpelicula>', methods=['GET'])
 def detallefunciones(idpelicula):
-    if idpelicula == "shang-chi":
-        return render_template('detallefunciones.html')
-    if idpelicula == "sintiempoparamorir":
-        return render_template('detallefuncion2.html')
-    else:
-        return render_template('detallefuncion3.html')
-    
+    funcion= db.retornar_detalle_funcion(idpelicula)
+    return render_template('detallefunciones.html', funcion=funcion)
 
 @app.route('/informacion', methods=['GET'])
 def informacion():
@@ -181,17 +182,7 @@ def informacion():
 
 @app.route('/busqueda', methods=['GET'])
 def busqueda():
-    buscado = request.args.get('busqueda')
-    if buscado in peliculas:
-        if buscado=="Shang-chi":
-            return render_template('detallefunciones.html')
-        if buscado=="Sin tiempo para morir":
-            return render_template('detallefuncion2.html')
-        else:
-            return render_template('detallefuncion3.html')
-    else:
-        resultado ="película no encontrada"
-        return render_template('busqueda.html',buscado=buscado, resultado=resultado)
+    return render_template('busqueda.html')
 
 @app.route('/perfilusuario/<user>')
 def perfilusuario(user):

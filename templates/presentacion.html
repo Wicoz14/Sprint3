@@ -1,15 +1,8 @@
 {% extends "layout.html" %}
-
+{% block link %}
+<link rel="stylesheet" href="/static/assets/css/style_presentacion.css">
+{% endblock %}
 {% block contenido %}
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/assets/css/style_presentacion.css">
-</head>
 <body>
     <main>
         <section>
@@ -34,34 +27,17 @@
 
         <div class="container-fluid">
             <div class="row justify-content-around" id="">
+                {% for i in estrenos %}
                 <div class="col text-center">
                     <img id="content_div_one_photo" class="rounded " src="/static/assets/images/p1.jpg">
-                    <h4>Shang-Chi</h4>
-                    <p>Genero: Accion/Fantasia</p>
-                    <p>Duracion: 132m</p>
+                    <h4>{{i[0]}}</h4>
+                    <p>Genero: {{i[1]}}</p>
+                    <p>Duracion: {{i[2]}}</p>
                     <p>Estreno: 02 de Septiembre 2021</p>
                 </div>
-                <div class="col text-center">
-                    <img id="content_div_one_photo" class="rounded " src="/static/assets/images/p2.jpg">
-                    <h4>Sin tiempo para morir</h4>
-                    <p>Genero: Accion</p>
-                    <p>Duracion: 140m</p>
-                    <p>Estreno: 30 de Septiembre</p>
-                </div>
-                <div class="col text-center">
-                    <img id="content_div_one_photo" class="rounded " src="/static/assets/images/p3.jpg">
-                    <h4>Venom</h4>
-                    <p>Genero: Accion/Ciencia Ficcion</p>
-                    <p>Duracion: 138m</p>
-                    <p>Estreno: 07 de octubre 2021</p>
-                </div>
+                {% endfor %}
             </div>
         </div>
-
-        
-
     </main>   
 </body>
-</html>
-
 {% endblock %}
