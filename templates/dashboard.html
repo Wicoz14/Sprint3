@@ -27,7 +27,7 @@
         
         <a href="#" id = "letter">
             <i class="far fa-envelope"></i>
-        </a> 
+        </a> <!-- corregir logo, no puede ser <a> -->
         
         <a href="#" id="login">
             <i class="far fa-user"></i>
@@ -37,10 +37,10 @@
 
     <div class="menu__side" id="menu__side">
 
-        <div class="name__page">
+        <div class="name__page" >
 
-            <a href="/" id= "logo" > 
-                <i class="fab fa-contao logo" id="icon_logo"></i>
+            <a href="/"  class = "logo_header" > 
+                <i class="fab fa-contao" id="logo"></i>
             </a>
 
             <h3 id="nombre" >cine colombia</h3>
@@ -49,53 +49,52 @@
 
         <div class="options__menu">
 
-            <button class="selected">
-
+            <button onclick="active(0)">
                 <a href="/usuario">
                     <div class="option">
-                        <div id = icon>
+                        <div id = "icon">
                             <i class="fas fa-user-friends"></i>
                         </div>
-                        <div>
+                        <div class ="nombreOpcion"  >
                         <h4>Usuarios</h4> 
                        </div>
                     </div> 
                 </a>
             </button>
 
-            <button>
+            <button onclick="active(1)" >
                 <a href="/agregarPelicula">
                     <div class="option">
                         <div id = icon>
                             <i class="fas fa-file-video"></i>
                         </div>
-                        <div>
+                        <div  class ="nombreOpcion">
                             <h4>Agregar pelicula</h4> 
                        </div>
                     </div> 
                 </a>
             </button>
             
-            <button>            
+            <button onclick="active(2)">            
                 <a href="/peliculas">
                     <div class="option">
                         <div id = icon>
                             <i class="fas fa-film"></i>
                         </div>
-                        <div>
+                        <div  class ="nombreOpcion">
                             <h4>Peliculas</h4> 
                        </div>
                     </div>     
                 </a>
             </button>
 
-            <button>
-                <a href="/Dfunciones">
+            <button onclick="active(3)">
+                <a href="/Dfuncion">
                     <div class="option">
                         <div id = icon>
                             <i class="fas fa-folder"></i>
                         </div>
-                        <div>
+                        <div  class ="nombreOpcion">
                             <h4>Funciones</h4> 
                        </div>
                          
@@ -105,16 +104,16 @@
 
         </div>
 
-        <div class="foot__page" id="logo">
-            <i class="fab fa-contao logo" id="icon_logo"></i>
+        <div class="foot__page">
+            <i class="fab fa-contao" id="logo_foot"></i>
         </div>
     </div>
 
     <section>
-        {% block contenido %} 
 
-        {% endblock %} 
-        
+        {% block contenido %}
+        {% endblock %}
+
         
     </section>
 

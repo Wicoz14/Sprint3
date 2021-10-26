@@ -28,4 +28,145 @@ def consultardatos(usuario):
     datos = cursor.fetchall()
     return datos
 
+def obtener_conexion():
+    try:
+        conn = sqlite3.connect('database/database')
+        return conn
+    except Error:
+        print(Error)
 
+
+def agregar_pelicula(nombre, duracion, director, genero, sinopsis, caratula):
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+
+    sql=""" INSERT INTO peliculas(nombre, duracion, director, genero, sinopsis, caratula) 
+    VALUES ('{}', '{}', '{}', '{}', '{}', '{}')""".format(nombre, duracion, director, genero, sinopsis, caratula)
+    
+    cursor.execute(sql)
+    conn.commit()
+    conn.close()
+
+def agregar_funcion(pelicula,id,fecha,hora,sala,capacidad):
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+
+    sql=""" INSERT INTO funciones( pelicula,peli_id,fecha, hora,sala, capacidad) 
+    VALUES ('{}', {}, '{}','{}', {}, '{}')""".format(pelicula,id,fecha,hora,sala,capacidad)
+    
+    cursor.execute(sql)
+    conn.commit()
+    conn.close()
+
+def mostrar_tabla(tabla):
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+
+    sql = """ SELECT * FROM {}""".format(tabla)
+    
+    cursor.execute(sql)
+
+    datos=cursor.fetchall()
+    conn.close()    
+
+    return datos
+
+def elminar_dato(tabla, n):
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+
+    sql = """DELETE FROM {} WHERE {}""".format(tabla, n)
+    
+    cursor.execute(sql)
+    conn.commit()
+    conn.close()    
+
+def editar_dato(tabla,p,i_p,f,h,s,c,i):
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+
+    sql = """ UPDATE {} SET {},{},{},{},{},{} WHERE {}""".format(tabla,p,i_p,f,h,s,c,i)
+    
+    cursor.execute(sql)
+    conn.commit()
+    conn.close()    
+
+def editar_pelicula(nombre,duracion,director,genero,sinopsis,caratula,id):
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+
+    sql = """ UPDATE peliculas SET {},{},{},{},{},{} WHERE {}""".format(nombre,duracion,director,genero,sinopsis,caratula,id)
+    
+    cursor.execute(sql)
+    conn.commit()
+    conn.close() 
+
+
+def contar_dato(tabla,n):
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+
+    sql = """SELECT COUNT(*) FROM {} WHERE {}""".format(tabla,n)
+
+    cursor.execute(sql)
+
+    contar=cursor.fetchall()
+    conn.close()  
+    return contar
+
+
+def consultar_dato(tabla,n,posicion):
+    conn = obtener_conexion()
+    Cursor = conn.cursor()
+
+    if tabla == "peliculas" :
+        if posicion == "ultimo":
+            sql =""" SELECT * FROM peliculas ORDER BY peli_id DESC LIMIT 1;"""
+        else:
+            sql=""" SELECT * FROM {} WHERE {}""".format(tabla, n)
+    if tabla == "funciones":
+        sql=""" SELECT * FROM {} WHERE {}""".format(tabla, n)
+
+
+
+    Cursor.execute(sql)
+    valor = Cursor.fetchall()
+    conn.close()
+    
+    return valor
+
+def retornar_estrenos():
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+
+    sql = "SELECT A.nombre, A.genero, A.duracion FROM peliculas A LEFT JOIN funciones B ON A.peli_id = B.peli_id WHERE B.peli_Id IS NULL"
+
+    cursor.execute(sql)
+
+    estrenos=cursor.fetchall()
+    conn.close()  
+    return estrenos
+
+def retornar_funciones():
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+
+    sql = "SELECT A.nombre, A.genero, A.duracion, A.peli_id FROM peliculas A JOIN funciones B ON A.peli_id = B.peli_id"
+
+    cursor.execute(sql)
+
+    funciones=cursor.fetchall()
+    conn.close()  
+    return funciones
+
+def retornar_detalle_funcion(id):
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+
+    sql = "SELECT* FROM peliculas WHERE peli_id={}".format(id)
+
+    cursor.execute(sql)
+
+    funcion=cursor.fetchall()
+    conn.close()  
+    return funcion
