@@ -12,27 +12,27 @@
 
     <div class="name">
         <label for="name">Nombre: </label>
-        <input type="text" id="name" name="nombre" value="{{datosEdit[0][1]}}" >
+        <input type="text" id="name" name="nombre" value="{{datosEdit[0][1]}}" required >
     </div>
 
      <div class="duration"> 
         <label for="duration">Duración:</label>
-        <input type="text" id="duration" name="duracion" value="{{datosEdit[0][2]}}" >
+        <input type="text" id="duration" name="duracion" value="{{datosEdit[0][2]}}" required>
     </div> 
     
     <div class="director">
         <label for="director">Director:</label>
-        <input type="text" id="director" name="director" value="{{datosEdit[0][3]}}" >
+        <input type="text" id="director" name="director" value="{{datosEdit[0][3]}}" required>
     </div> 
 
     <div class="genre">
         <label for="genre">Género: </label>
-        <input type="text" id="genre" name="genero" value="{{datosEdit[0][4]}}" >
+        <input type="text" id="genre" name="genero" value="{{datosEdit[0][4]}}" required>
     </div> 
 
     <div class="trailer">
         <label for="trailer">Trailer: </label>
-        <input type="text" id="trailer" name="link" value="{{datosEdit[0][5]}}" >
+        <input type="text" id="trailer" name="link" value="{{datosEdit[0][5]}}" required>
     </div> 
 
     <div class="estreno">
@@ -42,7 +42,7 @@
     
     <div class="synopsis">
         <label for="synopsis">Sinopsis</label>
-        <textarea name="sinopsis" id="textSynopsis"> {{datosEdit[0][7]}} </textarea>
+        <textarea name="sinopsis" id="textSynopsis" required> {{datosEdit[0][7]}} </textarea>
     </div>
 
 </div>
@@ -56,6 +56,7 @@
             <input type="file" id="file" name = "files" hidden >
             
             <div id= "image" name="caratula">
+                
                 {%if datosEdit%}
                     <img src="{{datosEdit[0][8]}}" alt="">
                 {%endif%}

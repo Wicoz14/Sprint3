@@ -9,8 +9,10 @@
     <label for=""> 
         <h2>Buscar pelicula:</h2> 
     </label>
-    <input type="text" id="searchBox">
+    <form action="/peliculas" method="post">
+    <input type="text" id="searchBox" name="nombrePelicula">
     <input type="submit" id="searchButton" value="Buscar">
+    </form>
 </div>
 
 <table id="tableOfContentsP"> 

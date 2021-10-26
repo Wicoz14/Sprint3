@@ -55,8 +55,13 @@ def presentacionA():
 
 @app.route('/peliculas', methods=['GET','POST'])
 def presentacionP():
-    mostrar = db.mostrar_tabla("peliculas")
-    return  render_template("dashboardP.html", tablapeli = mostrar)
+    if(request.method=='GET'):
+        mostrar = db.mostrar_tabla("peliculas")
+        return  render_template("dashboardP.html", tablapeli = mostrar)
+    else:
+        peli = request.form['nombrePelicula']
+        mostrar = db.consultar_dato("peliculas","nombre='{}'".format(peli)," ")
+        return render_template('dashboardP.html', tablapeli = mostrar) 
 
 @app.route('/peliculas/<id>/<condicion>', methods=['GET','POST'])
 def peliculasEE(id, condicion):
@@ -169,7 +174,14 @@ def dashboardU():
         mostrar = db.mostrar_tabla("usuario")
         return render_template("dashboardU.html", tablaUsuario = mostrar )       
     else:
-        return render_template('dashboardU.html')     
+        id = request.form['id']
+        mostrar = db.consultar_dato("usuario","id={}".format(id)," ")
+        return render_template('dashboardU.html', tablaUsuario = mostrar)    
+
+@app.route('/usuario/eliminar/<id>')
+def eliminarUsuario(id):
+    db.elminar_dato("usuario","id={}".format(id))
+    return redirect('/usuario')
 
 @app.route('/detallefunciones/<idpelicula>', methods=['GET'])
 def detallefunciones(idpelicula):

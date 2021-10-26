@@ -124,11 +124,8 @@ def consultar_dato(tabla,n,posicion):
             sql =""" SELECT * FROM peliculas ORDER BY peli_id DESC LIMIT 1;"""
         else:
             sql=""" SELECT * FROM {} WHERE {}""".format(tabla, n)
-            
-    if tabla == "funciones":
+    else:
         sql=""" SELECT * FROM {} WHERE {}""".format(tabla, n)
-
-
 
     Cursor.execute(sql)
     valor = Cursor.fetchall()
