@@ -257,7 +257,7 @@ body{
         }
 
 
-        form#form_Add .name, .duration, .director, .genre, .synopsis, .cover{
+        form#form_Add .name, .duration, .director, .genre, .synopsis, .cover, .trailer, .estreno{
             width: 600px;
         }
 
@@ -277,7 +277,7 @@ body{
 
         form#form_Add .synopsis {
             display: flex;
-            height:300px;
+            height:240px;
         }
 
         form#form_Add .synopsis #textSynopsis{
@@ -295,14 +295,12 @@ body{
         form#form_Add .cover #coverBox{
             height: 420px;
             width: 60%;
-            border: 1px solid;
-            cursor: pointer;
-            background: white;
-            
+            border: 0.2px solid rgb(121, 121, 121); 
         }
 
         form#form_Add .cover input{
             margin-left: 4px;
+            
             
         }
 
@@ -312,9 +310,11 @@ body{
             margin: 10px 0px 10px 344px;
         }
 
-        section #form_Add .image, #image{
+        section #form_Add  #image{
             width: 100%;
             height: 420px;
+            cursor: pointer;
+            background: white;
                 
         }
 

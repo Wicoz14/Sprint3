@@ -6,7 +6,7 @@
 </div>
 
 
-<form action={{action}}  method="post" id="form_Add">
+<form action={{action}}  method="post" id="form_Add" enctype="multipart/form-data">
 
     <div class="left">
 
@@ -29,10 +29,20 @@
         <label for="genre">Género: </label>
         <input type="text" id="genre" name="genero" value="{{datosEdit[0][4]}}" >
     </div> 
+
+    <div class="trailer">
+        <label for="trailer">Trailer: </label>
+        <input type="text" id="trailer" name="link" value="{{datosEdit[0][5]}}" >
+    </div> 
+
+    <div class="estreno">
+        <label for="estreno"> Estreno: </label>
+        <input type="text" id="estreno" name="fecha_estreno" value="{{datosEdit[0][6]}}" >
+    </div> 
     
     <div class="synopsis">
         <label for="synopsis">Sinopsis</label>
-        <textarea name="sinopsis" id="textSynopsis"> {{datosEdit[0][5]}} </textarea>
+        <textarea name="sinopsis" id="textSynopsis"> {{datosEdit[0][7]}} </textarea>
     </div>
 
 </div>
@@ -43,9 +53,12 @@
         <label for="">Caratula</label>
 
         <div  id=coverBox onclick = "searchImage()">
-            <input type="file" id="file" name = "files[]" hidden >
+            <input type="file" id="file" name = "files" hidden >
             
-            <div id= "image">
+            <div id= "image" name="caratula">
+                {%if datosEdit%}
+                    <img src="{{datosEdit[0][8]}}" alt="">
+                {%endif%}
             
             </div>
 

@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request,redirect,session
+from flask import Flask, render_template, request,redirect,session, send_from_directory
 import db
+import os
 from sqlite3 import Error
 import werkzeug.security as sec
 
@@ -29,22 +30,20 @@ def dashboard():
 def presentacionA(): 
     if(request.method == 'GET'): 
         action="/agregarPelicula"
-        datosEdit=[(" "," "," "," "," "," ")]
+        datosEdit=[(" "," "," "," "," "," "," "," ")]
         return render_template("dashboardA.html", action=action, datosEdit=datosEdit)
     else:
         nombre = request.form['nombre'] 
         duracion=request.form['duracion'] 
         director=request.form['director'] 
         genero=request.form['genero'] 
+        trailer=request.form['link']
+        estreno=request.form['fecha_estreno']
         sinopsis=request.form['sinopsis'] 
-        caratula= "null"
-        ''' caratula=request.form['']  '''
-        db.agregar_pelicula(nombre,duracion,director,genero,sinopsis,caratula)
-
-        '''   consulta = db.consultar_dato("peliculas","nombre='{}'".format(nombre),"ultimo")
-        id = consulta[0][0]
-        
-        db.agregar_funcion(id,0," ",0,nombre) '''
+        caratula= request.files['files']
+        caratula.save(os.getcwd() + "/static/assets/images/carteleras/" + caratula.filename )
+        caratula_final = "/static/assets/images/carteleras/{}".format(caratula.filename)
+        db.agregar_pelicula(nombre,duracion,director,genero,trailer,estreno,sinopsis,caratula_final)
 
         return redirect('/agregarPelicula')
 
@@ -55,8 +54,10 @@ def presentacionP():
 
 @app.route('/peliculas/<id>/<condicion>', methods=['GET','POST'])
 def peliculasEE(id, condicion):
-    if condicion == "Delete":  
-        db.elminar_dato("funciones","peli_id={}".format(id)) 
+    if condicion == "Delete":   
+        caratulaEliminar = db.consultar_dato('peliculas', 'peli_id={}'.format(id)," ")
+        os.remove(os.getcwd() + caratulaEliminar[0][8])
+        
         db.elminar_dato("peliculas","peli_id={}".format(id))
         return redirect('/peliculas')  
 
@@ -71,10 +72,25 @@ def peliculasEE(id, condicion):
             duracion=request.form['duracion'] 
             director=request.form['director'] 
             genero=request.form['genero'] 
+            trailer=request.form['link']
+            estreno=request.form['fecha_estreno']
             sinopsis=request.form['sinopsis'] 
-            caratula= "null"
+            caratula = request.files['files']
+
+            consulta = db.consultar_dato("peliculas", "caratula= '/static/assets/images/carteleras/{}'".format(caratula.filename), " ") 
+            print(consulta)
+            if not consulta:
+                caratulaEliminar = db.consultar_dato('peliculas', 'peli_id={}'.format(id)," ")
+
+                os.remove(os.getcwd() + caratulaEliminar[0][8])
+                caratula.save(os.getcwd() + "/static/assets/images/carteleras/" + caratula.filename )
+                caratula_actualizada = "/static/assets/images/carteleras/" + caratula.filename
+            else:
+                caratula_actualizada = "/static/assets/images/carteleras/" + caratula.filename
+
+           
             
-            db.editar_pelicula("nombre='{}'".format(nombre),"duracion='{}'".format(duracion),"director='{}'".format(director),"genero='{}'".format(genero),"sinopsis='{}'".format(sinopsis),"caratula='{}'".format(caratula),"peli_id={}".format(id))
+            db.editar_pelicula("nombre='{}'".format(nombre),"duracion='{}'".format(duracion),"director='{}'".format(director),"genero='{}'".format(genero), "trailer='{}'".format(trailer), "fechaEstreno='{}'".format(estreno), "sinopsis='{}'".format(sinopsis),"caratula='{}'".format(caratula_actualizada),"peli_id={}".format(id))
 
             return redirect("/peliculas")
 
