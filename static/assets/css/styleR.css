@@ -257,7 +257,7 @@ body{
         }
 
 
-        form#form_Add .name, .duration, .director, .genre, .synopsis, .cover, .trailer, .estreno{
+        form#form_Add .name, .duration, .director, .genre, .synopsis, .cover, .trailer, .estreno, .actors{
             width: 600px;
         }
 

@@ -36,12 +36,12 @@ def obtener_conexion():
         print(Error)
 
 
-def agregar_pelicula(nombre, duracion, director, genero,trailer, fechasEstreno, sinopsis, caratula):
+def agregar_pelicula(nombre, duracion, director, genero,trailer, fechasEstreno,actores, sinopsis, caratula):
     conn = obtener_conexion()
     cursor = conn.cursor()
 
-    sql=""" INSERT INTO peliculas(nombre, duracion, director, genero, trailer, fechaEstreno, sinopsis, caratula) 
-    VALUES ('{}', '{}', '{}', '{}', '{}', '{}','{}','{}' )""".format(nombre, duracion, director, genero, trailer, fechasEstreno, sinopsis, caratula)
+    sql=""" INSERT INTO peliculas(nombre, duracion, director, genero, trailer, fechaEstreno, actores, sinopsis, caratula) 
+    VALUES ('{}', '{}', '{}', '{}', '{}', '{}','{}','{}','{}' )""".format(nombre, duracion, director, genero, trailer, fechasEstreno,actores, sinopsis, caratula)
     
     cursor.execute(sql)
     conn.commit()
@@ -91,11 +91,11 @@ def editar_dato(tabla,p,i_p,f,h,s,c,i):
     conn.commit()
     conn.close()    
 
-def editar_pelicula(nombre,duracion,director,genero,trailer,estreno,sinopsis,caratula,id):
+def editar_pelicula(nombre,duracion,director,genero,trailer,estreno,actores,sinopsis,caratula,id):
     conn = obtener_conexion()
     cursor = conn.cursor()
 
-    sql = """ UPDATE peliculas SET {},{},{},{},{},{},{},{} WHERE {}""".format(nombre,duracion,director,genero,trailer,estreno,sinopsis,caratula,id)
+    sql = """ UPDATE peliculas SET {},{},{},{},{},{},{},{},{} WHERE {}""".format(nombre,duracion,director,genero,trailer,estreno,actores,sinopsis,caratula,id)
     
     cursor.execute(sql)
     conn.commit()

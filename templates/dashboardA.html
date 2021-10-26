@@ -40,9 +40,14 @@
         <input type="text" id="estreno" name="fecha_estreno" value="{{datosEdit[0][6]}}" >
     </div> 
     
+    <div class="actors">
+        <label for="actor"> Actores: </label>
+        <input type="text" id="actors" name="actores" value="{{datosEdit[0][7]}}" >
+    </div> 
+
     <div class="synopsis">
         <label for="synopsis">Sinopsis</label>
-        <textarea name="sinopsis" id="textSynopsis" required> {{datosEdit[0][7]}} </textarea>
+        <textarea name="sinopsis" id="textSynopsis" required> {{datosEdit[0][8]}} </textarea>
     </div>
 
 </div>
@@ -53,12 +58,12 @@
         <label for="">Caratula</label>
 
         <div  id=coverBox onclick = "searchImage()">
-            <input type="file" id="file" name = "files" hidden >
+            <input type="file" id="file" name = "files"  multiple=" " hidden >
             
             <div id= "image" name="caratula">
                 
                 {%if datosEdit%}
-                    <img src="{{datosEdit[0][8]}}" alt="">
+                    <img class="image" src="{{datosEdit[0][9]}}" alt="">
                 {%endif%}
             
             </div>

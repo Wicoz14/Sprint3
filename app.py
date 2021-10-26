@@ -36,7 +36,7 @@ def dashboard():
 def presentacionA(): 
     if(request.method == 'GET'): 
         action="/agregarPelicula"
-        datosEdit=[(" "," "," "," "," "," "," "," ")]
+        datosEdit=[(" "," "," "," "," "," "," "," "," ")]
         return render_template("dashboardA.html", action=action, datosEdit=datosEdit)
     else:
         nombre = request.form['nombre'] 
@@ -45,11 +45,12 @@ def presentacionA():
         genero=request.form['genero'] 
         trailer=request.form['link']
         estreno=request.form['fecha_estreno']
+        actores=request.form['actores']
         sinopsis=request.form['sinopsis'] 
         caratula= request.files['files']
         caratula.save(os.getcwd() + "/static/assets/images/carteleras/" + caratula.filename )
         caratula_final = "/static/assets/images/carteleras/{}".format(caratula.filename)
-        db.agregar_pelicula(nombre,duracion,director,genero,trailer,estreno,sinopsis,caratula_final)
+        db.agregar_pelicula(nombre,duracion,director,genero,trailer,estreno,actores,sinopsis,caratula_final)
 
         return redirect('/agregarPelicula')
 
@@ -67,7 +68,7 @@ def presentacionP():
 def peliculasEE(id, condicion):
     if condicion == "Delete":   
         caratulaEliminar = db.consultar_dato('peliculas', 'peli_id={}'.format(id)," ")
-        os.remove(os.getcwd() + caratulaEliminar[0][8])
+        os.remove(os.getcwd() + caratulaEliminar[0][9])
         
         db.elminar_dato("peliculas","peli_id={}".format(id))
         return redirect('/peliculas')  
@@ -85,6 +86,7 @@ def peliculasEE(id, condicion):
             genero=request.form['genero'] 
             trailer=request.form['link']
             estreno=request.form['fecha_estreno']
+            actores=request.form['actores']
             sinopsis=request.form['sinopsis'] 
             caratula = request.files['files']
 
@@ -93,7 +95,7 @@ def peliculasEE(id, condicion):
             if not consulta:
                 caratulaEliminar = db.consultar_dato('peliculas', 'peli_id={}'.format(id)," ")
 
-                os.remove(os.getcwd() + caratulaEliminar[0][8])
+                os.remove(os.getcwd() + caratulaEliminar[0][9])
                 caratula.save(os.getcwd() + "/static/assets/images/carteleras/" + caratula.filename )
                 caratula_actualizada = "/static/assets/images/carteleras/" + caratula.filename
             else:
@@ -101,7 +103,7 @@ def peliculasEE(id, condicion):
 
            
             
-            db.editar_pelicula("nombre='{}'".format(nombre),"duracion='{}'".format(duracion),"director='{}'".format(director),"genero='{}'".format(genero), "trailer='{}'".format(trailer), "fechaEstreno='{}'".format(estreno), "sinopsis='{}'".format(sinopsis),"caratula='{}'".format(caratula_actualizada),"peli_id={}".format(id))
+            db.editar_pelicula("nombre='{}'".format(nombre),"duracion='{}'".format(duracion),"director='{}'".format(director),"genero='{}'".format(genero), "trailer='{}'".format(trailer), "fechaEstreno='{}'".format(estreno), "actores='{}'".format(actores), "sinopsis='{}'".format(sinopsis),"caratula='{}'".format(caratula_actualizada),"peli_id={}".format(id))
 
             return redirect("/peliculas")
 
