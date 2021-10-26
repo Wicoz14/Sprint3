@@ -137,7 +137,7 @@ def retornar_estrenos():
     conn = obtener_conexion()
     cursor = conn.cursor()
 
-    sql = "SELECT A.nombre, A.genero, A.duracion FROM peliculas A LEFT JOIN funciones B ON A.peli_id = B.peli_id WHERE B.peli_Id IS NULL"
+    sql = "SELECT A.nombre, A.genero, A.duracion, A.fechaEstreno, A.caratula FROM peliculas A LEFT JOIN funciones B ON A.peli_id = B.peli_id WHERE B.peli_Id IS NULL"
 
     cursor.execute(sql)
 
