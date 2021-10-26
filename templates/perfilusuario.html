@@ -10,44 +10,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/assets/css/style_perfiluser.css">
   </head>
+  <div class="exit">
+    <a class="btn btn-outline-warning bt2" href="/cerrarsesion" role="button">SALIR</a>
+  </div>
+<body onload="cdatos()">
+  <form class="row g-3 cuerporegistro" action="" method="post">
+    <h1>Perfil</h1>
+    <div class="col-md-6">
+      <label class="form-label">Nombres*</label>
+      <input type="text" name="nombres" class="form-control inputregistro" id="nombres" value={{datos[0][1]}} readonly="readonly">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Documento de identidad*</label>
+      <select class="form-select inputregistro" name="selector" id="selector">
+        <option selected>{{datos[0][6]}}</option>
+      </select>
+      <input type="number" name="doc" class="form-control inputregistro" id="doc" value={{datos[0][0]}} readonly="readonly">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label" id="fecha">Fecha de nacimiento*</label>
+      <input class="inputregistro fecha" type="date" name="fecha" value={{datos[0][5]}} readonly="readonly">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label" id="celular">Celular*</label>
+      <input type="number" name="celular" class="form-control inputregistro" id="celular" value={{datos[0][7]}} readonly="readonly">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Departamento*</label>
+      <input type="text" name="departamento" class="form-control inputregistro" id="departamento" value={{datos[0][8]}} readonly="readonly">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Ciudad de residencia*</label>
+      <input type="text" name="ciudad" class="form-control inputregistro" id="ciudad" value={{datos[0][9]}} readonly="readonly">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Nombre de Usuario*</label>
+      <input type="name" name="usuario" class="form-control inputregistro" id="usuario" value={{datos[0][2]}} readonly="readonly">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Correo*</label>
+      <input type="email" name="email" class="form-control inputregistro" id="email" value={{datos[0][3]}} >
+    </div>
+  </form>
 
-<body>
-  <h1>Perfil</h1>
-  <section class ="contenedor">
-      <form action="/updatedatos" method="post" onload="cdatos();">
-        <div class="form">
-          <div class="grupo">
-            <label for="nombre">Nombre: </label>
-            <input class="lblfor" type="text" name="nombre" id="nombre" required placeholder="Nombres">
-            <label for="usuario">Usuario: </label>
-            <input class="lblfor" type="text" name="usuario" id="usuario" required placeholder=  >
-            <label for="correo">Correo: </label>
-            <input class="lblfor" type="email" name="correo" id="correo" required>
-            <label for="celular">Celular: </label>
-            <input class="lblfor" type="text" name="celular" id="celular" required>
-            <label for="tipodocumento">Tipo de Documento: </label>
-            <select class="lblfor" name="tcedula" id="tcedula" required>
-              <option value="Cedula de ciudadania">Cédula de ciudadanía</option>
-              <option value="Tarjeta de identidiad">Tarjeta de identidiad</option>
-              <option value="Pasaporte de extrangería">Pasaporte de extrangería</option>
-            </select>
-            <label for="documento">N° Documento: </label>
-            <input class="lblfor" type="text" name="documento" id="documento" required>
-            <label for="fnacimiento">Fecha de Nacimiento: </label>
-            <input class="lblfor" type="date" name="fnacimiento" id="fnacimiento" required>
-            <label for="departamento">Departamento Residencia: </label>
-            <input class="lblfor" type="text" name="departamento" id="departamento" required>
-            <label for="ciudad">Ciudad: </label>
-            <input class="lblfor" type="text" name="ciudad" id="ciudad" required>
-            <label for="contraseña">Confirmar contraseña: </label>
-            <input class="lblfor" type="password" name="contraseña" id="contraseña" required>
-          </div>
-        </div>
-        <button class="opcion" type="submit" value="actualizar">Actualizar</button>
-      </form>
-      <a class="btn btn-outline-warning bt2" href="/cerrarsesion" role="button">SALIR</a>
-  </section>
+  <div class = botones>
+    <a class="boton" role="button" href="/editarpu" style="text-decoration:none; color:#ffc107">Editar</a>
+    <a class="boton" role="button" href="" style="text-decoration:none; color:#ffc107">Compras</a>
+    <a class="boton" role="button" href="" style="text-decoration:none; color:#ffc107">Mi Tarjeta</a>
+  </div>
 </body>
 </html>
+
 
 {% endblock %}

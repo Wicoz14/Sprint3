@@ -26,6 +26,6 @@ def consultardatos(usuario):
     cursor.execute(strsql)
     conexion.commit()
     datos = cursor.fetchall()
-    print(datos)
+    return datos
 
 

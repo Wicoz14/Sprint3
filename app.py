@@ -71,7 +71,8 @@ def busqueda():
 
 @app.route('/perfilusuario/<user>')
 def perfilusuario(user):
-    return render_template('perfilusuario.html')
+    datos = db.consultardatos(session['user'])
+    return render_template('perfilusuario.html', datos=datos)
 
 @app.route('/validar-usuario', methods=['GET','POST'])
 def validarusuario():
@@ -82,7 +83,8 @@ def validarusuario():
             return render_template('dashboard.html')
             
         else:
-            return render_template('perfilusuario.html', user=usuario)
+            datos = db.consultardatos(session['user'])
+            return render_template('perfilusuario.html', user=usuario, datos=datos)
             
     else:
         denegado= True
@@ -157,5 +159,11 @@ def actualizardatos():
     departamento = request.form['departamento']
     ciudad= request.form['ciudad']
 
+    datos = db.consultardatos(session['user'])
     db.actualizarusuario(id,nombre,usuario,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad)
-    return render_template('perfilusuario.html', user=usuario)
+    return render_template('perfilusuario.html', user=usuario, datos=datos)
+
+@app.route('/editarpu')
+def editarpu():
+    datos = db.consultardatos(session['user'])
+    return render_template('editarpu.html', datos=datos)
