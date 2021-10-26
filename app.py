@@ -10,7 +10,7 @@ app.secret_key = "Secret Key"
 def antes_peticion():
     if 'user' not in session and request.endpoint in ['perfilusuario']:
        return redirect('/')
-    elif 'usuario' in session and request.endpoint in ['registro']:
+    elif 'user' in session and request.endpoint in ['registro']:
         return redirect('/perfilusuario/{}'.format(session['user']))
 
 @app.route('/', methods=['GET'])
@@ -164,10 +164,11 @@ def detallefunciones(idpelicula):
 def informacion():
     return render_template('informacion.html')
 
-@app.route('/busqueda', methods=['GET'])
-def busqueda():
-    return render_template('busqueda.html')
-
+@app.route('/busqueda/<pelicula>', methods=['GET'])
+def busqueda(pelicula):
+    busqueda= db.retornar_busqueda(pelicula)
+    return render_template('busqueda.html',busqueda=busqueda)
+    
 @app.route('/perfilusuario/<user>')
 def perfilusuario(user):
     return render_template('perfilusuario.html')

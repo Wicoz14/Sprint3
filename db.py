@@ -170,3 +170,15 @@ def retornar_detalle_funcion(id):
     funcion=cursor.fetchall()
     conn.close()  
     return funcion
+
+def retornar_busqueda(nombrepelicula):
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+
+    sql = "SELECT* FROM peliculas WHERE nombre={}".format(nombrepelicula)
+
+    cursor.execute(sql)
+
+    busqueda=cursor.fetchall()
+    conn.close()  
+    return busqueda
