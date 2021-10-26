@@ -14,7 +14,7 @@ def close_db():
 def actualizarusuario(id,nombre,usuario,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad):
     conexion = get_db()
     cursor = conexion.cursor()
-    strsql = "UPDATE usuario SET (id,nombre,usuario,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad) = ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}', '{}', '{}') WHERE id = {}".format(id,nombre,usuario,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad,id)
+    strsql = "UPDATE usuario SET (id,nombre,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad) = ('{}', '{}', '{}','{}', '{}', '{}', '{}', '{}', '{}') WHERE usuario = '{}'".format(id,nombre,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad,usuario)
     cursor.execute(strsql)
     conexion.commit()
     conexion.close()
@@ -26,7 +26,7 @@ def consultardatos(usuario):
     cursor.execute(strsql)
     conexion.commit()
     datos = cursor.fetchall()
-    print(datos)
+    return datos
 
 def obtener_conexion():
     try:
@@ -137,7 +137,7 @@ def retornar_estrenos():
     conn = obtener_conexion()
     cursor = conn.cursor()
 
-    sql = "SELECT A.nombre, A.genero, A.duracion FROM peliculas A LEFT JOIN funciones B ON A.peli_id = B.peli_id WHERE B.peli_Id IS NULL"
+    sql = "SELECT A.nombre, A.genero, A.duracion, A.fechaEstreno, A.caratula FROM peliculas A LEFT JOIN funciones B ON A.peli_id = B.peli_id WHERE B.peli_Id IS NULL"
 
     cursor.execute(sql)
 
@@ -168,3 +168,15 @@ def retornar_detalle_funcion(id):
     funcion=cursor.fetchall()
     conn.close()  
     return funcion
+
+def retornar_busqueda(nombrepelicula):
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+
+    sql = "SELECT* FROM peliculas WHERE nombre={}".format(nombrepelicula)
+
+    cursor.execute(sql)
+
+    busqueda=cursor.fetchall()
+    conn.close()  
+    return busqueda

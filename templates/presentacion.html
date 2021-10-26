@@ -29,11 +29,11 @@
             <div class="row justify-content-around" id="">
                 {% for i in estrenos %}
                 <div class="col text-center">
-                    <img id="content_div_one_photo" class="rounded " src="/static/assets/images/p1.jpg">
+                    <img id="content_div_one_photo" class="rounded " src="{{i[4]}}">
                     <h4>{{i[0]}}</h4>
                     <p>Genero: {{i[1]}}</p>
                     <p>Duracion: {{i[2]}}</p>
-                    <p>Estreno: 02 de Septiembre 2021</p>
+                    <p>Estreno: {{i[3]}}</p>
                 </div>
                 {% endfor %}
             </div>

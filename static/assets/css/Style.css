@@ -134,3 +134,12 @@
     font-size:2rem;
     color: #ffc107;
 }
+.dropusuario{
+    border-radius: 2rem;
+    border-color: #ffc107;
+    border-width: 2px;
+    background-color: black;
+}
+.droptext{
+    color: #ffc107;
+}
