@@ -8,7 +8,6 @@ form{
 }
 
 .lblfor, select{
-    background-color: rgb(245, 237, 167);
     display: flex;
     display: block;
     width: 400px;
@@ -25,10 +24,6 @@ form{
     appearance: none;
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
-
-.exit{
-    text-align: right;
 }
 
 .boton {
