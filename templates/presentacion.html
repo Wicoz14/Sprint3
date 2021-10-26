@@ -1,15 +1,8 @@
 {% extends "layout.html" %}
-
+{% block link %}
+<link rel="stylesheet" href="/static/assets/css/style_presentacion.css">
+{% endblock %}
 {% block contenido %}
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/assets/css/style_presentacion.css">
-</head>
 <body>
     <main>
         <section>
@@ -45,11 +38,6 @@
                 {% endfor %}
             </div>
         </div>
-
-        
-
     </main>   
 </body>
-</html>
-
 {% endblock %}
