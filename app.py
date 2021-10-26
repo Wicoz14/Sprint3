@@ -199,7 +199,8 @@ def busqueda(pelicula):
     
 @app.route('/perfilusuario/<user>')
 def perfilusuario(user):
-    return render_template('perfilusuario.html')
+    datos = db.consultardatos(session['user'])
+    return render_template('perfilusuario.html', datos=datos)
 
 @app.route('/validar-usuario', methods=['GET','POST'])
 def validarusuario():
@@ -210,7 +211,8 @@ def validarusuario():
             return render_template('dashboard.html')
             
         else:
-            return render_template('perfilusuario.html', user=usuario)
+            datos = db.consultardatos(session['user'])
+            return render_template('perfilusuario.html', user=usuario, datos=datos)
             
     else:
         denegado= True
@@ -270,3 +272,26 @@ def cerrar_sesion():
     if 'user' in session:
         session.pop('user')
         return redirect('/')
+
+@app.route('/updatedatos', methods=['GET','POST'])
+def actualizardatos():
+
+    id = request.form['documento']
+    nombre = request.form['nombre']
+    usuario = session['user']
+    correo = request.form['correo']
+    contraseña = sec.generate_password_hash(request.form['contraseña'])
+    fecha = request.form['fnacimiento']
+    tipoDeDocumento = request.form['tcedula']
+    celular= request.form['celular']
+    departamento = request.form['departamento']
+    ciudad= request.form['ciudad']
+
+    datos = db.consultardatos(session['user'])
+    db.actualizarusuario(id,nombre,usuario,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad)
+    return render_template('perfilusuario.html', user=usuario, datos=datos)
+
+@app.route('/editarpu')
+def editarpu():
+    datos = db.consultardatos(session['user'])
+    return render_template('editarpu.html', datos=datos)

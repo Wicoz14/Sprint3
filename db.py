@@ -14,7 +14,7 @@ def close_db():
 def actualizarusuario(id,nombre,usuario,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad):
     conexion = get_db()
     cursor = conexion.cursor()
-    strsql = "UPDATE usuario SET (id,nombre,usuario,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad) = ('{}', '{}', '{}', '{}','{}', '{}', '{}', '{}', '{}', '{}') WHERE id = {}".format(id,nombre,usuario,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad,id)
+    strsql = "UPDATE usuario SET (id,nombre,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad) = ('{}', '{}', '{}','{}', '{}', '{}', '{}', '{}', '{}') WHERE usuario = '{}'".format(id,nombre,correo,contraseña,fecha,tipoDeDocumento,celular,departamento,ciudad,usuario)
     cursor.execute(strsql)
     conexion.commit()
     conexion.close()
@@ -26,7 +26,7 @@ def consultardatos(usuario):
     cursor.execute(strsql)
     conexion.commit()
     datos = cursor.fetchall()
-    print(datos)
+    return datos
 
 def obtener_conexion():
     try:
