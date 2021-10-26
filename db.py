@@ -36,12 +36,12 @@ def obtener_conexion():
         print(Error)
 
 
-def agregar_pelicula(nombre, duracion, director, genero, sinopsis, caratula):
+def agregar_pelicula(nombre, duracion, director, genero,trailer, fechasEstreno, sinopsis, caratula):
     conn = obtener_conexion()
     cursor = conn.cursor()
 
-    sql=""" INSERT INTO peliculas(nombre, duracion, director, genero, sinopsis, caratula) 
-    VALUES ('{}', '{}', '{}', '{}', '{}', '{}')""".format(nombre, duracion, director, genero, sinopsis, caratula)
+    sql=""" INSERT INTO peliculas(nombre, duracion, director, genero, trailer, fechaEstreno, sinopsis, caratula) 
+    VALUES ('{}', '{}', '{}', '{}', '{}', '{}','{}','{}' )""".format(nombre, duracion, director, genero, trailer, fechasEstreno, sinopsis, caratula)
     
     cursor.execute(sql)
     conn.commit()
@@ -91,11 +91,11 @@ def editar_dato(tabla,p,i_p,f,h,s,c,i):
     conn.commit()
     conn.close()    
 
-def editar_pelicula(nombre,duracion,director,genero,sinopsis,caratula,id):
+def editar_pelicula(nombre,duracion,director,genero,trailer,estreno,sinopsis,caratula,id):
     conn = obtener_conexion()
     cursor = conn.cursor()
 
-    sql = """ UPDATE peliculas SET {},{},{},{},{},{} WHERE {}""".format(nombre,duracion,director,genero,sinopsis,caratula,id)
+    sql = """ UPDATE peliculas SET {},{},{},{},{},{},{},{} WHERE {}""".format(nombre,duracion,director,genero,trailer,estreno,sinopsis,caratula,id)
     
     cursor.execute(sql)
     conn.commit()
@@ -124,10 +124,8 @@ def consultar_dato(tabla,n,posicion):
             sql =""" SELECT * FROM peliculas ORDER BY peli_id DESC LIMIT 1;"""
         else:
             sql=""" SELECT * FROM {} WHERE {}""".format(tabla, n)
-    if tabla == "funciones":
+    else:
         sql=""" SELECT * FROM {} WHERE {}""".format(tabla, n)
-
-
 
     Cursor.execute(sql)
     valor = Cursor.fetchall()
@@ -170,3 +168,15 @@ def retornar_detalle_funcion(id):
     funcion=cursor.fetchall()
     conn.close()  
     return funcion
+
+def retornar_busqueda(nombrepelicula):
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+
+    sql = "SELECT* FROM peliculas WHERE nombre={}".format(nombrepelicula)
+
+    cursor.execute(sql)
+
+    busqueda=cursor.fetchall()
+    conn.close()  
+    return busqueda
