@@ -36,7 +36,7 @@ def dashboard():
 def presentacionA(): 
     if(request.method == 'GET'): 
         action="/agregarPelicula"
-        datosEdit=[(" "," "," "," "," "," "," "," "," ")]
+        datosEdit=[(" "," "," "," "," "," "," "," "," "," ")]
         return render_template("dashboardA.html", action=action, datosEdit=datosEdit)
     else:
         nombre = request.form['nombre'] 
@@ -89,17 +89,25 @@ def peliculasEE(id, condicion):
             actores=request.form['actores']
             sinopsis=request.form['sinopsis'] 
             caratula = request.files['files']
+            print(caratula)
+            if  caratula: 
+                consulta = db.consultar_dato("peliculas", "caratula= '/static/assets/images/carteleras/{}'".format(caratula.filename), " ") 
+                
+                    
+                if not consulta:
+                    caratulaEliminar = db.consultar_dato('peliculas', 'peli_id={}'.format(id)," ")
 
-            consulta = db.consultar_dato("peliculas", "caratula= '/static/assets/images/carteleras/{}'".format(caratula.filename), " ") 
-            print(consulta)
-            if not consulta:
-                caratulaEliminar = db.consultar_dato('peliculas', 'peli_id={}'.format(id)," ")
+                    os.remove(os.getcwd() + caratulaEliminar[0][9])
+                    caratula.save(os.getcwd() + "/static/assets/images/carteleras/" + caratula.filename )
+                    caratula_actualizada = "/static/assets/images/carteleras/" + caratula.filename
+                else:
+                    caratula_actualizada = "/static/assets/images/carteleras/" + caratula.filename
+            else: 
+                consulta = db.consultar_dato('peliculas', 'peli_id={}'.format(id)," ")
+                caratula_actualizada=consulta[0][9]
+                print(caratula.filename)
+                print(consulta)
 
-                os.remove(os.getcwd() + caratulaEliminar[0][9])
-                caratula.save(os.getcwd() + "/static/assets/images/carteleras/" + caratula.filename )
-                caratula_actualizada = "/static/assets/images/carteleras/" + caratula.filename
-            else:
-                caratula_actualizada = "/static/assets/images/carteleras/" + caratula.filename
 
            
             
