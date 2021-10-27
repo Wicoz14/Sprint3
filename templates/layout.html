@@ -24,8 +24,8 @@
           Cine Colombia
         </a>
         <div class="collapse navbar-collapse textprincipal" id="navbarScroll">
-          <form class="d-flex" method="get" action="/busqueda/">
-            <input name="busqueda" class="form-control me-2 barrabusqueda" type="search" aria-label="Search">
+          <form class="d-flex" method="get" id="formdebusqueda">
+            <input name="busqueda" id="busquedainput" class="form-control me-2 barrabusqueda" type="search" aria-label="Search">
             <button class="btn btn-outline-warning bt1" type="submit">BUSCAR</button>
             <a class="btn btn-outline-warning bt2" href="/funciones" role="button">FUNCIONES</a>
             {% if 'user' in session%}

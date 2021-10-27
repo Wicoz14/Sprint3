@@ -197,7 +197,7 @@ def informacion():
 @app.route('/busqueda/<pelicula>', methods=['GET'])
 def busqueda(pelicula):
     busqueda= db.retornar_busqueda(pelicula)
-    return render_template('busqueda.html',busqueda=busqueda)
+    return render_template('busqueda.html',busqueda=busqueda, pelicula=pelicula)
     
 @app.route('/perfilusuario/<user>')
 def perfilusuario(user):

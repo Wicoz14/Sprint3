@@ -143,3 +143,27 @@
 .droptext{
     color: #ffc107;
 }
+
+.imagenbusqueda{
+    width:300px;
+    height: 400px;
+}
+
+.divbusqueda{
+    margin-bottom: 3rem;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: inline-block;
+}
+.botonverbus{
+    border-radius: 57px;
+    border-width: 2px;
+    border-color: rgb(245,196,20);
+    background: rgb(0,0,0);
+    color: rgb(245,196,20);
+    display: inline-block;
+    border: 1px solid;
+}
