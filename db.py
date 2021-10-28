@@ -173,7 +173,7 @@ def retornar_busqueda(nombrepelicula):
     conn = obtener_conexion()
     cursor = conn.cursor()
 
-    sql = "SELECT* FROM peliculas WHERE nombre or genero COLLATE SQL_Latin1_General_Cp1_CI_AI LIKE '%{}%'".format(nombrepelicula)
+    sql = "SELECT* FROM peliculas WHERE nombre or genero or sinopsis COLLATE SQL_Latin1_General_Cp1_CI_AI LIKE '%{}%'".format(nombrepelicula)
 
     cursor.execute(sql)
 
