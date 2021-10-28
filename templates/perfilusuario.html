@@ -1,14 +1,9 @@
 {% extends "layout.html" %}
 {% block link %}
+<link rel="stylesheet" href="/static/assets/css/style_perfiluser.css">
+{% endblock %}
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/assets/css/style_perfiluser.css">
-  </head>
+{% block contenido %}
 <body onload="cdatos()">
   <form class="row g-3 cuerporegistro" action="" method="post">
     <h1>Perfil</h1>
@@ -55,8 +50,4 @@
     <a class="boton" role="button" href="" style="text-decoration:none; color:#ffc107">Mi Tarjeta</a>
   </div>
 </body>
-</html>
-
-
-
 {% endblock %}

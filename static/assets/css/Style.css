@@ -139,6 +139,7 @@
     border-color: #ffc107;
     border-width: 2px;
     background-color: black;
+    opacity: none;
 }
 .droptext{
     color: #ffc107;

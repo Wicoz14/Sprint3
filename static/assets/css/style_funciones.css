@@ -1,5 +1,6 @@
 .card-img-top{
-    max-width: 300px;
+    width: 300px;
+    height: 400px;
     border-radius: 5px;
 }
 

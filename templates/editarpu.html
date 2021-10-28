@@ -1,16 +1,9 @@
 {% extends "layout.html" %}
+{% block link %}
+<link rel="stylesheet" href="/static/assets/css/style_perfiluser.css">
+{% endblock %}
 
 {% block contenido %}
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/assets/css/style_perfiluser.css">
-  </head>
-
 <body onload="cdatos()">
   <h1>Perfil</h1>
   <section class ="contenedor">
@@ -48,7 +41,5 @@
       
   </section>
 </body>
-</html>
-
 
 {% endblock %}

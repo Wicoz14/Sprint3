@@ -34,9 +34,9 @@
                 <div class="dropdown">
                   <button class="dropdown-toggle btn btn-outline btn-outline-warning bt2" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">{{session['user']}}</button>
                   <ul class="dropdown-menu dropdown-menu-dark dropusuario" aria-labelledby="dropdownMenuButton2">
-                    <li><a class="dropdown-item" Style="color:#ffc107" href="/perfilusuario/{{session['user']}}">Mi perfil</a></li>
-                    <li><a class="dropdown-item" Style="color:#ffc107" href="/dashboard">Dashboard</a></li>
-                    <li><a class="dropdown-item" Style="color:#ffc107" href="/cerrarsesion">Cerrar cesión</a></li>
+                    <li><a class="dropdown-item drop1" Style="color:#ffc107" href="/perfilusuario/{{session['user']}}">Mi perfil</a></li>
+                    <li><a class="dropdown-item drop1" Style="color:#ffc107" href="/dashboard">Dashboard</a></li>
+                    <li><a class="dropdown-item drop1" Style="color:#ffc107" href="/cerrarsesion">Cerrar cesión</a></li>
                   </ul>
                 </div>
                 {%else%}
@@ -44,8 +44,8 @@
                 <div class="dropdown">
                   <button class="dropdown-toggle btn btn-outline btn-outline-warning bt2" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">{{session['user']}}</button>
                   <ul class="dropdown-menu dropdown-menu-dark dropusuario" aria-labelledby="dropdownMenuButton2">
-                    <li><a class="dropdown-item" Style="color:#ffc107" href="/perfilusuario/{{session['user']}}">Mi perfil</a></li>
-                    <li><a class="dropdown-item" Style="color:#ffc107" href="/cerrarsesion">Cerrar cesión</a></li>
+                    <li><a class="dropdown-item drop1" Style="color:#ffc107" href="/perfilusuario/{{session['user']}}">Mi perfil</a></li>
+                    <li><a class="dropdown-item drop1" Style="color:#ffc107" href="/cerrarsesion">Cerrar cesión</a></li>
                   </ul>
                 </div>
                 {% endif %}

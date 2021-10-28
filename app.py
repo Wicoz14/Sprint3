@@ -123,7 +123,7 @@ def presentacionF():
         action = "/Dfuncion"
         return render_template("dashboardF.html", tablafunc = mostrar, datosEdit = datosEdit, action=action)       
     else:
-        pelicula = request.form['pelicula']
+        peliculaadmi1 = request.form['pelicula']
         id = request.form['id']
         fecha = request.form['fecha']
         hora = request.form['hora']
@@ -202,7 +202,7 @@ def detallefunciones(idpelicula):
 def informacion():
     return render_template('informacion.html')
 
-@app.route('/busqueda/<pelicula>', methods=['GET'])
+@app.route('/busqueda/<peliculadmi1a>', methods=['GET'])
 def busqueda(pelicula):
     busqueda= db.retornar_busqueda(pelicula)
     return render_template('busqueda.html',busqueda=busqueda, pelicula=pelicula)
@@ -226,7 +226,8 @@ def validarusuario():
             
     else:
         denegado= True
-        return render_template('presentacion.html', denegado=denegado   )
+        estrenos= db.retornar_estrenos()
+        return render_template('presentacion.html',denegado=denegado,estrenos=estrenos )
 
 def validarUserPass(usuario,contraseña):
     conexion=db.get_db()
@@ -275,7 +276,8 @@ def validacion_registro():
         registrado= "Usuario registrado con éxito"
     else:
         registrado= "No se ha registrado el usuario, el usuario o sus credenciales ya existen"
-    return render_template('presentacion.html', registrado=registrado)
+    estrenos= db.retornar_estrenos()
+    return render_template('presentacion.html', registrado=registrado, estrenos=estrenos)
 
 @app.route('/cerrarsesion')
 def cerrar_sesion():
