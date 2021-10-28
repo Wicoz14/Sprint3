@@ -17,26 +17,38 @@
 
 <table id="tableOfContentsP"> 
     <tr>
-        <th>Id</th>
-        <th>Nombre </th>
-        <th>Duración</th>
-        <th>Director</th>
-        <th>Genero</th>
-        <th>Sinopsis</th>
-        <th>Caratula</th>
+        <th style="width:10px;">Id</th>
+        <th style="width:100px;" >Nombre </th>
+        <th style="width:30px;">Duración</th>
+        <th style="width:50px;">Director</th>
+        <th style="width:60px;">Genero</th>
+        <th style="width:10px;">Sinopsis</th>
+        <th style="width:10px;">Caratula</th>
     </tr>
 
     {% for peli in tablapeli %}
+
     <tr>
-        <td>{{peli[0]}}</td>
-        <td>{{peli[1]}}</td>
-        <td>{{peli[2]}}</td>
-        <td>{{peli[3]}}</td>
-        <td>{{peli[4]}}</td>
-        <td><a href="">ver</a></td>
-        <td><a href="">ver</a></td>
-        <td><a href="/peliculas/{{peli[0]}}/Update" style="color: blue;">Editar</a></td>
-        <td><a href="/peliculas/{{peli[0]}}/Delete" style="color: blue;">Eliminar</a></td>
+        <td style="width:10px;">{{peli[0]}}</td>
+        <td style="width:100px;">{{peli[1]}}</td>
+        <td style="width:30px;">{{peli[2]}}</td>
+        <td style="width:50px;">{{peli[3]}}</td>
+        <td style="width:60px;">{{peli[4]}}</td>
+        <td style="width:10px;"><button id="ver_sinopsis" onclick="show(sinopsis{{peli[0]}})">ver</button> 
+            <div id="sinopsis{{peli[0]}}" class = "mostrar_sinopsis" >
+            <p>{{peli[8]}}</p>
+            
+            <button onclick="show(sinopsis{{peli[0]}})"> cerrar</button>
+            </div> 
+        </td>
+        <td style="width:10px;"><button id="ver_caratula" onclick="show(caratula{{peli[0]}})">ver</button> 
+            <div id="caratula{{peli[0]}}" class = "mostrar_caratula">
+            <img src="{{peli[9]}}" alt="" style="width: 250px; height: 350px;">   
+            <button onclick="show(caratula{{peli[0]}})"> cerrar</button>
+            </div> 
+        </td>
+        <td style="width:30px;"><a href="/peliculas/{{peli[0]}}/Update" style="color: blue;">Editar</a></td>
+        <td style="width:30px;"><a href="/peliculas/{{peli[0]}}/Delete" style="color: blue;">Eliminar</a></td>
 
     </tr>
     {%endfor%}

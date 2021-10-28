@@ -55,23 +55,23 @@
 
 <table id="tableOfContentsF"> 
     <tr>
-        <th> Pelicula</th>
-        <th> Fecha</th>
-        <th> Hora</th>
-        <th> Sala</th>
-        <th> Capacidad </th>
+        <th style="width:50px;"> Pelicula</th>
+        <th style="width:40px;"> Fecha</th>
+        <th style="width:50px;"> Hora</th>
+        <th style="width:20px;"> Sala</th>
+        <th style="width:20px;"> Capacidad </th>
         
     </tr>
 
     {% for fun in tablafunc %}
     <tr>
-        <td >{{fun[2]}}</td>
-        <td>{{fun[3]}}</td>
-        <td>{{fun[4]}}</td>
-        <td >{{fun[5]}}</td>
-        <td >{{fun[6]}}</td>
-        <td><a href="/Dfunciones/{{fun[4]}}/U/{{fun[0]}}" style="color: blue;">editar</a></td>
-        <td><a href="/Dfunciones/{{fun[4]}}/D/{{fun[0]}}" style="color: blue;">eliminar</a></td>
+        <td style="width:50px;">{{fun[2]}}</td>
+        <td style="width:40px;">{{fun[3]}}</td>
+        <td style="width:50px;">{{fun[4]}}</td>
+        <td style="width:20px;">{{fun[5]}}</td>
+        <td style="width:20px;">{{fun[6]}}</td>
+        <td style="width:20px;"><a href="/Dfunciones/{{fun[4]}}/U/{{fun[0]}}" style="color: blue;">editar</a></td>
+        <td style="width:20px;"><a href="/Dfunciones/{{fun[4]}}/D/{{fun[0]}}" style="color: blue;">eliminar</a></td>
 
     </tr>
     {%endfor%}

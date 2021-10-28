@@ -7,15 +7,19 @@
 
 body{
     background: rgb(251, 251, 149);
-
+    /* margin-left: 60px; */
+    height: 100%;
+    left: 60px;   
+    overflow-x: hidden; 
 }
 
 /* header */
 
     header{
-        margin-left: 60px;
+        /* margin-left: 60px; */
         width:100%;
         height: 80px;
+        left:60px;
         background: gold;
         display: flex;
         align-items: center ;
@@ -93,7 +97,8 @@ body{
 
     .name__page #logo, #logo_foot{
         color: gold;
-        width: 220px;    
+        width: 220px;
+           
     }
 
     .logo_header, .foot__page {
@@ -189,7 +194,7 @@ body{
     .foot__page{
         /* width: 220px; */
         position:fixed;
-        bottom: 0;    
+        bottom: 0;   
     } 
 
      
@@ -197,10 +202,15 @@ body{
 /* DESPLIEGUE LATERAL*/
 
     .body_move{
-        margin-left: 160px;
+        margin-left: 220px;
     }
 
+    .header_move{
+        left: 220px;
+    } 
+
     .menu__side_move{
+        
         width: 220px ;
     }
 
@@ -224,24 +234,35 @@ body{
 
 
     section{
-        margin: 80px 60px;
+        /* margin: 80px 0px 0px 60px; */
+        top:80px;
+        left: 60px;
         width: 100%;
         height: 100%; 
-        position: fixed;
+        /* position: fixed; */
+        position: relative;
     }
 
     /* Agregar pelicula */
         
         section .add_movie{
             height: 30px;
-            margin: 50px 0px 40px 65px;
+            position: absolute;
+            top: 50px;
+            left: 60px;
+            /* 
+            margin: 50px 0px 40px 65px; */
         }
 
 
         section form#form_Add{
             width: 100%;
             height: 100%;
-            margin: 0px 65px;
+            position: absolute;
+            top:110px;
+            left: 60px;
+
+            /* margin: 0px 65px; */
             display:flex;
         }
 
@@ -289,12 +310,12 @@ body{
 
         form#form_Add .cover{
             display: flex;
-            height:420px;  
+            /* height:420px;  */ 
             
         }
 
         form#form_Add .cover #coverBox{
-            height: 420px;
+            height: 450px;
             width: 60%;
             border: 0.2px solid rgb(121, 121, 121); 
             cursor: pointer;
@@ -315,7 +336,8 @@ body{
 
         section #form_Add .image, #image{
             width: 100%;
-            height: 420px;
+            height: 450px;
+            border: none;
             
         }
 
@@ -352,22 +374,53 @@ body{
         section table#tableOfContentsP{
             margin-top: 30px;
             margin-left: 25px;
-            width: 80%;   
+            width: 90%;   
+           
         }
 
-      
+        section button{
+            border: none;
+            background: none; 
+            color: blue;}
+
+        section .mostrar_sinopsis{
+            visibility: hidden;  
+            display: grid;
+            position: fixed;
+            width: 250px;
+        }  
+
+        section .mostrar_sinopsis p{
+            border: 1px solid black;
+            background: white;
+        }
+        
+        section .mostrar_caratula{
+            visibility: hidden; 
+            border: 1px solid black;
+            position: fixed;
+            width: 250px;
+            height: 350px;
+            
+        }    
 
     /* Usuarios*/
 
         section .user{
             height: 30px;
-            margin: 50px 0px 40px 65px;
+            top:50px;
+            left:65px;
+            /* margin: 50px 0px 40px 65px; */
+            position: absolute;
         }
 
         section .searchUser{
-            margin-left: 65px;
+            /* margin: 115px 0px 40px 65px; */
+            top:115px;
+            left: 65px;
             display: flex;
             align-items: center;
+            position: absolute;
         }
 
         section .searchUser label{
@@ -387,9 +440,11 @@ body{
 
                 
         section table#tableOfContentsU{
-            margin-top: 30px;
-            margin-left: 25px;
-            width: 80%;
+            width: 90%;
+            position: absolute;
+            top: 180px;
+            left: 40px;
+          
             
         }
 

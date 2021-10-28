@@ -2,31 +2,56 @@
 document.getElementById("btn_open").addEventListener("click", open_close_menu);
 
 var side_menu = document.getElementById("menu__side")
-/* var btn_open = document.getElementById("btn_open") */
+
 var body = document.getElementById("body")
 var logo = document.getElementById("logo")
 var logoFoot=document.getElementById("logo_foot")
 var nombre = document.getElementById("nombre")
 
-function show_name(){
-    if (nombre.style.visibility == "visible"){  
-        nombre.style.visibility = "hidden"
+var caratula = document.getElementById("caratula")
+
+
+function show(n){
+    if (n.style.visibility == "visible"){  
+        n.style.visibility = "hidden"
         
           
     }else{
-        nombre.style.visibility="visible";    
+        n.style.visibility="visible";    
     }   
 }
 
 function open_close_menu(){
+    header.classList.toggle("header_move") 
     body.classList.toggle("body_move");
     side_menu.classList.toggle("menu__side_move")
     logo.classList.toggle("logo__move"); 
     logoFoot.classList.toggle("logoFoot__move");
-
-    show_name();
+    
+    
+    show(nombre);
 
 }
+
+/* window.onload = function() {
+    side_menu
+};
+ */
+
+function ver(){  
+    var dialogo = document.getElementById("sinopsis") 
+    dialogo.show()
+}
+function ocultar(){
+    dialogo.close()
+}
+
+
+algo = document.querySelectorAll("button")
+    console.log(algo[0])
+
+
+
 
 // Opciones de menu side//
 
