@@ -29,14 +29,26 @@
             <button class="btn btn-outline-warning bt1" type="submit">BUSCAR</button>
             <a class="btn btn-outline-warning bt2" href="/funciones" role="button">FUNCIONES</a>
             {% if 'user' in session%}
-            <a href="/perfilusuario/{{session['user']}}"><i class="far fa-user icon-user" ></i></a>
-              <div class="dropdown">
-                <button class="dropdown-toggle btn btn-outline btn-outline-warning bt2" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">{{session['user']}}</button>
-                <ul class="dropdown-menu dropdown-menu-dark dropusuario" aria-labelledby="dropdownMenuButton2">
-                  <li><a class="dropdown-item" Style="color:#ffc107" href="/perfilusuario/{{session['user']}}">Mi perfil</a></li>
-                  <li><a class="dropdown-item" Style="color:#ffc107" href="/cerrarsesion">Cerrar cesión</a></li>
-                </ul>
-              </div>
+              {%if session['user']== 'admi1'%}
+              <a href="/perfilusuario/{{session['user']}}"><i class="far fa-user icon-user" ></i></a>
+                <div class="dropdown">
+                  <button class="dropdown-toggle btn btn-outline btn-outline-warning bt2" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">{{session['user']}}</button>
+                  <ul class="dropdown-menu dropdown-menu-dark dropusuario" aria-labelledby="dropdownMenuButton2">
+                    <li><a class="dropdown-item" Style="color:#ffc107" href="/perfilusuario/{{session['user']}}">Mi perfil</a></li>
+                    <li><a class="dropdown-item" Style="color:#ffc107" href="/peliculas">Dashboard</a></li>
+                    <li><a class="dropdown-item" Style="color:#ffc107" href="/cerrarsesion">Cerrar cesión</a></li>
+                  </ul>
+                </div>
+                {%else%}
+                <a href="/perfilusuario/{{session['user']}}"><i class="far fa-user icon-user" ></i></a>
+                <div class="dropdown">
+                  <button class="dropdown-toggle btn btn-outline btn-outline-warning bt2" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">{{session['user']}}</button>
+                  <ul class="dropdown-menu dropdown-menu-dark dropusuario" aria-labelledby="dropdownMenuButton2">
+                    <li><a class="dropdown-item" Style="color:#ffc107" href="/perfilusuario/{{session['user']}}">Mi perfil</a></li>
+                    <li><a class="dropdown-item" Style="color:#ffc107" href="/cerrarsesion">Cerrar cesión</a></li>
+                  </ul>
+                </div>
+                {% endif %}
             {%else%}
             <button type="button" class="btn btn-outline-warning bt1" data-bs-toggle="modal"
               data-bs-target="#exampleModal" data-bs-whatever="@mdo">INGRESO</button>
