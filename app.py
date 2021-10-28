@@ -218,7 +218,7 @@ def validarusuario():
     contraseña= request.form['password']
     if validarUserPass(usuario,contraseña):
         if usuario=="admi1":
-            return render_template('dashboard.html')
+            return redirect('/dashboard')
             
         else:
             datos = db.consultardatos(session['user'])
