@@ -36,23 +36,23 @@ def obtener_conexion():
         print(Error)
 
 
-def agregar_pelicula(nombre, duracion, director, genero,trailer, fechasEstreno,actores, sinopsis, caratula):
+def agregar_pelicula(nombre, duracion, director, genero,trailer, fechasEstreno,actores, sinopsis, caratula, pancarta):
     conn = obtener_conexion()
     cursor = conn.cursor()
 
-    sql=""" INSERT INTO peliculas(nombre, duracion, director, genero, trailer, fechaEstreno, actores, sinopsis, caratula) 
-    VALUES ('{}', '{}', '{}', '{}', '{}', '{}','{}','{}','{}' )""".format(nombre, duracion, director, genero, trailer, fechasEstreno,actores, sinopsis, caratula)
+    sql=""" INSERT INTO peliculas(nombre, duracion, director, genero, trailer, fechaEstreno, actores, sinopsis, caratula, pancarta) 
+    VALUES ('{}', '{}', '{}', '{}', '{}', '{}','{}','{}','{}','{}' )""".format(nombre, duracion, director, genero, trailer, fechasEstreno,actores, sinopsis, caratula, pancarta)
     
     cursor.execute(sql)
     conn.commit()
     conn.close()
 
-def agregar_funcion(pelicula,id,fecha,hora,sala,capacidad):
+def agregar_funcion(pelicula,id_pelicula,formato,fecha,hora,sala,capacidad):
     conn = obtener_conexion()
     cursor = conn.cursor()
 
-    sql=""" INSERT INTO funciones( pelicula,peli_id,fecha, hora,sala, capacidad) 
-    VALUES ('{}', {}, '{}','{}', {}, '{}')""".format(pelicula,id,fecha,hora,sala,capacidad)
+    sql=""" INSERT INTO funciones(  pelicula,peli_id,formato,fecha, hora,sala, capacidad) 
+    VALUES ('{}', {}, '{}','{}','{}', {}, '{}')""".format(pelicula,id_pelicula,formato,fecha,hora,sala,capacidad)
     
     cursor.execute(sql)
     conn.commit()
@@ -81,21 +81,21 @@ def elminar_dato(tabla, n):
     conn.commit()
     conn.close()    
 
-def editar_dato(tabla,p,i_p,f,h,s,c,i):
+def editar_funcion(pelicula,id_pelicula,formato,fecha,hora,sala,capacidad,id_funcion):
     conn = obtener_conexion()
     cursor = conn.cursor()
 
-    sql = """ UPDATE {} SET {},{},{},{},{},{} WHERE {}""".format(tabla,p,i_p,f,h,s,c,i)
+    sql = """ UPDATE funciones SET {},{},{},{},{},{},{} WHERE {}""".format(pelicula,id_pelicula,formato,fecha,hora,sala,capacidad,id_funcion)
     
     cursor.execute(sql)
     conn.commit()
     conn.close()    
 
-def editar_pelicula(nombre,duracion,director,genero,trailer,estreno,actores,sinopsis,caratula,id):
+def editar_pelicula(nombre,duracion,director,genero,trailer,estreno,actores,sinopsis,caratula,pancarta,id):
     conn = obtener_conexion()
     cursor = conn.cursor()
 
-    sql = """ UPDATE peliculas SET {},{},{},{},{},{},{},{},{} WHERE {}""".format(nombre,duracion,director,genero,trailer,estreno,actores,sinopsis,caratula,id)
+    sql = """ UPDATE peliculas SET {},{},{},{},{},{},{},{},{},{} WHERE {}""".format(nombre,duracion,director,genero,trailer,estreno,actores,sinopsis,caratula,pancarta,id)
     
     cursor.execute(sql)
     conn.commit()

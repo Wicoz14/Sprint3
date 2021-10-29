@@ -27,24 +27,30 @@
         <input type="text" id="id" name="id" value="{{datosEdit[0][1]}}" required>
     </div>
 
+    <div class="formato">
+        <label for=""> Formato: </label>
+        <input type="text" id="formato" name="formato" value="{{datosEdit[0][3]}}" required>
+    </div>
+
+
     <div class="fecha">
         <label for=""> Fecha: </label>
-        <input type="text" id="fecha" name="fecha" value="{{datosEdit[0][3]}}" >
+        <input type="text" id="fecha" name="fecha" value="{{datosEdit[0][4]}}" >
     </div>
 
     <div class="hora">
         <label for=""> Hora: </label>
-        <input type="text" id="hora" name="hora" value="{{datosEdit[0][4]}}" >
+        <input type="text" id="hora" name="hora" value="{{datosEdit[0][5]}}" >
     </div>
 
     <div class="sala">
         <label for=""> Sala: </label>
-        <input type="text" id="sala" name="sala" value="{{datosEdit[0][5]}}" >
+        <input type="text" id="sala" name="sala" value="{{datosEdit[0][6]}}" >
     </div>
 
     <div class="capacidad">
         <label for=""> Capacidad: </label>
-        <input type="text" id="capacidad" name="capacidad" value="{{datosEdit[0][6]}}" >
+        <input type="text" id="capacidad" name="capacidad" value="{{datosEdit[0][7]}}" >
     </div>
 
     <span id="msj">{{msj}}</span>
@@ -56,6 +62,7 @@
 <table id="tableOfContentsF"> 
     <tr>
         <th style="width:50px;"> Pelicula</th>
+        <th style="width:20px;"> formato</th>
         <th style="width:40px;"> Fecha</th>
         <th style="width:50px;"> Hora</th>
         <th style="width:20px;"> Sala</th>
@@ -66,12 +73,13 @@
     {% for fun in tablafunc %}
     <tr>
         <td style="width:50px;">{{fun[2]}}</td>
-        <td style="width:40px;">{{fun[3]}}</td>
+        <td style="width:50px;">{{fun[3]}}</td>
         <td style="width:50px;">{{fun[4]}}</td>
         <td style="width:20px;">{{fun[5]}}</td>
         <td style="width:20px;">{{fun[6]}}</td>
-        <td style="width:20px;"><a href="/Dfunciones/{{fun[4]}}/U/{{fun[0]}}" style="color: blue;">editar</a></td>
-        <td style="width:20px;"><a href="/Dfunciones/{{fun[4]}}/D/{{fun[0]}}" style="color: blue;">eliminar</a></td>
+        <td style="width:20px;">{{fun[7]}}</td>
+        <td style="width:20px;"><a href="/Dfunciones/{{fun[0]}}" style="color: blue;">editar</a></td>
+        <td style="width:20px;"><a href="/Dfunciones/eliminar/{{fun[0]}}" style="color: blue;">eliminar</a></td>
 
     </tr>
     {%endfor%}

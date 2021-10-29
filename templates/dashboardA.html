@@ -12,47 +12,48 @@
 
     <div class="name">
         <label for="name">Nombre: </label>
-        <input type="text" id="name" name="nombre" value="{{datosEdit[0][1]}}" required >
+        <input type="text" id="name" name="nombre" value="{{datosEdit[0][1]}}"  >
     </div>
 
      <div class="duration"> 
         <label for="duration">Duración:</label>
-        <input type="text" id="duration" name="duracion" value="{{datosEdit[0][2]}}" required>
+        <input type="text" id="duration" name="duracion" value="{{datosEdit[0][2]}}" >
     </div> 
     
     <div class="director">
         <label for="director">Director:</label>
-        <input type="text" id="director" name="director" value="{{datosEdit[0][3]}}" required>
+        <input type="text" id="director" name="director" value="{{datosEdit[0][3]}}" >
     </div> 
 
     <div class="genre">
         <label for="genre">Género: </label>
-        <input type="text" id="genre" name="genero" value="{{datosEdit[0][4]}}" required>
+        <input type="text" id="genre" name="genero" value="{{datosEdit[0][4]}}">
     </div> 
 
     <div class="trailer">
         <label for="trailer">Trailer: </label>
-        <input type="text" id="trailer" name="link" value="{{datosEdit[0][5]}}" required>
+        <input type="text" id="trailer" name="link" value="{{datosEdit[0][5]}}" >
     </div> 
 
     <div class="estreno">
         <label for="estreno"> Estreno: </label>
-        <input type="text" id="estreno" name="fecha_estreno" value="{{datosEdit[0][6]}}" required>
+        <input type="text" id="estreno" name="fecha_estreno" value="{{datosEdit[0][6]}}" >
     </div> 
     
     <div class="actors">
         <label for="actor"> Actores: </label>
-        <input type="text" id="actors" name="actores" value="{{datosEdit[0][7]}}" required>
+        <input type="text" id="actors" name="actores" value="{{datosEdit[0][7]}}" >
     </div> 
 
     <div class="synopsis">
         <label for="synopsis">Sinopsis</label>
-        <textarea name="sinopsis" id="textSynopsis" required> {{datosEdit[0][8]}} </textarea>
+        <textarea name="sinopsis" id="textSynopsis" > {{datosEdit[0][8]}} </textarea>
     </div>
 
 </div>
 
 <div class="right">
+   
     <div class="cover" >
         
         <label for="">Caratula</label>
@@ -63,7 +64,7 @@
             <div id= "image" name="caratula">
                 
                 {%if datosEdit%}
-                    <img class="image" src="{{datosEdit[0][9]}}" alt="">
+                    <img class="image" src="{{datosEdit[0][9]}}" >
                 {%endif%}
             
             </div>
@@ -72,8 +73,28 @@
 
     </div>   
 
+    <div class="pancarta" >
+        
+        <label for="">Pancarta</label>
+
+        <div  id=caja_pancarta onclick = "searchImagePancarta()">
+            <input type="file" id="file_pancarta" name = "files_pancarta"  hidden  >
+            
+            <div id= "image_pancarta" name="pancarta">
+                
+                {%if datosEdit%}
+                    <img class="image_pancarta" src="{{datosEdit[0][10]}}" >
+                {%endif%}
+            
+            </div>
+
+        </div>
+
+    </div>  
+    
+    
     <div class="add">
-        <input type="submit" id="submitAdd" value="Agregar">
+        <input type="submit" id="submitAdd" value="Agregar pelicula" onclick="alertaDeVacio()">
     </div>
 </div>    
 </form> 

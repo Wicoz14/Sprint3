@@ -9,10 +9,14 @@ app.secret_key = "Secret Key"
 
 @app.before_request
 def antes_peticion():
-    if 'user' not in session and request.endpoint in ['perfilusuario']:
+    if 'user' not in session and request.endpoint in ['perfilusuario','dashboard','presentacionA','presentacionP','presentacionF','dashboardU']:
        return redirect('/')
     elif 'user' in session and request.endpoint in ['registro']:
         return redirect('/perfilusuario/{}'.format(session['user']))
+    elif 'user' in session and session['user']!= "admi1" and  request.endpoint in ['registro','dashboard','presentacionA','presentacionP','presentacionF','dashboardU']:   
+        return redirect('/')
+
+
 
 @app.route('/', methods=['GET'])
 def presentacion():
@@ -48,10 +52,18 @@ def presentacionA():
         actores=request.form['actores']
         sinopsis=request.form['sinopsis'] 
         caratula= request.files['files']
-        caratula.save(os.getcwd() + "/static/assets/images/carteleras/" + caratula.filename )
-        caratula_final = "/static/assets/images/carteleras/{}".format(caratula.filename)
-        db.agregar_pelicula(nombre,duracion,director,genero,trailer,estreno,actores,sinopsis,caratula_final)
+        pancarta=request.files['files_pancarta']
 
+        caratula_final = "/static/assets/images/carteleras/C-{}".format(caratula.filename)
+        pancarta_final = "/static/assets/images/carteleras/P-{}".format(pancarta.filename)
+
+        db.agregar_pelicula(nombre,duracion,director,genero,trailer,estreno,actores,sinopsis,caratula_final,pancarta_final)
+
+
+        caratula.save(os.getcwd() + "/static/assets/images/carteleras/" + 'C-' + caratula.filename )
+        pancarta.save(os.getcwd() + "/static/assets/images/carteleras/" + 'P-'+ pancarta.filename )
+
+       
         return redirect('/agregarPelicula')
 
 @app.route('/peliculas', methods=['GET','POST'])
@@ -67,8 +79,9 @@ def presentacionP():
 @app.route('/peliculas/<id>/<condicion>', methods=['GET','POST'])
 def peliculasEE(id, condicion):
     if condicion == "Delete":   
-        caratulaEliminar = db.consultar_dato('peliculas', 'peli_id={}'.format(id)," ")
-        os.remove(os.getcwd() + caratulaEliminar[0][9])
+        datoEliminar = db.consultar_dato('peliculas', 'peli_id={}'.format(id)," ")
+        os.remove(os.getcwd() + datoEliminar[0][9])
+        os.remove(os.getcwd() + datoEliminar[0][10]) 
         
         db.elminar_dato("peliculas","peli_id={}".format(id))
         return redirect('/peliculas')  
@@ -89,29 +102,32 @@ def peliculasEE(id, condicion):
             actores=request.form['actores']
             sinopsis=request.form['sinopsis'] 
             caratula = request.files['files']
-            print(caratula)
-            if  caratula: 
-                consulta = db.consultar_dato("peliculas", "caratula= '/static/assets/images/carteleras/{}'".format(caratula.filename), " ") 
-                
-                    
-                if not consulta:
-                    caratulaEliminar = db.consultar_dato('peliculas', 'peli_id={}'.format(id)," ")
-
-                    os.remove(os.getcwd() + caratulaEliminar[0][9])
-                    caratula.save(os.getcwd() + "/static/assets/images/carteleras/" + caratula.filename )
-                    caratula_actualizada = "/static/assets/images/carteleras/" + caratula.filename
-                else:
-                    caratula_actualizada = "/static/assets/images/carteleras/" + caratula.filename
+            pancarta = request.files['files_pancarta']
+            """ print(caratula) """
+            
+            peliculaEditar = db.consultar_dato('peliculas', 'peli_id={}'.format(id)," ")
+            if caratula:
+                os.remove(os.getcwd() + peliculaEditar[0][9])
+                caratula.save(os.getcwd() + "/static/assets/images/carteleras/" +'C-' + caratula.filename )
+                caratula_actualizada = "/static/assets/images/carteleras/" + "C-" + caratula.filename 
             else: 
-                consulta = db.consultar_dato('peliculas', 'peli_id={}'.format(id)," ")
-                caratula_actualizada=consulta[0][9]
-                print(caratula.filename)
-                print(consulta)
+                caratula_actualizada = peliculaEditar[0][9]
+            
+            if pancarta:
+                os.remove(os.getcwd() + peliculaEditar[0][10])
+                pancarta.save(os.getcwd() + "/static/assets/images/carteleras/" + 'P-' + pancarta.filename )
+                pancarta_actualizada = "/static/assets/images/carteleras/" + 'P-' + pancarta.filename  
+            else:
+                pancarta_actualizada = peliculaEditar[0][10]
+
+
+           
+                
 
 
            
             
-            db.editar_pelicula("nombre='{}'".format(nombre),"duracion='{}'".format(duracion),"director='{}'".format(director),"genero='{}'".format(genero), "trailer='{}'".format(trailer), "fechaEstreno='{}'".format(estreno), "actores='{}'".format(actores), "sinopsis='{}'".format(sinopsis),"caratula='{}'".format(caratula_actualizada),"peli_id={}".format(id))
+            db.editar_pelicula("nombre='{}'".format(nombre),"duracion='{}'".format(duracion),"director='{}'".format(director),"genero='{}'".format(genero), "trailer='{}'".format(trailer), "fechaEstreno='{}'".format(estreno), "actores='{}'".format(actores), "sinopsis='{}'".format(sinopsis),"caratula='{}'".format(caratula_actualizada),"pancarta='{}'".format(pancarta_actualizada), "peli_id={}".format(id))
 
             return redirect("/peliculas")
 
@@ -119,31 +135,32 @@ def peliculasEE(id, condicion):
 def presentacionF():     
     if(request.method == 'GET'): 
         mostrar = db.mostrar_tabla("funciones")
-        datosEdit=[(" "," "," "," "," "," ")]
+        datosEdit=[(" "," "," "," "," "," "," ")]
         action = "/Dfuncion"
         return render_template("dashboardF.html", tablafunc = mostrar, datosEdit = datosEdit, action=action)       
     else:
         peliculaadmi1 = request.form['pelicula']
         id = request.form['id']
+        formato=request.form['formato']
         fecha = request.form['fecha']
         hora = request.form['hora']
         sala = request.form['sala']
         capacidad = request.form['capacidad']
         
 
-        cantidad = db.contar_dato("peliculas","peli_id='{}'".format(id))
+        consulta = db.consultar_dato("peliculas","peli_id='{}'".format(id), " ")
 
-        if cantidad[0][0] == 1:
+        if consulta:
             ''' consulta = db.consultar_dato("peliculas","nombre='{}'".format(pelicula), " ")
             print(len(consulta))
             id=consulta[0][0] '''
             
-            db.agregar_funcion(pelicula,id,fecha,hora,sala,capacidad)
+            db.agregar_funcion(peliculaadmi1,id,formato,fecha,hora,sala,capacidad)
             return redirect('/Dfuncion')
         else:
             mostrar = db.mostrar_tabla("funciones")
             msj="La pelicula no existe"
-            datosEdit=[(" "," "," "," "," "," ")]
+            datosEdit=[(" "," "," "," "," "," "," ")]
             action = "/Dfuncion"
             return render_template("dashboardF.html", tablafunc = mostrar, msj=msj,datosEdit = datosEdit, action=action)
 
@@ -158,24 +175,22 @@ def función_editar(id):
     else:    
         pelicula = request.form['pelicula']
         id_peli = request.form['id'] 
+        formato=request.form['formato']
         fecha = request.form['fecha']
         hora = request.form['hora']
         sala = request.form['sala']
         capacidad = request.form['capacidad']
         
-        db.editar_dato("funciones","pelicula='{}'".format(pelicula),"peli_id={}".format(id_peli), "fecha='{}'".format(fecha), "hora='{}'".format(hora), "sala='{}'".format(sala), "capacidad={}".format(capacidad),"id={}".format(id))   
+        db.editar_funcion("pelicula='{}'".format(pelicula),"peli_id={}".format(id_peli),"formato='{}'".format(formato), "fecha='{}'".format(fecha),"hora='{}'".format(hora),"sala='{}'".format(sala), "capacidad={}".format(capacidad),"id={}".format(id))   
        
         return redirect('/Dfuncion')
     
 
-@app.route('/Dfunciones/<funcion>/<condicion>/<id>')
-def funcionesEE(funcion, condicion, id):
-    if condicion == "D":
-        db.elminar_dato("funciones","id='{}'".format(id))
-        return redirect('/Dfuncion')
-    elif condicion == "U":
-        ''' db.consultar_dato("funciones", "id='{}'".format(id)) '''
-        return redirect('/Dfunciones/{}'.format(id))
+@app.route('/Dfunciones/eliminar/<id>')
+def funcionesEE(id):
+    db.elminar_dato("funciones","id='{}'".format(id))
+    return redirect('/Dfuncion')
+    
 
 
 @app.route('/usuario', methods=['GET','POST'])

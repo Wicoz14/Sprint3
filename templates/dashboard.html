@@ -24,14 +24,17 @@
             <h3>Administrativo</h3>
         </div>
         
-        
-        <a href="#" id = "letter">
-            <i class="far fa-envelope"></i>
-        </a> <!-- corregir logo, no puede ser <a> -->
-        
-        <a href="#" id="login">
-            <i class="far fa-user"></i>
+        <a href="#" id="login" >
+            <i class="far fa-user" onclick="show(menuLogin)"></i>
         </a>
+
+        <div id="menu_login" >
+            <ul id='opciones_menu_login'>
+                <li><a class="" Style="color:#ffc107" href="/perfilusuario/{{session['user']}}">Mi perfil</a></li>
+                <li><a class="" Style="color:#ffc107" href="/dashboard">Dashboard</a></li>
+                <li><a class="" Style="color:#ffc107" href="/cerrarsesion">Cerrar cesión</a></li>
+            </ul>
+        </div>
         
     </header>
 

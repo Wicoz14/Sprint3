@@ -29,14 +29,14 @@ body{
         
     }
 
-    header a#letter{
+   /*  header a#letter{
         position: fixed;
         left: 85%;
         right: 15%;
         font-size: 35px;
         color:black;
         
-    }
+    } */
 
 
     header #login{
@@ -46,6 +46,43 @@ body{
         font-size: 35px;
         color: black;
     }
+
+    header #menu_login{
+        position: fixed;
+        right: 10px;
+        top: 60px;
+        width: 160px;
+        height: 114px;
+        border-radius: 25px;
+        background: black;
+        border: 2px solid #ffc107;
+        visibility: hidden;
+    }
+
+    header #opciones_menu_login{
+        position: absolute;
+        list-style: none;
+        top:15px;
+        left:0;
+        
+    } 
+
+    header #opciones_menu_login li{
+        /* margin-left: 4px; */
+        width: 160px;
+        height: 30px; 
+        overflow: hidden;
+        
+    }
+
+    header #opciones_menu_login li a{
+        margin-left: 20px;
+    }
+
+    header #opciones_menu_login li:hover{
+        background: rgba(124, 124, 124, 0.4);
+        overflow: hidden;
+    } 
 
 
     header .name h1{
@@ -269,13 +306,19 @@ body{
         form#form_Add .left{
             height: 100%;
             width: 40%;
-            margin-right: 100px;  
+              
         }
 
         form#form_Add .right{
             height: 100%;
             width: 40%;
+           
         }
+
+        form#form_Add .right #contenedor-right{
+           display: flex;
+        }
+
 
 
         form#form_Add .name, .duration, .director, .genre, .synopsis, .cover, .trailer, .estreno, .actors{
@@ -308,25 +351,37 @@ body{
         }
 
 
-        form#form_Add .cover{
+        form#form_Add .cover, .pancarta{
             display: flex;
             /* height:420px;  */ 
             
         }
 
         form#form_Add .cover #coverBox{
-            height: 450px;
-            width: 60%;
+            height: 210px;
+            width: 30%;
+            margin-bottom: 10px;
             border: 0.2px solid rgb(121, 121, 121); 
             cursor: pointer;
             background: white;
         }
 
-        form#form_Add .cover input{
+        form#form_Add .pancarta #caja_pancarta{
+            height: 230px;
+            width: 70%;
+            border: 0.2px solid rgb(121, 121, 121); 
+            cursor: pointer;
+            background: white;
+            
+
+        }
+
+
+        /* form#form_Add .cover input{
             margin-left: 4px;
             
             
-        }
+        } */
 
 
         .add #submitAdd{
@@ -336,10 +391,30 @@ body{
 
         section #form_Add .image, #image{
             width: 100%;
-            height: 450px;
+            height: 210px;
             border: none;
             
         }
+
+
+        section #form_Add .pancarta, #image_pancarta{
+            width: 100%;
+            height: 230px;
+            border: none;
+            
+        }
+
+        section .add {
+            position:absolute ;
+            top:500px;
+            left: 10%; 
+        }
+
+        section .add #submitAdd{
+            height: 40px;
+            width: 200px;
+        }
+
 
 
     /* pelicula Dashboard*/
@@ -387,12 +462,13 @@ body{
             visibility: hidden;  
             display: grid;
             position: fixed;
-            width: 250px;
+            max-width: 250px;
         }  
 
         section .mostrar_sinopsis p{
             border: 1px solid black;
             background: white;
+            max-width: 250px;
         }
         
         section .mostrar_caratula{

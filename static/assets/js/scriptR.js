@@ -8,7 +8,26 @@ var logo = document.getElementById("logo")
 var logoFoot=document.getElementById("logo_foot")
 var nombre = document.getElementById("nombre")
 
+
 var caratula = document.getElementById("caratula")
+
+var menuLogin = document.getElementById("menu_login")
+
+
+function alertaDeVacio(){
+var name = document.getElementById("name").required = true;
+var duration = document.getElementById("duration").required = true;
+var director = document.getElementById("director").required = true;
+var genre = document.getElementById("genre").required = true;
+var trailer = document.getElementById("trailer").required = true;
+var estreno = document.getElementById("estreno").required = true;
+var actors = document.getElementById("actors").required = true;
+var textSynopsis = document.getElementById("textSynopsis").required = true;
+var file = document.getElementById("file").required = true;
+var file_pancarta = document.getElementById("file_pancarta").required = true;
+
+return(window.alert("Debe llenar todos los campos"))
+}
 
 
 function show(n){
@@ -38,73 +57,17 @@ function open_close_menu(){
 };
  */
 
-function ver(){  
-    var dialogo = document.getElementById("sinopsis") 
-    dialogo.show()
-}
-function ocultar(){
-    dialogo.close()
-}
-
-
-algo = document.querySelectorAll("button")
-    console.log(algo[0])
-
 
 
 
 // Opciones de menu side//
-
-/* 
-let n = document.querySelectorAll(".nombreOpcion");
-let  U = document.getElementById("usuario")
-let  A = document.getElementById("agregarPelicula")
-let  P = document.getElementById("peliculas")
-let  F = document.getElementById("funciones")
-
-function active(x){
-    for(var i = 0; i < 4; i++){ 
-        n[i].style.background="#d1b500 ";
-    }
-    
-    n[x].style.background="#FFDF00"; 
-
-    ocultar()
-
-    if(x==0){
-        U.style.display="block"
-    }
-    if(x==1){
-        A.style.display="block"
-    }
-    if(x==2){
-        P.style.display="block"
-    }
-    if(x==3){
-        F.style.display="block"
-    }
-    
-}
-
-function ocultar(){
-   
-
-    U.style.display="none"
-    A.style.display="none"
-    P.style.display="none"
-    F.style.display="none"
-
-}
-
-document.addEventListener("DOMContentLoaded", ocultar)
- */
 
 
 // Evento agregar funciones Dashboard//
 
 const formAddFuntion = document.getElementById("add_funcion");
 
-formAddFuntion.addEventListener("submit", add_data)
+/* formAddFuntion.addEventListener("submit", add_data) */
 
 
 function clearInputs(){
@@ -115,58 +78,7 @@ function clearInputs(){
 
 }
 
-/* btn = document.querySelector(".btn_delete")
-btn.addEventListener("click",delete_Row) */
 
-/* function delete_Row(event){
-    var nom = document.getElementById("nom")
-    console.log(this)
-} */
-
-/* 
-
-function add_data(event){
-    event.preventDefault();
-    let sala = formAddFuntion.querySelector("#sala").value;
-    let hora = formAddFuntion.querySelector("#hora").value;
-    let capacidad = formAddFuntion.querySelector("#capacidad").value;
-    let pelicula = formAddFuntion.querySelector("#pelicula").value;
-    ( - let buttons = "<button id='editar'> Editar </button>  <button id='eliminar'> Eliminar </button>" -)
-
-    let tableOfFuncion = document.getElementById("tableOfContentsF");
-    
-    let newRow = tableOfFuncion.insertRow(-1);
-
-    let newCell = newRow.insertCell(0);
-    newCell.textContent = sala ;
-
-    newCell = newRow.insertCell(1);
-    newCell.textContent = hora ;
-
-    newCell = newRow.insertCell(2);
-    newCell.textContent = capacidad ;
-
-    newCell = newRow.insertCell(3);
-    newCell.textContent = pelicula; 
-
-
-    newEditarCell = newRow.insertCell(4);
-    let botonEditar = document.createElement("button");
-    botonEditar.textContent = "Editar"
-    newEditarCell.appendChild(botonEditar)
-
-    newDeleteCell = newRow.insertCell(5);
-    let deleteButton = document.createElement("button");
-    deleteButton.textContent = "Eliminar"
-    newDeleteCell.appendChild(deleteButton)
-    
-
-    clearInputs();
-    deleteButton.addEventListener("click", delete_Row)
-
-}
-
- */
 
 // Evento buscar usuarios Dashboard//
 
@@ -201,22 +113,21 @@ function searchId(i){
 
 
 
-
-
-
-
-
-
 function searchImage(){
     let coverInput =  document.getElementById("file");
-    coverInput.click();
-    document.getElementById('file').addEventListener('change', archivo, false);
+   
 
+    coverInput.click();
+    
+
+    coverInput.addEventListener('change', archivo, false);
+    
     
 }
 
 function archivo(event){
     var files = event.target.files;
+
     var f = files[0];
 
     if(f.type.match("image.*")){
@@ -227,27 +138,51 @@ function archivo(event){
         return function(e) {
           // Insertamos la imagen
          document.getElementById("image").innerHTML = ['<img class="image" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
-        };
+         };
+        
     })(f);
 
     reader.readAsDataURL(f);
+    
    }
 }
 
 
-/* document.getElementById("cover2").addEventListener("onchange", function(){
-    const img = document.getElementsByClassName("image");
-    const file = this.files[0];
-    if(file){
-        const reader = new FileReader();    
-        reader.onload=function(){
-            const result = reader.result;
-            img.src = result;
-        }
-    reader.readerAsDataURL(file);
-    }
+function searchImagePancarta(){
+  
+    let pancartaImput = document.getElementById('file_pancarta')
 
-}) */
+    
+    pancartaImput.click();
+
+   
+    pancartaImput.addEventListener('change', archivop, false);
+    
+}
+
+function archivop(event){
+    var filePancarta = event.target.files;
+
+    var p = filePancarta[0]
+
+    if(p.type.match("image.*")){
+
+    var reader = new FileReader();
+
+    reader.onload = (function(theFile) {
+        return function(e) {
+          // Insertamos la imagen
+         document.getElementById("image_pancarta").innerHTML = ['<img class="pancarta" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
+        };
+        
+    })(p);
+
+    reader.readAsDataURL(p);
+   }
+}
+
+
+
 
 
 
