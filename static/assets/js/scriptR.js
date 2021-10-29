@@ -14,6 +14,7 @@ var caratula = document.getElementById("caratula")
 var menuLogin = document.getElementById("menu_login")
 
 
+<<<<<<< HEAD
 // function alertaDeVacio(){
 // var name = document.getElementById("name").required = true;
 // var duration = document.getElementById("duration").required = true;
@@ -28,6 +29,23 @@ var menuLogin = document.getElementById("menu_login")
 
 // return(window.alert("Debe llenar todos los campos"))
 // }
+=======
+/* function alertaDeVacio(){
+var name = document.getElementById("name").required = true;
+var duration = document.getElementById("duration").required = true;
+var director = document.getElementById("director").required = true;
+var genre = document.getElementById("genre").required = true;
+var trailer = document.getElementById("trailer").required = true;
+var estreno = document.getElementById("estreno").required = true;
+var actors = document.getElementById("actors").required = true;
+var textSynopsis = document.getElementById("textSynopsis").required = true;
+var file = document.getElementById("file").required = true;
+var file_pancarta = document.getElementById("file_pancarta").required = true;
+
+
+return(window.alert("Debe llenar todos los campos"))
+} */
+>>>>>>> 506b39ba1786ce7c2a8d2591b8a1b0d79ed95945
 
 
 function show(n){
