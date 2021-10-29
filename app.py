@@ -220,7 +220,8 @@ def eliminarUsuario(id):
 
 @app.route('/detallefunciones/<idpelicula>', methods=['GET'])
 def detallefunciones(idpelicula):
-    funcion= db.retornar_detalle_funcion(idpelicula)
+    funcion1= db.consultar_dato("funciones","peli_id={}".format(idpelicula),"")
+    funcion=funcion1[0][4].split(sep= " - ")
     return render_template('detallefunciones.html', funcion=funcion)
 
 @app.route('/informacion', methods=['GET'])
