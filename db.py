@@ -189,3 +189,6 @@ def consultar_compras(user):
     conexion.commit()
     datoscompras = cursor.fetchall()
     return datoscompras
+
+
+    
