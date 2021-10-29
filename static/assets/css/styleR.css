@@ -377,11 +377,11 @@ body{
         }
 
 
-        /* form#form_Add .cover input{
+       /*  form#form_Add .cover input{
             margin-left: 4px;
             
             
-        } */
+        }  */
 
 
         .add #submitAdd{
@@ -393,16 +393,33 @@ body{
             width: 100%;
             height: 210px;
             border: none;
-            
         }
 
+       /*  section #form_Add  #image{
+            margin: 10px;
+        } */
 
-        section #form_Add .pancarta, #image_pancarta{
+
+        section #form_Add #cont_image_pancarta, #image_pancarta{
             width: 100%;
             height: 230px;
             border: none;
             
         }
+
+        section #form_Add #cont_image_pancarta .pancarta{
+            width: 100%;
+            height: 230px;
+            border: none;
+            
+        }
+
+       /*  section #form_Add .image_pancarta{
+            width: 100%;
+            height: 230px;
+            border: none;
+            
+        } */
 
         section .add {
             position:absolute ;

@@ -26,6 +26,7 @@ var textSynopsis = document.getElementById("textSynopsis").required = true;
 var file = document.getElementById("file").required = true;
 var file_pancarta = document.getElementById("file_pancarta").required = true;
 
+console.log(file)
 return(window.alert("Debe llenar todos los campos"))
 }
 
@@ -172,7 +173,7 @@ function archivop(event){
     reader.onload = (function(theFile) {
         return function(e) {
           // Insertamos la imagen
-         document.getElementById("image_pancarta").innerHTML = ['<img class="pancarta" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
+         document.getElementById("cont_image_pancarta").innerHTML = ['<img class="pancarta" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
         };
         
     })(p);

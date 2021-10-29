@@ -40,7 +40,7 @@ def dashboard():
 def presentacionA(): 
     if(request.method == 'GET'): 
         action="/agregarPelicula"
-        datosEdit=[(" "," "," "," "," "," "," "," "," "," ")]
+        datosEdit=[("","","","","","","","",""," "," ")]
         return render_template("dashboardA.html", action=action, datosEdit=datosEdit)
     else:
         nombre = request.form['nombre'] 
@@ -54,11 +54,13 @@ def presentacionA():
         caratula= request.files['files']
         pancarta=request.files['files_pancarta']
 
+       
+
         caratula_final = "/static/assets/images/carteleras/C-{}".format(caratula.filename)
         pancarta_final = "/static/assets/images/carteleras/P-{}".format(pancarta.filename)
 
         db.agregar_pelicula(nombre,duracion,director,genero,trailer,estreno,actores,sinopsis,caratula_final,pancarta_final)
-
+  
 
         caratula.save(os.getcwd() + "/static/assets/images/carteleras/" + 'C-' + caratula.filename )
         pancarta.save(os.getcwd() + "/static/assets/images/carteleras/" + 'P-'+ pancarta.filename )
@@ -135,7 +137,7 @@ def peliculasEE(id, condicion):
 def presentacionF():     
     if(request.method == 'GET'): 
         mostrar = db.mostrar_tabla("funciones")
-        datosEdit=[(" "," "," "," "," "," "," ")]
+        datosEdit=[("","","","","","","")]
         action = "/Dfuncion"
         return render_template("dashboardF.html", tablafunc = mostrar, datosEdit = datosEdit, action=action)       
     else:
@@ -150,19 +152,27 @@ def presentacionF():
 
         consulta = db.consultar_dato("peliculas","peli_id='{}'".format(id), " ")
 
-        if consulta:
+       
+
+        if consulta and (str(consulta[0][1]).replace(" ","") == peliculaadmi1.replace(" ","")):
             ''' consulta = db.consultar_dato("peliculas","nombre='{}'".format(pelicula), " ")
             print(len(consulta))
             id=consulta[0][0] '''
             
             db.agregar_funcion(peliculaadmi1,id,formato,fecha,hora,sala,capacidad)
             return redirect('/Dfuncion')
-        else:
+        elif consulta and (str(consulta[0][1]).replace(" ","") != peliculaadmi1.replace(" ","")):
+            mostrar = db.mostrar_tabla("funciones")
+            msj="Id o pelicula equivocados"
+            datosEdit=[(" "," "," "," "," "," "," ")]
+            action = "/Dfuncion"
+            return render_template("dashboardF.html", tablafunc = mostrar, msj=msj,datosEdit = datosEdit, action=action)
+        elif not consulta:
             mostrar = db.mostrar_tabla("funciones")
             msj="La pelicula no existe"
             datosEdit=[(" "," "," "," "," "," "," ")]
             action = "/Dfuncion"
-            return render_template("dashboardF.html", tablafunc = mostrar, msj=msj,datosEdit = datosEdit, action=action)
+            return render_template("dashboardF.html", tablafunc = mostrar, msj=msj,datosEdit = datosEdit, action=action)    
 
 @app.route('/Dfunciones/<id>', methods=['GET','POST']) 
 def función_editar(id):

@@ -47,7 +47,7 @@
 
     <div class="synopsis">
         <label for="synopsis">Sinopsis</label>
-        <textarea name="sinopsis" id="textSynopsis" > {{datosEdit[0][8]}} </textarea>
+        <textarea name="sinopsis" id="textSynopsis" required > {{datosEdit[0][8]}} </textarea>
     </div>
 
 </div>
@@ -59,7 +59,7 @@
         <label for="">Caratula</label>
 
         <div  id=coverBox onclick = "searchImage()">
-            <input type="file" id="file" name = "files"  hidden >
+            <input type="file" id="file" name = "files"  hidden required >
             
             <div id= "image" name="caratula">
                 
@@ -78,12 +78,12 @@
         <label for="">Pancarta</label>
 
         <div  id=caja_pancarta onclick = "searchImagePancarta()">
-            <input type="file" id="file_pancarta" name = "files_pancarta"  hidden  >
+            <input type="file" id="file_pancarta" name = "files_pancarta"  hidden >
             
-            <div id= "image_pancarta" name="pancarta">
+            <div id= "cont_image_pancarta" name="pancarta">
                 
                 {%if datosEdit%}
-                    <img class="image_pancarta" src="{{datosEdit[0][10]}}" >
+                    <img id = "image_pancarta" src="{{datosEdit[0][10]}}" >
                 {%endif%}
             
             </div>
