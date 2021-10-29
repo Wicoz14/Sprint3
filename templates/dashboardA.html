@@ -47,7 +47,7 @@
 
     <div class="synopsis">
         <label for="synopsis">Sinopsis</label>
-        <textarea name="sinopsis" id="textSynopsis" required > {{datosEdit[0][8]}} </textarea>
+        <textarea name="sinopsis" id="textSynopsis"  > {{datosEdit[0][8]}} </textarea>
     </div>
 
 </div>
@@ -59,7 +59,7 @@
         <label for="">Caratula</label>
 
         <div  id=coverBox onclick = "searchImage()">
-            <input type="file" id="file" name = "files"  hidden required >
+            <input type="file" id="file" name = "files"  hidden >
             
             <div id= "image" name="caratula">
                 
@@ -94,7 +94,7 @@
     
     
     <div class="add">
-        <input type="submit" id="submitAdd" value="Agregar pelicula" onclick="alertaDeVacio()">
+        <input type="submit" id="submitAdd" value="Agregar pelicula" >
     </div>
 </div>    
 </form> 
