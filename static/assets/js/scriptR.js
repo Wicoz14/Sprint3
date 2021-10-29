@@ -14,21 +14,20 @@ var caratula = document.getElementById("caratula")
 var menuLogin = document.getElementById("menu_login")
 
 
-function alertaDeVacio(){
-var name = document.getElementById("name").required = true;
-var duration = document.getElementById("duration").required = true;
-var director = document.getElementById("director").required = true;
-var genre = document.getElementById("genre").required = true;
-var trailer = document.getElementById("trailer").required = true;
-var estreno = document.getElementById("estreno").required = true;
-var actors = document.getElementById("actors").required = true;
-var textSynopsis = document.getElementById("textSynopsis").required = true;
-var file = document.getElementById("file").required = true;
-var file_pancarta = document.getElementById("file_pancarta").required = true;
+// function alertaDeVacio(){
+// var name = document.getElementById("name").required = true;
+// var duration = document.getElementById("duration").required = true;
+// var director = document.getElementById("director").required = true;
+// var genre = document.getElementById("genre").required = true;
+// var trailer = document.getElementById("trailer").required = true;
+// var estreno = document.getElementById("estreno").required = true;
+// var actors = document.getElementById("actors").required = true;
+// var textSynopsis = document.getElementById("textSynopsis").required = true;
+// var file = document.getElementById("file").required = true;
+// var file_pancarta = document.getElementById("file_pancarta").required = true;
 
-console.log(file)
-return(window.alert("Debe llenar todos los campos"))
-}
+// return(window.alert("Debe llenar todos los campos"))
+// }
 
 
 function show(n){
