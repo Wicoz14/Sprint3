@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block link %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/assets/css/style_perfiluser.css">
+    <title>CineColombia - Compras</title>
+</head>
+<body>
+    <section class = "sectioncompras">
+        <h5>Mis Compras</h5>
+
+        {% if nocompras %}
+                <p class="textregist">{{nocompras}}</p>
+        {% endif %}
+        {% if datoscompras %}
+        <table id="tablacompras"> 
+            <tr>
+                <th style="width:70px;"> #Ticket</th>
+                <th style="width:100px;" >Fecha </th>
+                <th style="width:80px;">Hora</th>
+                <th style="width:160px;">Pelicula</th>
+                <th style="width:160px;" >Sala</th>
+                <th style="width:50px;">Silla</th>
+            </tr>
+            {% for compras in datoscompras %}
+            <tr>
+                <th style="width:70px;">{{compras[0]}}</th>
+                <th style="width:100px;" >{{compras[3]}}</th>
+                <th style="width:80px;">{{compras[4]}}</th>
+                <th style="width:160px;">{{compras[5]}}</th>
+                <th style="width:160px;" >{{compras[2]}}</th>
+                <th style="width:50px;">{{compras[6]}}</th>
+            </tr>
+            {%endfor%}
+        </table>
+        {% endif %}
+
+        <div class = botones>
+            <a class="boton" role="button" href="/funciones" style="text-decoration:none; color:#ffc107">Ver Funciones</a>
+        </div>
+    </section>
+</body>
+</html>
+
+
+
+
+
+
+{% endblock %}

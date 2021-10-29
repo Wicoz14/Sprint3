@@ -332,3 +332,12 @@ def actualizardatos():
 def editarpu():
     datos = db.consultardatos(session['user'])
     return render_template('editarpu.html', datos=datos)
+
+@app.route('/infocompras', methods=['GET','POST'])
+def infcompras():
+    datoscompras = db.consultar_compras(session['user'])
+    print(datoscompras)
+    if datoscompras == []:
+        return render_template("compras.html", nocompras="No has realizado ninguna compra, podras realizarlas en la seccion de funciones")
+    else:
+        return render_template('compras.html', datoscompras=datoscompras)
