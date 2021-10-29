@@ -180,3 +180,12 @@ def retornar_busqueda(nombrepelicula):
     busqueda=cursor.fetchall()
     conn.close()  
     return busqueda
+
+def consultar_compras(user):
+    conexion = get_db()
+    cursor = conexion.cursor()
+    strsql = "SELECT * FROM tickets WHERE usuario = '{}'".format(user)
+    cursor.execute(strsql)
+    conexion.commit()
+    datoscompras = cursor.fetchall()
+    return datoscompras
