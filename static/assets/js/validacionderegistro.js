@@ -62,6 +62,10 @@ function validarformulario() {
 }
 link = document.querySelector('#formdebusqueda');
 	        link.addEventListener('click', function(e) {
-	                  valor = document.querySelector('#busquedainput').value;
-	                  this.action = '/busqueda/' + valor;
+	            valor = document.querySelector('#busquedainput').value;
+                if (valor == ''){
+                    this.action = '/busqueda/vacío';
+                }else{
+                    this.action = '/busqueda/' + valor;
+                }
 	        });

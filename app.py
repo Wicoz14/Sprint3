@@ -58,7 +58,6 @@ def presentacionA():
 
         caratula_final = "/static/assets/images/carteleras/C-{}".format(caratula.filename)
         pancarta_final = "/static/assets/images/carteleras/P-{}".format(pancarta.filename)
-
         db.agregar_pelicula(nombre,duracion,director,genero,trailer,estreno,actores,sinopsis,caratula_final,pancarta_final)
   
 
@@ -220,18 +219,22 @@ def eliminarUsuario(id):
 
 @app.route('/detallefunciones/<idpelicula>', methods=['GET'])
 def detallefunciones(idpelicula):
-    funcion1= db.consultar_dato("funciones","peli_id={}".format(idpelicula),"")
-    funcion=funcion1[0][4].split(sep= " - ")
+    funcion= db.retornar_detalle_funcion(idpelicula)
+    # funcion1= db.consultar_dato("funciones","peli_id={}".format(idpelicula),"")
+    # funcion=funcion1[0][4].split(sep= " - ")
     return render_template('detallefunciones.html', funcion=funcion)
 
 @app.route('/informacion', methods=['GET'])
 def informacion():
     return render_template('informacion.html')
 
-@app.route('/busqueda/<peliculadmi1a>', methods=['GET'])
+@app.route('/busqueda/<pelicula>', methods=['GET'])
 def busqueda(pelicula):
-    busqueda= db.retornar_busqueda(pelicula)
-    return render_template('busqueda.html',busqueda=busqueda, pelicula=pelicula)
+    if pelicula == '':
+       return render_template('busqueda.html', pelicula="") 
+    else:
+        busqueda= db.retornar_busqueda(pelicula)
+        return render_template('busqueda.html',busqueda=busqueda, pelicula=pelicula)
     
 @app.route('/perfilusuario/<user>')
 def perfilusuario(user):

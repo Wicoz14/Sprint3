@@ -42,7 +42,7 @@ def agregar_pelicula(nombre, duracion, director, genero,trailer, fechasEstreno,a
 
     sql=""" INSERT INTO peliculas(nombre, duracion, director, genero, trailer, fechaEstreno, actores, sinopsis, caratula, pancarta) 
     VALUES ('{}', '{}', '{}', '{}', '{}', '{}','{}','{}','{}','{}' )""".format(nombre, duracion, director, genero, trailer, fechasEstreno,actores, sinopsis, caratula, pancarta)
-    
+    print(sql)
     cursor.execute(sql)
     conn.commit()
     conn.close()
