@@ -13,7 +13,7 @@
                 allowfullscreen></iframe>
             </div>
             <div class="Cuadrado">
-                <div class="card" style="width: 29rem;left: 90; top: 700px; position:absolute;">
+                <div class="card divinfopeli" style="width: 29rem;left: 90; top: 700px; position:absolute;">
                     <div class="card-body">
                     <h5 class="card-title">{{funcion[0][1]}}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Genero: {{funcion[0][4]}}</h6>
@@ -47,16 +47,56 @@
                     </div>
                 </div> 
             </div>
-            <div>
-                <h4 class="text-center">Pantalla</h4>
-            </div>
-            <div>
-                {%for i in range (10) %}
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                        <label class="form-check-label" for="inlineRadio1">{{i}}</label>
-                    </div>
-                {% endfor %}
+            <div class="Cuadrado3">
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="card" style="width: 380px;">
+                        <img src="/static/assets/images/sillascine.png" class="card-img-bottom" alt="...">
+                        <div class="card-body">
+                          <p class="card-text">Selecciona tu silla</p>
+                        <div class="btn-toolbar" role="toolbar" aria-label="Basic mixed styles example">
+                            <div class="btn-group me-4" role="group" aria-label="First group">
+                            <button type="button" class="btn btn-outline-primary">A 1</button>
+                            <button type="button" class="btn btn-outline-primary">A 2</button>
+                            <button type="button" class="btn btn-outline-primary">A 3</button>
+                        
+                            </div>
+                            <div class="btn-group me-4" role="group" aria-label="Second group">
+                            <button type="button" class="btn btn-outline-primary">A 5</button>
+                            <button type="button" class="btn btn-outline-primary">A 6</button>
+                            <button type="button" class="btn btn-outline-primary">A 7</button>
+                            
+                            </div>
+                        </div>
+                        <div class="btn-toolbar" role="toolbar" aria-label="Basic mixed styles example">
+                            <div class="btn-group me-4" role="group" aria-label="First group">
+                            <button type="button" class="btn btn-outline-primary">B 1</button>
+                            <button type="button" class="btn btn-outline-primary"> B 2</button>
+                            <button type="button" class="btn btn-outline-primary"> B 3</button>
+                            
+                            </div>
+                            <div class="btn-group me-4" role="group" aria-label="Second group">
+                                <button type="button" class="btn btn-outline-primary">B 5</button>
+                                <button type="button" class="btn btn-outline-primary">B 6</button>
+                                <button type="button" class="btn btn-outline-primary">B 7</button>
+                               
+                            </div>
+                        </div>
+                        <div class="btn-toolbar" role="toolbar" aria-label="Basic mixed styles example">
+                            <div class="btn-group me-4" role="group" aria-label="First group">
+                            <button type="button" class="btn btn-outline-primary">C 1</button>
+                            <button type="button" class="btn btn-outline-primary">C 2</button>
+                            <button type="button" class="btn btn-outline-primary">C 3</button>
+                          
+                            </div>
+                            <div class="btn-group me-4" role="group" aria-label="Second group">
+                                <button type="button" class="btn btn-outline-primary">C 5</button>
+                                <button type="button" class="btn btn-outline-primary">C 6</button>
+                                <button type="button" class="btn btn-outline-primary">C 7</button>
+                               
+                            </div>
+                        </div>
+                    </div>    
+                </div>
             </div>
         </div>
         </section>

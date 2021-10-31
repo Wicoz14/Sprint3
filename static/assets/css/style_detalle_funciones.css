@@ -1,5 +1,5 @@
 main{
-    padding-bottom: 13rem;
+    padding-bottom: 3rem;
 }
 
 .background{
@@ -27,7 +27,7 @@ main{
 .contenedor-video iframe{
  Position:absolute;
  top: 0;
- left:850px;
+ left:650px;
  width:50%; 
  height:45%;
 }
@@ -38,9 +38,10 @@ main{
     position: absolute;
     left: 30px;
     top: 0px;
+    padding-bottom: 10rem;
 }
 .Cuadrado2{
-    width: 1200px;
+    width: 200px;
     height:350px;
     background: white;
     position: absolute;
@@ -54,4 +55,8 @@ main{
     position: absolute;
     left: 250px;
     top: 170px;
+}
+
+.divinfopeli{
+    padding-bottom: 4rem;
 }
